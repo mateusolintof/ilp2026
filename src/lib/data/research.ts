@@ -209,7 +209,7 @@ export const trends2026 = {
       'Destacar resultados sutis e naturais, não transformações dramáticas',
       'Enfatizar protocolos personalizados ao invés de "pacotes prontos"',
     ],
-    source: 'AAFPRS Member Survey 2024, Galderma Reports',
+    source: 'AAFPRS Member Survey, Galderma Reports',
   },
   procedures: [
     {
@@ -217,7 +217,7 @@ export const trends2026 = {
       description: 'Injetáveis como Sculptra (ácido poli-L-lático) que estimulam produção de colágeno e elastina. Não preenchem, mas "ensinam" a pele a se regenerar.',
       potential: 'ALTO',
       marketData: 'Segundo IAPAM, 57% dos cirurgiões faciais esperam que medicina regenerativa seja principal área de crescimento.',
-      ilpOpportunity: 'A ILP já oferece bioestimuladores. Oportunidade está em COMUNICAR melhor este diferencial.',
+      ilpOpportunity: 'Comunicar melhor o diferencial de regeneração natural vs preenchimento tradicional.',
       actionItems: [
         'Criar série de 8 posts explicando diferença entre preenchimento e bioestimulação',
         'Mostrar resultados de 3, 6 e 12 meses (progressão natural)',
@@ -244,7 +244,7 @@ export const trends2026 = {
       description: 'Protocolos que combinam múltiplas tecnologias: RF microneedling + bioestimuladores, laser + skinboosters, toxina + preenchimento sutil.',
       potential: 'MÉDIO-ALTO',
       marketData: 'Tendência de "tweakments" - ajustes sutis ao invés de procedimentos únicos drásticos.',
-      ilpOpportunity: 'A ILP tem múltiplas tecnologias disponíveis. Criar "protocolos proprietários" como diferencial.',
+      ilpOpportunity: 'Criar "protocolos proprietários" nomeados como diferencial competitivo.',
       actionItems: [
         'Desenvolver e nomear 2-3 protocolos exclusivos ILP',
         'Criar conteúdo explicando por que combinar é melhor que fazer um só procedimento',
@@ -277,7 +277,7 @@ export const trends2026 = {
       glassSkinUS: 'USD 4.03 bilhões (2025)',
       brazilSkincare: 'USD 3.62 bilhões (2025) → USD 4.55 bilhões (2030)',
     },
-    brazilContext: 'Brasileiros estão adotando rotinas multi-step de skincare. Busca por "peeling coreano" cresceu mais de 1.000% em 2024.',
+    brazilContext: 'Brasileiros estão adotando rotinas multi-step de skincare. Busca por "glass skin" e "peeling coreano" em alta.',
     ilpOpportunity: 'Posicionar tratamentos como parte de rotina "Glass Skin". Conectar procedimentos clínicos com cuidados em casa.',
     trends: ['Hidratação intensa', 'Poros refinados', 'Tom uniforme', 'Luminosidade natural'],
     source: 'Euromonitor K-Beauty Report 2025, Research and Markets',
@@ -291,27 +291,23 @@ export const trends2026 = {
   ilpOpportunities: [
     {
       service: 'Bioestimuladores',
-      trend: 'ALTO - Crescimento 47% em 2024',
-      context: 'A ILP já oferece este serviço. A oportunidade está em comunicar melhor o diferencial de "regeneração natural" vs preenchimento tradicional.',
-      action: 'Criar série de 8 posts mostrando progressão de resultados (3, 6, 12 meses)',
+      trend: 'ALTO - Tendência crescente',
+      action: 'Comunicar diferencial de "regeneração natural" vs preenchimento. Criar série mostrando progressão de 3, 6 e 12 meses.',
     },
     {
       service: 'Skinboosters',
       trend: 'ALTO - Mercado USD 4.81 bi até 2034',
-      context: 'Posicionar como tratamento de manutenção para pacientes que já fizeram outros procedimentos. Conecta com tendência K-Beauty de "skin quality".',
-      action: 'Oferecer como complemento a protocolos existentes, não como serviço isolado',
+      action: 'Posicionar como tratamento de manutenção. Oferecer como complemento a protocolos existentes.',
     },
     {
       service: 'Protocolos Combinados',
       trend: 'MÉDIO-ALTO - Tendência de tweakments',
-      context: 'A ILP tem múltiplas tecnologias. Criar protocolos proprietários nomeados como diferencial competitivo (ex: Protocolo Glow ILP).',
-      action: 'Desenvolver e comunicar 2-3 protocolos exclusivos com naming próprio',
+      action: 'Criar protocolos proprietários nomeados como diferencial (ex: Protocolo Glow ILP).',
     },
     {
       service: 'Ozempic Face',
       trend: 'EMERGENTE - Nova demanda',
-      context: 'Pacientes em emagrecimento com GLP-1 apresentam flacidez facial. Público específico, necessidade clara e urgente.',
-      action: 'Criar conteúdo direcionado e buscar parcerias com endocrinologistas',
+      action: 'Criar conteúdo para pacientes em emagrecimento com GLP-1. Buscar parcerias com endocrinologistas.',
     },
   ],
 } as const;

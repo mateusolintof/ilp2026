@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { MessageCircle, Eye, TrendingUp, Users, DollarSign, Target, CheckCircle2, ExternalLink } from 'lucide-react';
 import { Heading, Text, Label } from '../ui/Typography';
-import { Card, CardContent, CardHeader, CardTitle } from '../ui/Card';
+import { Card, CardContent } from '../ui/Card';
 import { Badge } from '../ui/Badge';
 import { MetricCard } from '../charts/MetricCard';
 import { formatCurrency, formatNumber, formatPercent } from '@/lib/utils';
@@ -87,7 +87,6 @@ export function SlidePaidTraffic() {
             <MetricCard
               title="Custo por Conversa"
               value={formatCurrency(mensagemSummary.consolidated.costPerResult)}
-              subtitle="Benchmark: R$ 5-15"
               icon={<Target className="w-5 h-5" />}
               size="sm"
               variant="success"
@@ -144,7 +143,7 @@ export function SlidePaidTraffic() {
             <MetricCard
               title="Custo por Visita"
               value={formatCurrency(audienciaSummary.consolidated.costPerResult)}
-              subtitle="Benchmark: R$ 0.30-0.80"
+              subtitle={`Benchmark: ${formatCurrency(ilpVsBenchmarks.custoVisita.benchmark)}`}
               icon={<Target className="w-5 h-5" />}
               size="sm"
               variant="success"
@@ -178,7 +177,30 @@ export function SlidePaidTraffic() {
           <Badge variant="success">Fontes Verificadas</Badge>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        {/* Legenda das Métricas */}
+        <motion.div variants={itemVariants} className="mb-4 p-3 rounded-lg bg-white/5 border border-white/10">
+          <Text size="xs" variant="muted" className="mb-2 font-semibold">Legenda das Métricas:</Text>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+            <div>
+              <Text size="xs" weight="bold" className="text-success">CTR</Text>
+              <Text size="xs" variant="muted">Click-Through Rate - % de pessoas que clicaram no anúncio após vê-lo</Text>
+            </div>
+            <div>
+              <Text size="xs" weight="bold" className="text-gold">CPL</Text>
+              <Text size="xs" variant="muted">Cost Per Lead - Custo para gerar cada lead/conversa</Text>
+            </div>
+            <div>
+              <Text size="xs" weight="bold" className="text-accent">CPC</Text>
+              <Text size="xs" variant="muted">Cost Per Click - Custo médio por cada clique no anúncio</Text>
+            </div>
+            <div>
+              <Text size="xs" weight="bold" className="text-info">CVR</Text>
+              <Text size="xs" variant="muted">Conversion Rate - % de visitantes que realizaram a ação desejada</Text>
+            </div>
+          </div>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           <motion.div variants={itemVariants}>
             <Card className="border-success/30">
               <CardContent className="p-4">
@@ -254,30 +276,6 @@ export function SlidePaidTraffic() {
             </Card>
           </motion.div>
 
-          <motion.div variants={itemVariants}>
-            <Card className="border-info/30">
-              <CardContent className="p-4">
-                <div className="flex items-center gap-2 mb-2">
-                  <CheckCircle2 className="w-4 h-4 text-info" />
-                  <Text size="sm" weight="semibold">CVR Healthcare</Text>
-                </div>
-                <div className="grid grid-cols-2 gap-2 mb-2">
-                  <div className="p-2 rounded bg-info/10 text-center">
-                    <Text size="xs" variant="muted">Benchmark</Text>
-                    <Text weight="bold" className="text-info">{benchmarks.healthcare.cvr.value}%</Text>
-                  </div>
-                  <div className="p-2 rounded bg-white/5 text-center">
-                    <Text size="xs" variant="muted">Beauty</Text>
-                    <Text weight="bold">{benchmarks.beauty.cvr.value}%</Text>
-                  </div>
-                </div>
-                <Text size="xs" variant="muted" className="flex items-center gap-1">
-                  <ExternalLink className="w-3 h-3" />
-                  {benchmarks.healthcare.cvr.source}
-                </Text>
-              </CardContent>
-            </Card>
-          </motion.div>
         </div>
       </motion.section>
 
@@ -294,20 +292,24 @@ export function SlidePaidTraffic() {
               <div className="space-y-1">
                 <Text size="sm" variant="muted">Distribuição de Budget</Text>
                 <Text weight="semibold">
-                  MSG: {formatPercent((mensagemSummary.consolidated.spent / (mensagemSummary.consolidated.spent + audienciaSummary.consolidated.spent)) * 100)} |
+                  MSG: {formatPercent((mensagemSummary.consolidated.spent / (mensagemSummary.consolidated.spent + audienciaSummary.consolidated.spent)) * 100)} |{' '}
                   AUD: {formatPercent((audienciaSummary.consolidated.spent / (mensagemSummary.consolidated.spent + audienciaSummary.consolidated.spent)) * 100)}
                 </Text>
               </div>
               <div className="space-y-1">
                 <Text size="sm" variant="muted">Custo/Visita vs Benchmark</Text>
-                <Text weight="semibold" className="text-success">
-                  R$ {audienciaSummary.consolidated.costPerResult.toFixed(2)} vs $ {benchmarks.beauty.cpc.value} (54% menor)
+                <Text weight="semibold">
+                  ILP: {formatCurrency(audienciaSummary.consolidated.costPerResult)} vs Benchmark: {formatCurrency(ilpVsBenchmarks.custoVisita.benchmark)}
                 </Text>
+                <Text size="xs" variant="muted">{ilpVsBenchmarks.custoVisita.comparison}</Text>
               </div>
               <div className="space-y-1">
                 <Text size="sm" variant="muted">Recomendação</Text>
                 <Text weight="semibold" className="text-accent">
                   Aumentar budget em 30% para Q1 2026
+                </Text>
+                <Text size="xs" variant="muted">
+                  Justificativa: Custo por visita está 54% abaixo do mercado e correlação r=0.99 mostra que investimento pago amplifica alcance orgânico. Há margem para escalar mantendo eficiência.
                 </Text>
               </div>
             </div>

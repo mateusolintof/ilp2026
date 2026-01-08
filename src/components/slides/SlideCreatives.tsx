@@ -176,7 +176,7 @@ export function SlideCreatives() {
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="grid grid-cols-3 gap-4 mb-8"
+        className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8"
       >
         <motion.div variants={itemVariants}>
           <Card className="text-center p-4">
@@ -214,47 +214,56 @@ export function SlideCreatives() {
           <Badge variant="gold">Top Performers</Badge>
         </motion.div>
 
-        <div className="space-y-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {melhoresCreativos.map((creative, index) => {
             const imagePath = getCreativeImage(creative.name);
             const isAudiencia = creative.campaignType === 'AUDIENCIA';
             return (
               <motion.div key={creative.id} variants={itemVariants}>
-                <Card className="p-4">
-                  <div className="flex items-center gap-4">
-                    <div className={`flex items-center justify-center w-8 h-8 rounded-full ${isAudiencia ? 'bg-gold/20 text-gold' : 'bg-accent/20 text-accent'} font-bold shrink-0`}>
-                      {index + 1}
+                <Card className="p-4 h-full">
+                  <div className="flex flex-col h-full">
+                    {/* Header com ranking e badge */}
+                    <div className="flex items-center justify-between mb-3">
+                      <div className={`flex items-center justify-center w-8 h-8 rounded-full ${isAudiencia ? 'bg-gold/20 text-gold' : 'bg-accent/20 text-accent'} font-bold`}>
+                        {index + 1}
+                      </div>
+                      <Badge variant={isAudiencia ? 'gold' : 'default'} className="text-xs">
+                        {creative.campaignType}
+                      </Badge>
                     </div>
+
+                    {/* Thumbnail maior */}
                     {imagePath ? (
-                      <div className="relative w-16 h-16 rounded-lg overflow-hidden shrink-0 border border-white/10">
+                      <div className="relative w-full aspect-square rounded-lg overflow-hidden border border-white/10 mb-3">
                         <Image
                           src={imagePath}
                           alt={creative.name}
                           fill
                           className="object-cover"
-                          sizes="64px"
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         />
                       </div>
                     ) : (
-                      <div className="w-16 h-16 rounded-lg shrink-0 border border-white/10 bg-accent/10 flex items-center justify-center">
-                        <Video className="w-6 h-6 text-accent" />
+                      <div className="w-full aspect-square rounded-lg border border-white/10 bg-accent/10 flex items-center justify-center mb-3">
+                        <Video className="w-12 h-12 text-accent" />
                       </div>
                     )}
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2">
+
+                    {/* Info do criativo */}
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-1">
                         {formatIcon(creative.format)}
-                        <Text weight="semibold" className="truncate">
+                        <Text weight="semibold" size="sm" className="line-clamp-1">
                           {creative.name}
                         </Text>
-                        <Badge variant={isAudiencia ? 'gold' : 'default'} className="text-xs">
-                          {creative.campaignType}
-                        </Badge>
                       </div>
-                      <Text size="sm" variant="muted" className="truncate">
+                      <Text size="xs" variant="muted" className="line-clamp-1 mb-2">
                         {creative.metrics.resultType}
                       </Text>
                     </div>
-                    <div className="text-right shrink-0">
+
+                    {/* Métricas */}
+                    <div className="flex items-center justify-between pt-2 border-t border-white/10">
                       <div className="flex items-center gap-1">
                         {isAudiencia ? (
                           <Eye className="w-4 h-4 text-gold" />
@@ -264,7 +273,7 @@ export function SlideCreatives() {
                         <Text weight="bold">{formatNumber(creative.metrics.results)}</Text>
                       </div>
                       <Text size="sm" variant="muted">
-                        {formatCurrency(creative.metrics.costPerResult)}/resultado
+                        {formatCurrency(creative.metrics.costPerResult)}/res.
                       </Text>
                     </div>
                   </div>

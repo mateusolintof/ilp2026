@@ -153,7 +153,7 @@ export function SlideClosings() {
               {closingsByCategory.slice(0, 6).map((cat, index) => (
                 <div key={cat.category} className="flex items-center gap-4 p-3 rounded-lg bg-white/5">
                   <div className={`flex items-center justify-center w-8 h-8 rounded-full font-bold ${
-                    index === 0 ? 'bg-gold/20 text-gold' : 'bg-white/10 text-white/60'
+                    index === 0 ? 'bg-gold/20 text-gold' : 'bg-white/10 text-muted'
                   }`}>
                     {index + 1}
                   </div>
@@ -200,11 +200,11 @@ export function SlideClosings() {
               <div className="space-y-3">
                 <Text size="sm" variant="muted">{trends2026.macroTrend.description}</Text>
                 <div className="p-3 rounded bg-white/5 border-l-2 border-gold">
-                  <Text size="sm" weight="semibold" className="text-white mb-1">O que isso significa na prática:</Text>
+                  <Text size="sm" weight="semibold" className="text-foreground mb-1">O que isso significa na prática:</Text>
                   <Text size="sm" variant="muted">
-                    A busca por resultados naturais está transformando o setor. Segundo a Galderma (líder global em estética),
-                    bioestimuladores cresceram 47% em 2024 enquanto preenchimentos tradicionais estagnaram.
-                    Pacientes querem &quot;melhorar a qualidade da pele&quot;, não &quot;preencher rugas&quot;.
+                    A busca por resultados naturais está transformando o setor. Pacientes não querem mais &quot;preencher rugas&quot;,
+                    mas sim &quot;melhorar a qualidade da pele&quot;. Bioestimuladores estão em alta, enquanto preenchimentos
+                    tradicionais estagnaram. Isso representa uma oportunidade para posicionar a clínica como referência em regeneração natural.
                   </Text>
                 </div>
                 <Text size="xs" variant="muted">Fonte: {trends2026.macroTrend.source}</Text>
@@ -221,14 +221,13 @@ export function SlideClosings() {
                 <CardContent className="p-4">
                   <div className="flex items-start justify-between mb-3">
                     <Text weight="bold">{opp.service}</Text>
-                    <Badge variant={opp.trend.includes('ALTO') || opp.action.includes('ALTO') ? 'success' : 'gold'} className="text-xs">
+                    <Badge variant={opp.trend.includes('ALTO') ? 'success' : 'gold'} className="text-xs">
                       {opp.trend}
                     </Badge>
                   </div>
-                  <Text size="sm" variant="muted" className="mb-2">{opp.context}</Text>
                   <div className="p-2 rounded bg-accent/5 border-l-2 border-accent">
-                    <div className="flex items-center gap-2 text-accent">
-                      <ArrowRight className="w-4 h-4 shrink-0" />
+                    <div className="flex items-start gap-2 text-accent">
+                      <ArrowRight className="w-4 h-4 shrink-0 mt-0.5" />
                       <Text size="sm" weight="semibold">{opp.action}</Text>
                     </div>
                   </div>

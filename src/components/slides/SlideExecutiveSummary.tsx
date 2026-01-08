@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { MessageCircle, Eye, FileText, DollarSign, Briefcase, TrendingUp, Users } from 'lucide-react';
+import { MessageCircle, Eye, FileText, DollarSign, Briefcase, TrendingUp, Users, Target, Award, ArrowUpRight, CheckCircle2, ExternalLink } from 'lucide-react';
 import { Heading, Text, Label } from '../ui/Typography';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/Card';
 import { Badge } from '../ui/Badge';
@@ -14,6 +14,7 @@ import { formatCurrency, formatNumber } from '@/lib/utils';
 import { mensagemSummary, audienciaSummary } from '@/lib/data/campaigns';
 import { organicSummary } from '@/lib/data/organic';
 import { consolidatedClosingSummary, monthlySummaries } from '@/lib/data/closings';
+import { performanceMetrics, ilpVsBenchmarks } from '@/lib/data/research';
 
 export function SlideExecutiveSummary() {
   const totalInvestment = mensagemSummary.consolidated.spent + audienciaSummary.consolidated.spent;
@@ -52,7 +53,7 @@ export function SlideExecutiveSummary() {
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="mb-8"
+        className="mb-6"
       >
         <Label className="mb-2 block">Slide 2 de 8</Label>
         <Heading as="h1" size="2xl" className="mb-2">
@@ -63,12 +64,57 @@ export function SlideExecutiveSummary() {
         </Text>
       </motion.div>
 
+      {/* ROI Highlight - NEW */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        className="mb-6"
+      >
+        <Card variant="glow" className="bg-gradient-to-r from-success/10 to-gold/10">
+          <CardContent className="p-4">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
+              <div className="text-center md:border-r md:border-white/10 pr-4">
+                <Text size="xs" variant="muted">ROI Marketing</Text>
+                <Text size="3xl" weight="bold" className="text-success">
+                  {formatNumber(performanceMetrics.roi.value)}%
+                </Text>
+                <Badge variant="success" className="mt-1">
+                  <ArrowUpRight className="w-3 h-3 mr-1" />
+                  21x acima da média
+                </Badge>
+              </div>
+              <div className="text-center md:border-r md:border-white/10 pr-4">
+                <Text size="xs" variant="muted">Receita por R$ 1 Investido</Text>
+                <Text size="3xl" weight="bold" className="text-gold">
+                  R$ {performanceMetrics.revenuePerReal.value.toFixed(2)}
+                </Text>
+                <Text size="xs" variant="muted">Retorno excepcional</Text>
+              </div>
+              <div className="text-center md:border-r md:border-white/10 pr-4">
+                <Text size="xs" variant="muted">Custo por Procedimento</Text>
+                <Text size="3xl" weight="bold" className="text-accent">
+                  R$ {performanceMetrics.costPerProcedure.value.toFixed(2)}
+                </Text>
+                <Text size="xs" variant="muted">Marketing eficiente</Text>
+              </div>
+              <div className="text-center">
+                <Text size="xs" variant="muted">Ticket Médio</Text>
+                <Text size="3xl" weight="bold" className="text-info">
+                  {formatCurrency(performanceMetrics.avgTicket.value)}
+                </Text>
+                <Text size="xs" variant="muted">Receita/procedimento</Text>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </motion.div>
+
       {/* Key Metrics Row */}
       <motion.div
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8"
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6"
       >
         <motion.div variants={itemVariants}>
           <MetricCard
@@ -99,21 +145,126 @@ export function SlideExecutiveSummary() {
         </motion.div>
         <motion.div variants={itemVariants}>
           <MetricCard
-            title="Ticket Médio"
-            value={formatCurrency(totalRevenue / totalProcedures)}
-            subtitle="Receita / Procedimentos"
-            icon={<TrendingUp className="w-5 h-5" />}
+            title="Conversas WhatsApp"
+            value={formatNumber(mensagemSummary.consolidated.conversationsStarted)}
+            subtitle="Leads gerados"
+            icon={<MessageCircle className="w-5 h-5" />}
             variant="success"
           />
         </motion.div>
       </motion.div>
+
+      {/* Benchmark Comparison - NEW */}
+      <motion.section
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="mb-6"
+      >
+        <motion.div variants={itemVariants} className="flex items-center gap-3 mb-4">
+          <div className="p-2 rounded-lg bg-info/10">
+            <Target className="w-5 h-5 text-info" />
+          </div>
+          <Heading as="h2" size="lg">ILP vs Benchmarks de Mercado</Heading>
+          <Badge variant="info">Fontes verificadas</Badge>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <motion.div variants={itemVariants}>
+            <Card className={`h-full ${ilpVsBenchmarks.custoConversa.status === 'DENTRO' ? 'border-success/50' : ''}`}>
+              <CardContent className="p-4">
+                <div className="flex items-center justify-between mb-2">
+                  <Text size="sm" weight="semibold">Custo/Conversa WhatsApp</Text>
+                  <Badge variant="success">
+                    <CheckCircle2 className="w-3 h-3 mr-1" />
+                    {ilpVsBenchmarks.custoConversa.status}
+                  </Badge>
+                </div>
+                <div className="grid grid-cols-2 gap-2 mb-2">
+                  <div className="p-2 rounded bg-accent/10 text-center">
+                    <Text size="xs" variant="muted">ILP</Text>
+                    <Text weight="bold" className="text-accent">R$ {ilpVsBenchmarks.custoConversa.ilp.toFixed(2)}</Text>
+                  </div>
+                  <div className="p-2 rounded bg-white/5 text-center">
+                    <Text size="xs" variant="muted">Benchmark</Text>
+                    <Text weight="bold">$ {ilpVsBenchmarks.custoConversa.benchmark}</Text>
+                  </div>
+                </div>
+                <Text size="xs" variant="muted">{ilpVsBenchmarks.custoConversa.comparison}</Text>
+                <Text size="xs" variant="muted" className="flex items-center gap-1 mt-1">
+                  <ExternalLink className="w-3 h-3" />
+                  Fonte: LocalIQ Healthcare CPL
+                </Text>
+              </CardContent>
+            </Card>
+          </motion.div>
+
+          <motion.div variants={itemVariants}>
+            <Card className={`h-full ${ilpVsBenchmarks.custoVisita.status === 'EXCELENTE' ? 'border-gold/50' : ''}`}>
+              <CardContent className="p-4">
+                <div className="flex items-center justify-between mb-2">
+                  <Text size="sm" weight="semibold">Custo/Visita ao Perfil</Text>
+                  <Badge variant="gold">
+                    <Award className="w-3 h-3 mr-1" />
+                    {ilpVsBenchmarks.custoVisita.status}
+                  </Badge>
+                </div>
+                <div className="grid grid-cols-2 gap-2 mb-2">
+                  <div className="p-2 rounded bg-gold/10 text-center">
+                    <Text size="xs" variant="muted">ILP</Text>
+                    <Text weight="bold" className="text-gold">R$ {ilpVsBenchmarks.custoVisita.ilp.toFixed(2)}</Text>
+                  </div>
+                  <div className="p-2 rounded bg-white/5 text-center">
+                    <Text size="xs" variant="muted">Benchmark</Text>
+                    <Text weight="bold">R$ {ilpVsBenchmarks.custoVisita.benchmark.toFixed(2)}</Text>
+                  </div>
+                </div>
+                <Text size="xs" variant="muted">{ilpVsBenchmarks.custoVisita.comparison}</Text>
+                <Text size="xs" variant="muted" className="flex items-center gap-1 mt-1">
+                  <ExternalLink className="w-3 h-3" />
+                  Fonte: Madgicx Meta Ads Benchmarks
+                </Text>
+              </CardContent>
+            </Card>
+          </motion.div>
+
+          <motion.div variants={itemVariants}>
+            <Card className={`h-full ${ilpVsBenchmarks.roi.status === 'EXCEPCIONAL' ? 'border-success/50' : ''}`}>
+              <CardContent className="p-4">
+                <div className="flex items-center justify-between mb-2">
+                  <Text size="sm" weight="semibold">ROI Marketing</Text>
+                  <Badge variant="success">
+                    <TrendingUp className="w-3 h-3 mr-1" />
+                    {ilpVsBenchmarks.roi.status}
+                  </Badge>
+                </div>
+                <div className="grid grid-cols-2 gap-2 mb-2">
+                  <div className="p-2 rounded bg-success/10 text-center">
+                    <Text size="xs" variant="muted">ILP</Text>
+                    <Text weight="bold" className="text-success">{formatNumber(ilpVsBenchmarks.roi.ilp)}%</Text>
+                  </div>
+                  <div className="p-2 rounded bg-white/5 text-center">
+                    <Text size="xs" variant="muted">Média Mercado</Text>
+                    <Text weight="bold">{ilpVsBenchmarks.roi.benchmark}%</Text>
+                  </div>
+                </div>
+                <Text size="xs" variant="muted">{ilpVsBenchmarks.roi.comparison}</Text>
+                <Text size="xs" variant="muted" className="flex items-center gap-1 mt-1">
+                  <ExternalLink className="w-3 h-3" />
+                  Fonte: TheeDigital ROI Benchmarks
+                </Text>
+              </CardContent>
+            </Card>
+          </motion.div>
+        </div>
+      </motion.section>
 
       {/* Charts Row */}
       <motion.div
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8"
+        className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6"
       >
         <motion.div variants={itemVariants}>
           <Card className="h-full">
@@ -123,7 +274,7 @@ export function SlideExecutiveSummary() {
             <CardContent>
               <LineChart
                 data={monthlyRevenueData}
-                height={220}
+                height={180}
                 lines={[{ key: 'value', color: 'var(--color-gold)', name: 'Receita' }]}
                 showLegend={false}
               />
@@ -138,7 +289,7 @@ export function SlideExecutiveSummary() {
             <CardContent>
               <BarChart
                 data={channelData}
-                height={220}
+                height={180}
                 colors={['var(--color-accent)', 'var(--color-gold)']}
               />
             </CardContent>
@@ -151,22 +302,22 @@ export function SlideExecutiveSummary() {
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="grid grid-cols-1 lg:grid-cols-3 gap-6"
+        className="grid grid-cols-1 lg:grid-cols-3 gap-4"
       >
         {/* Mensagem Campaign */}
         <motion.div variants={itemVariants}>
           <Card variant="bordered" className="h-full">
-            <CardContent className="p-6">
-              <div className="flex items-center gap-3 mb-4">
+            <CardContent className="p-4">
+              <div className="flex items-center gap-3 mb-3">
                 <div className="p-2 rounded-lg bg-accent/10">
                   <MessageCircle className="w-5 h-5 text-accent" />
                 </div>
                 <div>
                   <Text weight="semibold">Campanhas de Mensagem</Text>
-                  <Text size="sm" variant="muted">WhatsApp Business</Text>
+                  <Text size="xs" variant="muted">WhatsApp Business</Text>
                 </div>
               </div>
-              <div className="space-y-3">
+              <div className="space-y-2">
                 <div className="flex justify-between items-center">
                   <Text size="sm" variant="muted">Campanhas</Text>
                   <Badge variant="default">{mensagemSummary.count}</Badge>
@@ -193,17 +344,17 @@ export function SlideExecutiveSummary() {
         {/* Audiência Campaign */}
         <motion.div variants={itemVariants}>
           <Card variant="bordered" className="h-full">
-            <CardContent className="p-6">
-              <div className="flex items-center gap-3 mb-4">
+            <CardContent className="p-4">
+              <div className="flex items-center gap-3 mb-3">
                 <div className="p-2 rounded-lg bg-gold/10">
                   <Eye className="w-5 h-5 text-gold" />
                 </div>
                 <div>
                   <Text weight="semibold">Campanhas de Audiência</Text>
-                  <Text size="sm" variant="muted">Visitas ao Perfil</Text>
+                  <Text size="xs" variant="muted">Visitas ao Perfil</Text>
                 </div>
               </div>
-              <div className="space-y-3">
+              <div className="space-y-2">
                 <div className="flex justify-between items-center">
                   <Text size="sm" variant="muted">Campanhas</Text>
                   <Badge variant="gold">{audienciaSummary.count}</Badge>
@@ -230,17 +381,17 @@ export function SlideExecutiveSummary() {
         {/* Organic Performance */}
         <motion.div variants={itemVariants}>
           <Card variant="bordered" className="h-full">
-            <CardContent className="p-6">
-              <div className="flex items-center gap-3 mb-4">
+            <CardContent className="p-4">
+              <div className="flex items-center gap-3 mb-3">
                 <div className="p-2 rounded-lg bg-info/10">
                   <FileText className="w-5 h-5 text-info" />
                 </div>
                 <div>
                   <Text weight="semibold">Performance Orgânica</Text>
-                  <Text size="sm" variant="muted">Feed, Reels & Stories</Text>
+                  <Text size="xs" variant="muted">Feed, Reels & Stories</Text>
                 </div>
               </div>
-              <div className="space-y-3">
+              <div className="space-y-2">
                 <div className="flex justify-between items-center">
                   <Text size="sm" variant="muted">Posts Feed/Reels</Text>
                   <Badge variant="info">{organicSummary.feedReels.totalPosts}</Badge>

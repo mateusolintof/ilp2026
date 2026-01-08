@@ -15,6 +15,8 @@ import {
   creativeSummary,
 } from '@/lib/data/creatives';
 
+import { successPatterns } from '@/lib/data/research';
+
 export function SlideCreatives() {
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -29,14 +31,32 @@ export function SlideCreatives() {
     visible: { opacity: 1, y: 0 },
   };
 
-  // Pattern analysis
-  const patterns = [
-    { name: 'REELS', percentage: 40, color: 'var(--color-accent)' },
-    { name: 'MÉDICO PRESENTE', percentage: 40, color: 'var(--color-gold)' },
-    { name: 'BLACK FRIDAY', percentage: 40, color: 'var(--color-success)' },
-    { name: 'VIDEO', percentage: 20, color: 'var(--color-info)' },
-    { name: 'CARROSSEL', percentage: 20, color: 'var(--color-chart-5)' },
-  ];
+  // Pattern analysis from research data
+  const patternColors: Record<string, string> = {
+    'REELS': 'var(--color-accent)',
+    'MEDICO_PRESENTE': 'var(--color-gold)',
+    'BLACK_FRIDAY': 'var(--color-success)',
+    'VIDEO': 'var(--color-info)',
+    'BIOESTIMULADOR': 'var(--color-chart-5)',
+  };
+
+  const patternLabels: Record<string, string> = {
+    'REELS': 'REELS',
+    'MEDICO_PRESENTE': 'MÉDICO PRESENTE',
+    'BLACK_FRIDAY': 'BLACK FRIDAY',
+    'VIDEO': 'VÍDEO',
+    'BIOESTIMULADOR': 'BIOESTIMULADOR',
+  };
+
+  const patterns = successPatterns.top5Patterns.map(p => ({
+    name: patternLabels[p.pattern] || p.pattern,
+    percentage: p.percentage,
+    frequency: p.frequency,
+    color: patternColors[p.pattern] || 'var(--color-accent)',
+  }));
+
+  // Format performance from research
+  const formatPerformance = successPatterns.formatPerformance;
 
   const formatIcon = (format: string) => {
     switch (format) {
@@ -190,6 +210,47 @@ export function SlideCreatives() {
         </div>
       </motion.section>
 
+      {/* Format Performance Comparison */}
+      <motion.section
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="mb-8"
+      >
+        <motion.div variants={itemVariants} className="flex items-center gap-3 mb-4">
+          <TrendingUp className="w-6 h-6 text-success" />
+          <Heading as="h2" size="lg">Performance por Formato</Heading>
+          <Badge variant="success">Análise Comparativa</Badge>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <motion.div variants={itemVariants}>
+            <Card className="text-center p-4 border-accent/30">
+              <Video className="w-8 h-8 mx-auto mb-2 text-accent" />
+              <Text size="xl" weight="bold" className="text-accent">{formatNumber(formatPerformance.video.avgResults)}</Text>
+              <Text size="sm" variant="muted" className="mb-2">Resultados médios</Text>
+              <Badge variant="default">{formatCurrency(formatPerformance.video.avgCost)}/resultado</Badge>
+            </Card>
+          </motion.div>
+          <motion.div variants={itemVariants}>
+            <Card className="text-center p-4 border-gold/30">
+              <ImageIcon className="w-8 h-8 mx-auto mb-2 text-gold" />
+              <Text size="xl" weight="bold" className="text-gold">{formatNumber(formatPerformance.image.avgResults)}</Text>
+              <Text size="sm" variant="muted" className="mb-2">Resultados médios</Text>
+              <Badge variant="gold">{formatCurrency(formatPerformance.image.avgCost)}/resultado</Badge>
+            </Card>
+          </motion.div>
+          <motion.div variants={itemVariants}>
+            <Card className="text-center p-4 border-info/30">
+              <LayoutGrid className="w-8 h-8 mx-auto mb-2 text-info" />
+              <Text size="xl" weight="bold" className="text-info">{formatNumber(formatPerformance.carousel.avgResults)}</Text>
+              <Text size="sm" variant="muted" className="mb-2">Resultados médios</Text>
+              <Badge variant="info">{formatCurrency(formatPerformance.carousel.avgCost)}/resultado</Badge>
+            </Card>
+          </motion.div>
+        </div>
+      </motion.section>
+
       {/* Pattern Analysis */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -208,8 +269,13 @@ export function SlideCreatives() {
               {patterns.map((pattern) => (
                 <div key={pattern.name} className="space-y-2">
                   <div className="flex justify-between items-center">
-                    <Text weight="medium">{pattern.name}</Text>
-                    <Badge variant="outline">{pattern.percentage}% dos top performers</Badge>
+                    <div className="flex items-center gap-2">
+                      <Text weight="medium">{pattern.name}</Text>
+                      <Text size="xs" variant="muted">({pattern.frequency} de 10)</Text>
+                    </div>
+                    <Badge variant={pattern.percentage >= 40 ? 'success' : 'outline'}>
+                      {pattern.percentage}% dos top performers
+                    </Badge>
                   </div>
                   <ProgressBar
                     value={pattern.percentage}
@@ -220,11 +286,16 @@ export function SlideCreatives() {
               ))}
             </div>
             <div className="mt-6 pt-4 border-t border-white/10">
+              <Text size="sm" variant="muted" className="mb-2">Insight Principal:</Text>
+              <Text weight="semibold" className="text-accent mb-3">
+                {successPatterns.keyInsight}
+              </Text>
               <Text size="sm" variant="muted" className="mb-2">Recomendações:</Text>
               <ul className="list-disc list-inside space-y-1">
-                <li><Text size="sm" as="span">Priorizar formato REELS para novos criativos</Text></li>
-                <li><Text size="sm" as="span">Incluir médico(a) no criativo aumenta engajamento</Text></li>
-                <li><Text size="sm" as="span">Vídeos têm melhor custo/resultado em campanhas MSG</Text></li>
+                <li><Text size="sm" as="span">Priorizar formato REELS - 40x mais resultados que carrossel</Text></li>
+                <li><Text size="sm" as="span">Presença médica aumenta confiança e engajamento</Text></li>
+                <li><Text size="sm" as="span">Vídeos têm 25% melhor custo/resultado que imagens</Text></li>
+                <li><Text size="sm" as="span">Datas promocionais (Black Friday) são oportunidades-chave</Text></li>
               </ul>
             </div>
           </CardContent>

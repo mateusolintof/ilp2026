@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { DollarSign, TrendingUp, Briefcase, CheckCircle, Clock, Award } from 'lucide-react';
+import { DollarSign, TrendingUp, Briefcase, CheckCircle, Clock, Award, Sparkles, Gem, ArrowRight } from 'lucide-react';
 import { Heading, Text, Label } from '../ui/Typography';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/Card';
 import { Badge } from '../ui/Badge';
@@ -16,6 +16,8 @@ import {
   closingsByCategory,
   monthlySummaries,
 } from '@/lib/data/closings';
+
+import { trends2026, performanceMetrics } from '@/lib/data/research';
 
 export function SlideClosings() {
   const containerVariants = {
@@ -244,17 +246,67 @@ export function SlideClosings() {
         </Card>
       </motion.div>
 
+      {/* 2026 Trends Alignment */}
+      <motion.section
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="mt-8 mb-6"
+      >
+        <motion.div variants={itemVariants} className="flex items-center gap-3 mb-4">
+          <div className="p-2 rounded-lg bg-gold/10">
+            <Sparkles className="w-6 h-6 text-gold" />
+          </div>
+          <Heading as="h2" size="lg">Alinhamento com Tendências 2026</Heading>
+          <Badge variant="gold">Oportunidades</Badge>
+        </motion.div>
+
+        {/* Macro Trend Context */}
+        <motion.div variants={itemVariants} className="mb-4">
+          <Card className="border-gold/30 bg-gold/5">
+            <CardContent className="p-4">
+              <div className="flex items-center gap-3 mb-2">
+                <Gem className="w-5 h-5 text-gold" />
+                <Text weight="bold" className="text-gold">{trends2026.macroTrend.title}</Text>
+              </div>
+              <Text size="sm" variant="muted">{trends2026.macroTrend.description}</Text>
+            </CardContent>
+          </Card>
+        </motion.div>
+
+        {/* Services vs Trends Matrix */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {trends2026.ilpOpportunities.map((opp) => (
+            <motion.div key={opp.service} variants={itemVariants}>
+              <Card className="h-full hover:border-gold/50 transition-colors">
+                <CardContent className="p-4">
+                  <div className="flex items-start justify-between mb-2">
+                    <Text weight="bold">{opp.service}</Text>
+                    <Badge variant={opp.action.includes('ALTO') ? 'success' : 'default'} className="text-xs">
+                      {opp.trend}
+                    </Badge>
+                  </div>
+                  <div className="flex items-center gap-2 text-accent">
+                    <ArrowRight className="w-4 h-4" />
+                    <Text size="sm">{opp.action}</Text>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+          ))}
+        </div>
+      </motion.section>
+
       {/* Insights Box */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.8 }}
-        className="mt-8"
       >
         <Card variant="glow">
           <CardContent className="p-6">
             <Heading as="h3" size="sm" className="mb-4">Insights do Fechamento</Heading>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
               <div className="space-y-1">
                 <Text size="sm" variant="muted">Serviço carro-chefe</Text>
                 <Text weight="semibold" className="text-gold">
@@ -262,15 +314,21 @@ export function SlideClosings() {
                 </Text>
               </div>
               <div className="space-y-1">
-                <Text size="sm" variant="muted">Crescimento Novembro</Text>
+                <Text size="sm" variant="muted">ROI Marketing</Text>
                 <Text weight="semibold" className="text-success">
-                  +29,8% vs Outubro
+                  {formatPercent(performanceMetrics.roi.value)}
                 </Text>
               </div>
               <div className="space-y-1">
-                <Text size="sm" variant="muted">Recomendação</Text>
+                <Text size="sm" variant="muted">Custo/Procedimento</Text>
                 <Text weight="semibold" className="text-accent">
-                  Criar campanhas específicas para Toxina
+                  {formatCurrency(performanceMetrics.costPerProcedure.value)}
+                </Text>
+              </div>
+              <div className="space-y-1">
+                <Text size="sm" variant="muted">Tendência 2026</Text>
+                <Text weight="semibold" className="text-gold">
+                  Bioestimuladores + Regeneração
                 </Text>
               </div>
             </div>

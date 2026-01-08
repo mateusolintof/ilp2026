@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { GitBranch, Zap, Calendar, Clock, TrendingUp } from 'lucide-react';
+import { GitBranch, Zap, Calendar, Clock, TrendingUp, BarChart3, Activity, AlertCircle, CheckCircle2 } from 'lucide-react';
 import { Heading, Text, Label } from '../ui/Typography';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/Card';
 import { Badge } from '../ui/Badge';
@@ -17,6 +17,12 @@ import {
   monthlyPerformance,
   behaviorInsights,
 } from '@/lib/data/analysis';
+
+import {
+  correlations,
+  regression,
+  seasonality,
+} from '@/lib/data/research';
 
 export function SlideDataCrossing() {
   const containerVariants = {
@@ -50,6 +56,14 @@ export function SlideDataCrossing() {
     value: m.revenue,
   }));
 
+  // Correlation data for display
+  const correlationData = [
+    correlations.investimentoVsViewsOrganicos,
+    correlations.viewsVsProcedimentos,
+    correlations.investimentoVsReceita,
+    correlations.resultadosVsProcedimentos,
+  ];
+
   return (
     <div className="min-h-full pb-8">
       {/* Header */}
@@ -63,7 +77,7 @@ export function SlideDataCrossing() {
           Cruzamento de Dados
         </Heading>
         <Text variant="muted" size="lg">
-          Correlações entre Marketing, Orgânico e Resultados de Negócio
+          Correlações Estatísticas (Pearson) e Padrões Comportamentais
         </Text>
       </motion.div>
 
@@ -72,7 +86,7 @@ export function SlideDataCrossing() {
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="mb-8"
+        className="mb-6"
       >
         <motion.div variants={itemVariants} className="flex items-center gap-3 mb-4">
           <div className="p-2 rounded-lg bg-accent/10">
@@ -118,12 +132,118 @@ export function SlideDataCrossing() {
         </motion.div>
       </motion.section>
 
+      {/* Statistical Correlations - NEW */}
+      <motion.section
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="mb-6"
+      >
+        <motion.div variants={itemVariants} className="flex items-center gap-3 mb-4">
+          <div className="p-2 rounded-lg bg-info/10">
+            <Activity className="w-6 h-6 text-info" />
+          </div>
+          <Heading as="h2" size="lg">Correlações Estatísticas (Pearson)</Heading>
+          <Badge variant="info">Análise Python</Badge>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {correlationData.map((corr) => (
+            <motion.div key={corr.name} variants={itemVariants}>
+              <Card className={`h-full ${corr.isSignificant ? 'border-success/50' : 'border-white/10'}`}>
+                <CardContent className="p-4">
+                  <div className="flex items-start justify-between mb-3">
+                    <div className="flex items-center gap-2">
+                      <span className="text-2xl">{corr.icon}</span>
+                      <Text weight="semibold" size="sm">{corr.name}</Text>
+                    </div>
+                    {corr.isSignificant ? (
+                      <Badge variant="success" className="flex items-center gap-1">
+                        <CheckCircle2 className="w-3 h-3" />
+                        Significativo
+                      </Badge>
+                    ) : (
+                      <Badge variant="default" className="flex items-center gap-1">
+                        <AlertCircle className="w-3 h-3" />
+                        Não Significativo
+                      </Badge>
+                    )}
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4 mb-3">
+                    <div className="text-center p-2 rounded-lg bg-white/5">
+                      <Text size="xs" variant="muted">Coef. Pearson (r)</Text>
+                      <Text size="lg" weight="bold" className={corr.r > 0.7 ? 'text-success' : corr.r > 0.4 ? 'text-gold' : 'text-white/70'}>
+                        {corr.r.toFixed(4)}
+                      </Text>
+                    </div>
+                    <div className="text-center p-2 rounded-lg bg-white/5">
+                      <Text size="xs" variant="muted">p-value</Text>
+                      <Text size="lg" weight="bold" className={corr.pValue < 0.05 ? 'text-success' : 'text-white/70'}>
+                        {corr.pValue.toFixed(4)}
+                      </Text>
+                    </div>
+                  </div>
+
+                  <div className="space-y-1">
+                    <Text size="xs" variant="muted">Interpretação: <span className="text-white">{corr.interpretation}</span></Text>
+                    <Text size="xs" className={corr.isSignificant ? 'text-success' : 'text-white/60'}>
+                      {corr.conclusion}
+                    </Text>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+          ))}
+        </div>
+      </motion.section>
+
+      {/* Regression Model - NEW */}
+      <motion.section
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="mb-6"
+      >
+        <motion.div variants={itemVariants}>
+          <Card variant="glow">
+            <CardContent className="p-4">
+              <div className="flex items-center gap-3 mb-4">
+                <BarChart3 className="w-5 h-5 text-accent" />
+                <Text weight="semibold">Modelo de Regressão Linear</Text>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="p-3 rounded-lg bg-accent/10 text-center">
+                  <Text size="xs" variant="muted" className="mb-1">Equação</Text>
+                  <Text size="sm" weight="bold" className="text-accent font-mono">
+                    {regression.equation}
+                  </Text>
+                </div>
+                <div className="p-3 rounded-lg bg-gold/10 text-center">
+                  <Text size="xs" variant="muted" className="mb-1">R² (Coef. Determinação)</Text>
+                  <Text size="lg" weight="bold" className="text-gold">
+                    {(regression.rSquared * 100).toFixed(2)}%
+                  </Text>
+                </div>
+                <div className="p-3 rounded-lg bg-success/10 text-center">
+                  <Text size="xs" variant="muted" className="mb-1">Interpretação</Text>
+                  <Text size="sm" weight="semibold" className="text-success">
+                    R$ 1 investido = R$ {regression.slope.toFixed(2)} receita
+                  </Text>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </motion.div>
+      </motion.section>
+
       {/* Behavioral Patterns */}
       <motion.section
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="mb-8"
+        className="mb-6"
       >
         <motion.div variants={itemVariants} className="flex items-center gap-3 mb-4">
           <div className="p-2 rounded-lg bg-gold/10">
@@ -132,11 +252,11 @@ export function SlideDataCrossing() {
           <Heading as="h2" size="lg">Padrões Comportamentais</Heading>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
           <motion.div variants={itemVariants}>
             <Card className="h-full">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
+              <CardHeader className="pb-2">
+                <CardTitle className="flex items-center gap-2 text-sm">
                   <Calendar className="w-4 h-4" />
                   Performance por Dia
                 </CardTitle>
@@ -144,12 +264,13 @@ export function SlideDataCrossing() {
               <CardContent>
                 <BarChart
                   data={dayChartData}
-                  height={180}
+                  height={150}
                   colors={['var(--color-accent)']}
                 />
-                <div className="mt-4 p-3 rounded-lg bg-accent/10 text-center">
-                  <Text size="sm" variant="muted">Melhor Dia</Text>
+                <div className="mt-3 p-2 rounded-lg bg-accent/10 text-center">
+                  <Text size="xs" variant="muted">Melhor Dia</Text>
                   <Text weight="bold" className="text-accent">{behaviorInsights.bestDay}</Text>
+                  <Text size="xs" variant="muted">+{seasonality.daily.improvement} vs pior dia</Text>
                 </div>
               </CardContent>
             </Card>
@@ -157,8 +278,8 @@ export function SlideDataCrossing() {
 
           <motion.div variants={itemVariants}>
             <Card className="h-full">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
+              <CardHeader className="pb-2">
+                <CardTitle className="flex items-center gap-2 text-sm">
                   <Clock className="w-4 h-4" />
                   Performance por Horário
                 </CardTitle>
@@ -166,12 +287,13 @@ export function SlideDataCrossing() {
               <CardContent>
                 <BarChart
                   data={timeChartData}
-                  height={180}
+                  height={150}
                   colors={['var(--color-gold)']}
                 />
-                <div className="mt-4 p-3 rounded-lg bg-gold/10 text-center">
-                  <Text size="sm" variant="muted">Melhor Horário</Text>
+                <div className="mt-3 p-2 rounded-lg bg-gold/10 text-center">
+                  <Text size="xs" variant="muted">Melhor Horário</Text>
                   <Text weight="bold" className="text-gold">{behaviorInsights.bestTime}</Text>
+                  <Text size="xs" variant="muted">{formatNumber(seasonality.hourly.bestSlotViews)} views/post</Text>
                 </div>
               </CardContent>
             </Card>
@@ -179,8 +301,8 @@ export function SlideDataCrossing() {
 
           <motion.div variants={itemVariants}>
             <Card className="h-full">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
+              <CardHeader className="pb-2">
+                <CardTitle className="flex items-center gap-2 text-sm">
                   <TrendingUp className="w-4 h-4" />
                   Receita Mensal
                 </CardTitle>
@@ -188,13 +310,14 @@ export function SlideDataCrossing() {
               <CardContent>
                 <LineChart
                   data={monthlyChartData}
-                  height={180}
+                  height={150}
                   lines={[{ key: 'value', color: 'var(--color-success)', name: 'Receita' }]}
                   showLegend={false}
                 />
-                <div className="mt-4 p-3 rounded-lg bg-success/10 text-center">
-                  <Text size="sm" variant="muted">Melhor Mês</Text>
+                <div className="mt-3 p-2 rounded-lg bg-success/10 text-center">
+                  <Text size="xs" variant="muted">Melhor Mês</Text>
                   <Text weight="bold" className="text-success">{behaviorInsights.bestMonth}</Text>
+                  <Text size="xs" variant="muted">{formatCurrency(seasonality.monthly.bestMonthRevenue)}</Text>
                 </div>
               </CardContent>
             </Card>
@@ -202,55 +325,31 @@ export function SlideDataCrossing() {
         </div>
       </motion.section>
 
-      {/* Key Correlations */}
+      {/* Key Insight Box */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.8 }}
       >
-        <Card variant="glow">
-          <CardContent className="p-6">
-            <Heading as="h3" size="sm" className="mb-4">Correlações Identificadas</Heading>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-4">
-                <div className="flex items-start gap-3">
-                  <Badge variant="default">1</Badge>
-                  <div>
-                    <Text weight="semibold">Pago Impulsiona Orgânico</Text>
-                    <Text size="sm" variant="muted">
-                      Campanhas MSG + AUD aumentam alcance orgânico em 40%
-                    </Text>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <Badge variant="gold">2</Badge>
-                  <div>
-                    <Text weight="semibold">Black Friday Potencializou Resultados</Text>
-                    <Text size="sm" variant="muted">
-                      Novembro teve 29,8% mais receita que outubro
-                    </Text>
-                  </div>
-                </div>
+        <Card className="border-success/50 bg-success/5">
+          <CardContent className="p-4">
+            <div className="flex items-start gap-4">
+              <div className="p-2 rounded-full bg-success/20">
+                <CheckCircle2 className="w-6 h-6 text-success" />
               </div>
-              <div className="space-y-4">
-                <div className="flex items-start gap-3">
-                  <Badge variant="success">3</Badge>
-                  <div>
-                    <Text weight="semibold">Ticket Médio Crescente</Text>
-                    <Text size="sm" variant="muted">
-                      De R$ 1.380 (Set) para R$ 2.132 (Nov) - +54%
-                    </Text>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <Badge variant="info">4</Badge>
-                  <div>
-                    <Text weight="semibold">Sextas + Manhãs = Performance</Text>
-                    <Text size="sm" variant="muted">
-                      Melhor combinação para publicações orgânicas
-                    </Text>
-                  </div>
-                </div>
+              <div>
+                <Text weight="bold" className="text-success mb-1">
+                  Insight Principal: Correlação r = 0.99 (p = 0.02)
+                </Text>
+                <Text size="sm" variant="muted" className="mb-2">
+                  A correlação quase perfeita entre investimento em Meta Ads e views orgânicos prova estatisticamente que:
+                </Text>
+                <Text weight="semibold">
+                  Campanhas pagas NÃO competem com orgânico - elas AMPLIFICAM o alcance orgânico.
+                </Text>
+                <Text size="sm" variant="muted" className="mt-2">
+                  Fonte: Análise estatística Python com correlação Pearson e p-value &lt; 0.05
+                </Text>
               </div>
             </div>
           </CardContent>

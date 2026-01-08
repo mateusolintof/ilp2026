@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Play, LayoutGrid, Image as ImageIcon, TrendingUp, Eye, Heart, Share2, MessageCircle, Bookmark, Users, CheckCircle, Target, Zap } from 'lucide-react';
+import { Play, LayoutGrid, Image as ImageIcon, TrendingUp, Eye, Heart, Share2, MessageCircle, Bookmark, Target, Zap } from 'lucide-react';
 import { Heading, Text, Label } from '../ui/Typography';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/Card';
 import { Badge } from '../ui/Badge';
@@ -15,7 +15,7 @@ import {
   topFeedReelsPosts,
 } from '@/lib/data/organic';
 
-import { competitors, correlations } from '@/lib/data/research';
+import { correlations } from '@/lib/data/research';
 
 export function SlideOrganic() {
   const containerVariants = {
@@ -259,7 +259,7 @@ export function SlideOrganic() {
         </div>
       </motion.section>
 
-      {/* Competitive Analysis */}
+      {/* Key Insight - Paid amplifies Organic */}
       <motion.section
         variants={containerVariants}
         initial="hidden"
@@ -267,118 +267,54 @@ export function SlideOrganic() {
         className="mt-8 mb-6"
       >
         <motion.div variants={itemVariants} className="flex items-center gap-3 mb-4">
-          <div className="p-2 rounded-lg bg-info/10">
-            <Users className="w-6 h-6 text-info" />
+          <div className="p-2 rounded-lg bg-success/10">
+            <Zap className="w-6 h-6 text-success" />
           </div>
-          <Heading as="h2" size="lg">Análise Competitiva</Heading>
-          <Badge variant="info">Benchmark Instagram</Badge>
+          <Heading as="h2" size="lg">Descoberta Estatística</Heading>
+          <Badge variant="success">Correlação Pearson</Badge>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-4">
-          {/* ILP Card */}
-          <motion.div variants={itemVariants}>
-            <Card className="border-accent/30 h-full">
-              <CardContent className="p-4">
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center">
-                    <Text weight="bold" className="text-accent">ILP</Text>
-                  </div>
-                  <div>
-                    <Text weight="bold">@{competitors.ilp.username}</Text>
-                    <Text size="xs" variant="muted">{competitors.ilp.position}</Text>
-                  </div>
-                </div>
-                <div className="grid grid-cols-2 gap-2 text-center">
-                  <div className="p-2 rounded bg-accent/10">
-                    <Text size="xl" weight="bold" className="text-accent">{formatNumber(competitors.ilp.followers)}</Text>
-                    <Text size="xs" variant="muted">Seguidores</Text>
-                  </div>
-                  <div className="p-2 rounded bg-white/5">
-                    <Text size="xl" weight="bold">{formatNumber(competitors.ilp.posts)}</Text>
-                    <Text size="xs" variant="muted">Posts</Text>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </motion.div>
-
-          {/* Benchmark Card */}
-          <motion.div variants={itemVariants}>
-            <Card className="border-gold/30 h-full">
-              <CardContent className="p-4">
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center">
-                    {competitors.benchmark.isVerified && <CheckCircle className="w-4 h-4 text-gold" />}
-                  </div>
-                  <div>
-                    <Text weight="bold">{competitors.benchmark.fullName}</Text>
-                    <Text size="xs" variant="muted">Referência Nacional</Text>
-                  </div>
-                </div>
-                <div className="grid grid-cols-2 gap-2 text-center">
-                  <div className="p-2 rounded bg-gold/10">
-                    <Text size="xl" weight="bold" className="text-gold">{formatNumber(competitors.benchmark.followers)}</Text>
-                    <Text size="xs" variant="muted">Seguidores</Text>
-                  </div>
-                  <div className="p-2 rounded bg-white/5">
-                    <Text size="xl" weight="bold">{formatNumber(competitors.benchmark.posts)}</Text>
-                    <Text size="xs" variant="muted">Posts</Text>
-                  </div>
-                </div>
-                <div className="mt-2 p-2 rounded bg-gold/5 text-center">
-                  <Text size="xs" variant="muted">{competitors.benchmark.differentiator}</Text>
-                </div>
-              </CardContent>
-            </Card>
-          </motion.div>
-
-          {/* Growth Potential Card */}
-          <motion.div variants={itemVariants}>
-            <Card className="border-success/30 h-full">
-              <CardContent className="p-4">
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-10 h-10 rounded-full bg-success/20 flex items-center justify-center">
-                    <Target className="w-5 h-5 text-success" />
-                  </div>
-                  <div>
-                    <Text weight="bold">Potencial de Crescimento</Text>
-                    <Text size="xs" variant="muted">Gap vs Benchmark</Text>
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <div className="flex justify-between items-center">
-                    <Text size="sm">Seguidores</Text>
-                    <Badge variant="success">+{formatNumber(competitors.benchmark.followers - competitors.ilp.followers)}</Badge>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <Text size="sm">Posts</Text>
-                    <Badge variant="gold">+{formatNumber(competitors.benchmark.posts - competitors.ilp.posts)}</Badge>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <Text size="sm">Verificação</Text>
-                    <Badge variant="info">Oportunidade</Badge>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </motion.div>
-        </div>
-
-        {/* Key Insight - Paid amplifies Organic */}
         <motion.div variants={itemVariants}>
           <Card className="border-success/50 bg-success/5">
-            <CardContent className="p-4">
-              <div className="flex items-start gap-4">
-                <div className="p-2 rounded-full bg-success/20">
-                  <Zap className="w-6 h-6 text-success" />
+            <CardContent className="p-5">
+              <div className="flex items-start gap-4 mb-4">
+                <div className="p-3 rounded-full bg-success/20">
+                  <TrendingUp className="w-6 h-6 text-success" />
+                </div>
+                <div className="flex-1">
+                  <Text weight="bold" size="lg" className="text-success mb-2">
+                    Tráfego Pago Potencializa Alcance Orgânico
+                  </Text>
+                  <div className="grid grid-cols-2 gap-3 mb-3">
+                    <div className="p-2 rounded bg-success/10 text-center">
+                      <Text size="xs" variant="muted">Coef. Pearson (r)</Text>
+                      <Text size="xl" weight="bold" className="text-success">{correlations.investimentoVsViewsOrganicos.r.toFixed(2)}</Text>
+                    </div>
+                    <div className="p-2 rounded bg-white/5 text-center">
+                      <Text size="xs" variant="muted">p-value</Text>
+                      <Text size="xl" weight="bold">{correlations.investimentoVsViewsOrganicos.pValue.toFixed(2)}</Text>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="space-y-3 border-t border-white/10 pt-4">
+                <div>
+                  <Text size="sm" weight="semibold" className="text-white mb-1">O que isso significa:</Text>
+                  <Text size="sm" variant="muted">
+                    {correlations.investimentoVsViewsOrganicos.whatItMeans}
+                  </Text>
                 </div>
                 <div>
-                  <Text weight="bold" className="text-success mb-1">
-                    Correlação Descoberta: Pago Amplifica Orgânico (r = {correlations.investimentoVsViewsOrganicos.r.toFixed(2)})
-                  </Text>
+                  <Text size="sm" weight="semibold" className="text-white mb-1">Por que importa:</Text>
                   <Text size="sm" variant="muted">
-                    {correlations.investimentoVsViewsOrganicos.conclusion}.
-                    Investir em campanhas pagas NÃO compete com orgânico - os dois crescem juntos.
+                    {correlations.investimentoVsViewsOrganicos.whyItMatters}
+                  </Text>
+                </div>
+                <div className="p-3 rounded bg-success/10 border-l-2 border-success">
+                  <Text size="sm" weight="semibold" className="text-success mb-1">Conclusão:</Text>
+                  <Text size="sm" className="text-white">
+                    {correlations.investimentoVsViewsOrganicos.conclusion}
                   </Text>
                 </div>
               </div>
@@ -387,7 +323,7 @@ export function SlideOrganic() {
         </motion.div>
       </motion.section>
 
-      {/* Insights Box */}
+      {/* Performance Insights */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -395,24 +331,28 @@ export function SlideOrganic() {
       >
         <Card variant="glow">
           <CardContent className="p-6">
-            <Heading as="h3" size="sm" className="mb-4">Insights do Tráfego Orgânico</Heading>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="space-y-1">
-                <Text size="sm" variant="muted">Formato dominante</Text>
-                <Text weight="semibold" className="text-accent">
-                  Reels ({formatPercent((organicSummary.byType.reels / organicSummary.feedReels.totalPosts) * 100)} dos posts)
+            <Heading as="h3" size="sm" className="mb-4">Análise de Performance Orgânica</Heading>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="space-y-3">
+                <div className="flex items-center gap-2">
+                  <Play className="w-4 h-4 text-accent" />
+                  <Text weight="semibold">Formato com Melhor Performance</Text>
+                </div>
+                <Text size="sm" variant="muted">
+                  Reels representam {formatPercent((organicSummary.byType.reels / organicSummary.feedReels.totalPosts) * 100)} dos posts
+                  e geram o maior alcance orgânico. O algoritmo do Instagram prioriza vídeos curtos em 2025,
+                  especialmente conteúdo educativo e demonstrações de procedimentos.
                 </Text>
               </div>
-              <div className="space-y-1">
-                <Text size="sm" variant="muted">Gap vs Benchmark</Text>
-                <Text weight="semibold" className="text-gold">
-                  {formatNumber(competitors.benchmark.followers - competitors.ilp.followers)} seguidores
-                </Text>
-              </div>
-              <div className="space-y-1">
-                <Text size="sm" variant="muted">Recomendações</Text>
-                <Text weight="semibold" className="text-accent">
-                  Aumentar frequência de posts (+{formatPercent(((competitors.benchmark.posts - competitors.ilp.posts) / competitors.ilp.posts) * 100)})
+              <div className="space-y-3">
+                <div className="flex items-center gap-2">
+                  <Target className="w-4 h-4 text-gold" />
+                  <Text weight="semibold">Oportunidade de Crescimento</Text>
+                </div>
+                <Text size="sm" variant="muted">
+                  A taxa de engajamento de {formatPercent(organicSummary.feedReels.avgEngagement)} está dentro do benchmark
+                  do setor (1-3%). Para aumentar, focar em conteúdo que gere comentários: perguntas, enquetes em Stories,
+                  e CTAs que incentivem interação direta.
                 </Text>
               </div>
             </div>

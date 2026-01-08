@@ -1,6 +1,29 @@
-Agora vou gerar o relatório final em português, consolidando todas as informações coletadas, com foco em dados do Brasil, atualizados para 2025-2026, e estruturado conforme solicitado.
+# STATUS DO DOCUMENTO
 
-***
+> **Última atualização**: 08/01/2026
+> **Status**: VALIDADO - Dados integrados ao projeto
+
+---
+
+## O QUE FOI UTILIZADO NO PROJETO
+
+### Dados Integrados em research.ts
+- ✅ Benchmarks Meta Ads (CPL, CPC, CTR) com fontes
+- ✅ Tendências 2026 (Bioestimuladores, Skinboosters, K-Beauty, Ozempic Face)
+- ✅ Frameworks de criativos (UGC, Médico falando, Before/After)
+- ✅ Padrões de sazonalidade (dia, horário, mês)
+
+### Dados NÃO Utilizados (removidos por falta de verificabilidade)
+- ❌ Metas de CAC e funil de conversão (sem dados reais de CRM)
+- ❌ Projeções de procedimentos fechados (atribuição incerta)
+- ❌ LTV estimado (sem dados de recorrência real)
+
+### Dados Atualizados/Expandidos
+- Cada tendência agora tem `ilpOpportunity` com ação concreta
+- K-Beauty inclui `growth` (+1.000%) e `term` (Glass Skin)
+- Correlações estatísticas têm `whatItMeans` e `whyItMatters`
+
+---
 
 # DEEP RESEARCH: Benchmarks, Métricas e KPIs – Performance Marketing
 ## Nicho: Dermatologia e Estética Dermatológica (Instituto Luciane Prado)

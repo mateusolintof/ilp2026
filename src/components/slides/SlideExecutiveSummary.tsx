@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { MessageCircle, Eye, FileText, DollarSign, Briefcase, TrendingUp, Users, Target, Award, CheckCircle2, ExternalLink } from 'lucide-react';
+import { MessageCircle, Eye, FileText, DollarSign, Briefcase, Users, Target, Award, CheckCircle2, ExternalLink } from 'lucide-react';
 import { Heading, Text, Label } from '../ui/Typography';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/Card';
 import { Badge } from '../ui/Badge';
@@ -124,7 +124,7 @@ export function SlideExecutiveSummary() {
           <Badge variant="info">Fontes verificadas</Badge>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <motion.div variants={itemVariants}>
             <Card className={`h-full ${ilpVsBenchmarks.custoConversa.status === 'DENTRO' ? 'border-success/50' : ''}`}>
               <CardContent className="p-4">
@@ -178,35 +178,6 @@ export function SlideExecutiveSummary() {
                 <Text size="xs" variant="muted" className="flex items-center gap-1 mt-1">
                   <ExternalLink className="w-3 h-3" />
                   Fonte: Madgicx Meta Ads Benchmarks
-                </Text>
-              </CardContent>
-            </Card>
-          </motion.div>
-
-          <motion.div variants={itemVariants}>
-            <Card className={`h-full ${ilpVsBenchmarks.roi.status === 'EXCEPCIONAL' ? 'border-success/50' : ''}`}>
-              <CardContent className="p-4">
-                <div className="flex items-center justify-between mb-2">
-                  <Text size="sm" weight="semibold">ROI Marketing</Text>
-                  <Badge variant="success">
-                    <TrendingUp className="w-3 h-3 mr-1" />
-                    {ilpVsBenchmarks.roi.status}
-                  </Badge>
-                </div>
-                <div className="grid grid-cols-2 gap-2 mb-2">
-                  <div className="p-2 rounded bg-success/10 text-center">
-                    <Text size="xs" variant="muted">ILP</Text>
-                    <Text weight="bold" className="text-success">{formatNumber(ilpVsBenchmarks.roi.ilp)}%</Text>
-                  </div>
-                  <div className="p-2 rounded bg-white/5 text-center">
-                    <Text size="xs" variant="muted">Média Mercado</Text>
-                    <Text weight="bold">{ilpVsBenchmarks.roi.benchmark}%</Text>
-                  </div>
-                </div>
-                <Text size="xs" variant="muted">{ilpVsBenchmarks.roi.comparison}</Text>
-                <Text size="xs" variant="muted" className="flex items-center gap-1 mt-1">
-                  <ExternalLink className="w-3 h-3" />
-                  Fonte: TheeDigital ROI Benchmarks
                 </Text>
               </CardContent>
             </Card>

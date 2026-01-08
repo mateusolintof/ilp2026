@@ -133,7 +133,7 @@ export function SlideCreatives() {
     'BIOESTIMULADOR': 'BIOESTIMULADOR',
   };
 
-  const patterns = successPatterns.top5Patterns.map(p => ({
+  const patterns = successPatterns.top10Patterns.slice(0, 5).map(p => ({
     name: patternLabels[p.pattern] || p.pattern,
     percentage: p.percentage,
     frequency: p.frequency,

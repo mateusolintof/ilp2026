@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Lightbulb, Target, TrendingUp, Sparkles, ArrowRight, CheckCircle, Star, Rocket, ExternalLink, Gem, Droplets, RefreshCw, Zap } from 'lucide-react';
+import { Lightbulb, Target, TrendingUp, Sparkles, ArrowRight, CheckCircle, Star, Rocket, ExternalLink, Gem, Droplets, RefreshCw, Zap, Calendar, Video, Clock, Layers } from 'lucide-react';
 import { Heading, Text, Label } from '../ui/Typography';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/Card';
 import { Badge } from '../ui/Badge';
@@ -29,6 +29,15 @@ export function SlideInsightsTrends() {
     '💧': <Droplets className="w-6 h-6 text-info" />,
     '🔄': <RefreshCw className="w-6 h-6 text-gold" />,
     '✨': <Sparkles className="w-6 h-6 text-success" />,
+  };
+
+  // Icon mapping for insights
+  const insightIcons: Record<string, React.ReactNode> = {
+    'rocket': <Rocket className="w-5 h-5 text-success" />,
+    'calendar': <Calendar className="w-5 h-5 text-gold" />,
+    'video': <Video className="w-5 h-5 text-accent" />,
+    'clock': <Clock className="w-5 h-5 text-info" />,
+    'layers': <Layers className="w-5 h-5 text-gold" />,
   };
 
   return (
@@ -63,13 +72,15 @@ export function SlideInsightsTrends() {
           <Badge variant="default">Baseados em Dados</Badge>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {actionableInsights.slice(0, 5).map((insight) => (
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          {actionableInsights.slice(0, 4).map((insight) => (
             <motion.div key={insight.id} variants={itemVariants}>
               <Card className={`h-full hover:border-accent/50 transition-colors ${insight.priority === 'ALTA' ? 'border-success/30' : ''}`}>
                 <CardContent className="p-4">
-                  <div className="flex items-start gap-3 mb-2">
-                    <span className="text-2xl">{insight.icon}</span>
+                  <div className="flex items-start gap-3 mb-3">
+                    <div className="p-2 rounded-lg bg-white/5">
+                      {insightIcons[insight.icon] || <Lightbulb className="w-5 h-5 text-accent" />}
+                    </div>
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-1">
                         <Text weight="bold" size="sm">{insight.title}</Text>
@@ -77,16 +88,36 @@ export function SlideInsightsTrends() {
                           {insight.priority}
                         </Badge>
                       </div>
-                      <Text size="xs" variant="muted" className="mb-2">
-                        {insight.finding}
+                      <Text size="xs" variant="muted">
+                        {insight.finding.data}
                       </Text>
+                      {'significance' in insight.finding && insight.finding.significance && (
+                        <Text size="xs" className="text-success">{insight.finding.significance}</Text>
+                      )}
                     </div>
                   </div>
-                  <div className="p-2 rounded bg-accent/5 border-l-2 border-accent">
-                    <div className="flex items-center gap-1 text-accent">
-                      <ArrowRight className="w-3 h-3" />
-                      <Text size="xs" weight="semibold">{insight.action}</Text>
+
+                  <div className="space-y-2 mb-3">
+                    <div>
+                      <Text size="xs" weight="semibold" className="text-white/80 mb-0.5">Por que importa:</Text>
+                      <Text size="xs" variant="muted">{insight.whyItMatters}</Text>
                     </div>
+                  </div>
+
+                  <div className="p-2 rounded bg-accent/5 border-l-2 border-accent">
+                    <Text size="xs" weight="semibold" className="text-accent mb-1">Como aplicar:</Text>
+                    <ul className="space-y-1">
+                      {insight.howToApply.slice(0, 2).map((action, i) => (
+                        <li key={i} className="flex items-start gap-1">
+                          <ArrowRight className="w-3 h-3 text-accent shrink-0 mt-0.5" />
+                          <Text size="xs" variant="muted">{action}</Text>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="flex justify-between items-center mt-2 pt-2 border-t border-white/5">
+                    <Text size="xs" variant="muted">Resultado esperado: <span className="text-white">{insight.expectedResult}</span></Text>
                   </div>
                 </CardContent>
               </Card>
@@ -190,10 +221,10 @@ export function SlideInsightsTrends() {
                 </CardTitle>
               </CardHeader>
               <CardContent className="pt-0">
-                {strategicRecommendations.immediate.map((rec, i) => (
+                {strategicRecommendations.immediate.items.map((rec, i) => (
                   <div key={i} className="flex items-start gap-2 mb-2">
                     <CheckCircle className="w-4 h-4 text-success shrink-0 mt-0.5" />
-                    <Text size="xs">{rec}</Text>
+                    <Text size="xs">{rec.action}</Text>
                   </div>
                 ))}
               </CardContent>
@@ -210,10 +241,10 @@ export function SlideInsightsTrends() {
                 </CardTitle>
               </CardHeader>
               <CardContent className="pt-0">
-                {strategicRecommendations.shortTerm.map((rec, i) => (
+                {strategicRecommendations.shortTerm.items.map((rec, i) => (
                   <div key={i} className="flex items-start gap-2 mb-2">
                     <CheckCircle className="w-4 h-4 text-gold shrink-0 mt-0.5" />
-                    <Text size="xs">{rec}</Text>
+                    <Text size="xs">{rec.action}</Text>
                   </div>
                 ))}
               </CardContent>
@@ -230,10 +261,10 @@ export function SlideInsightsTrends() {
                 </CardTitle>
               </CardHeader>
               <CardContent className="pt-0">
-                {strategicRecommendations.longTerm.map((rec, i) => (
+                {strategicRecommendations.longTerm.items.map((rec, i) => (
                   <div key={i} className="flex items-start gap-2 mb-2">
                     <CheckCircle className="w-4 h-4 text-accent shrink-0 mt-0.5" />
-                    <Text size="xs">{rec}</Text>
+                    <Text size="xs">{rec.action}</Text>
                   </div>
                 ))}
               </CardContent>
@@ -257,24 +288,18 @@ export function SlideInsightsTrends() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-center">
               <div>
                 <Text size="2xl" weight="bold" className="text-gold">
                   R$ 21.6K
                 </Text>
-                <Text size="xs" variant="muted">Investido</Text>
+                <Text size="xs" variant="muted">Investido em Marketing</Text>
               </div>
               <div>
                 <Text size="2xl" weight="bold" className="text-success">
                   R$ 2.3M
                 </Text>
-                <Text size="xs" variant="muted">Faturado</Text>
-              </div>
-              <div>
-                <Text size="2xl" weight="bold" className="text-accent">
-                  10.639%
-                </Text>
-                <Text size="xs" variant="muted">ROI</Text>
+                <Text size="xs" variant="muted">Faturamento da Clínica</Text>
               </div>
               <div>
                 <Text size="2xl" weight="bold" className="text-info">
@@ -284,10 +309,14 @@ export function SlideInsightsTrends() {
               </div>
             </div>
             <div className="mt-4 pt-3 border-t border-white/10 text-center">
-              <Text size="sm" className="text-success mb-1">
-                Marketing amplifica alcance orgânico - não compete com ele.
+              <Text size="sm" className="text-success mb-2">
+                Principal descoberta: Campanhas pagas amplificam o alcance orgânico.
               </Text>
               <Text size="xs" variant="muted">
+                A correlação estatisticamente significativa (p = 0.02) comprova que investimento em marketing
+                e crescimento orgânico caminham juntos - não competem entre si.
+              </Text>
+              <Text size="xs" variant="muted" className="mt-2">
                 Instituto Luciane Prado - Performance Marketing Report | Período: Set-Dez 2025
               </Text>
             </div>

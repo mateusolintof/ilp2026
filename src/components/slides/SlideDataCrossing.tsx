@@ -154,7 +154,7 @@ export function SlideDataCrossing() {
                 <CardContent className="p-4">
                   <div className="flex items-start justify-between mb-3">
                     <div className="flex items-center gap-2">
-                      <span className="text-2xl">{corr.icon}</span>
+                      <span className="text-xl">{corr.icon}</span>
                       <Text weight="semibold" size="sm">{corr.name}</Text>
                     </div>
                     {corr.isSignificant ? (
@@ -170,26 +170,36 @@ export function SlideDataCrossing() {
                     )}
                   </div>
 
-                  <div className="grid grid-cols-2 gap-4 mb-3">
+                  <div className="grid grid-cols-2 gap-3 mb-3">
                     <div className="text-center p-2 rounded-lg bg-white/5">
                       <Text size="xs" variant="muted">Coef. Pearson (r)</Text>
                       <Text size="lg" weight="bold" className={corr.r > 0.7 ? 'text-success' : corr.r > 0.4 ? 'text-gold' : 'text-white/70'}>
-                        {corr.r.toFixed(4)}
+                        {corr.r.toFixed(2)}
                       </Text>
                     </div>
                     <div className="text-center p-2 rounded-lg bg-white/5">
                       <Text size="xs" variant="muted">p-value</Text>
                       <Text size="lg" weight="bold" className={corr.pValue < 0.05 ? 'text-success' : 'text-white/70'}>
-                        {corr.pValue.toFixed(4)}
+                        {corr.pValue.toFixed(2)}
                       </Text>
                     </div>
                   </div>
 
-                  <div className="space-y-1">
-                    <Text size="xs" variant="muted">Interpretação: <span className="text-white">{corr.interpretation}</span></Text>
-                    <Text size="xs" className={corr.isSignificant ? 'text-success' : 'text-white/60'}>
-                      {corr.conclusion}
-                    </Text>
+                  {/* Expanded explanations */}
+                  <div className="space-y-2 border-t border-white/10 pt-3">
+                    <div>
+                      <Text size="xs" weight="semibold" className="text-white/80 mb-0.5">O que significa:</Text>
+                      <Text size="xs" variant="muted">{corr.whatItMeans}</Text>
+                    </div>
+                    <div>
+                      <Text size="xs" weight="semibold" className="text-white/80 mb-0.5">Por que importa:</Text>
+                      <Text size="xs" variant="muted">{corr.whyItMatters}</Text>
+                    </div>
+                    <div className={`p-2 rounded ${corr.isSignificant ? 'bg-success/10 border-l-2 border-success' : 'bg-white/5 border-l-2 border-white/20'}`}>
+                      <Text size="xs" className={corr.isSignificant ? 'text-success' : 'text-white/60'}>
+                        {corr.conclusion}
+                      </Text>
+                    </div>
                   </div>
                 </CardContent>
               </Card>
@@ -198,7 +208,7 @@ export function SlideDataCrossing() {
         </div>
       </motion.section>
 
-      {/* Regression Model - NEW */}
+      {/* Regression Model - With Context */}
       <motion.section
         variants={containerVariants}
         initial="hidden"
@@ -206,14 +216,15 @@ export function SlideDataCrossing() {
         className="mb-6"
       >
         <motion.div variants={itemVariants}>
-          <Card variant="glow">
+          <Card className="border-gold/30">
             <CardContent className="p-4">
               <div className="flex items-center gap-3 mb-4">
-                <BarChart3 className="w-5 h-5 text-accent" />
+                <BarChart3 className="w-5 h-5 text-gold" />
                 <Text weight="semibold">Modelo de Regressão Linear</Text>
+                <Badge variant="gold">Indicativo</Badge>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
                 <div className="p-3 rounded-lg bg-accent/10 text-center">
                   <Text size="xs" variant="muted" className="mb-1">Equação</Text>
                   <Text size="sm" weight="bold" className="text-accent font-mono">
@@ -226,12 +237,22 @@ export function SlideDataCrossing() {
                     {(regression.rSquared * 100).toFixed(2)}%
                   </Text>
                 </div>
-                <div className="p-3 rounded-lg bg-success/10 text-center">
+                <div className="p-3 rounded-lg bg-white/5 text-center">
                   <Text size="xs" variant="muted" className="mb-1">Interpretação</Text>
-                  <Text size="sm" weight="semibold" className="text-success">
-                    R$ 1 investido = R$ {regression.slope.toFixed(2)} receita
+                  <Text size="sm" weight="semibold" className="text-white">
+                    R$ 1 investido → ~R$ {regression.slope.toFixed(0)} receita
                   </Text>
                 </div>
+              </div>
+
+              {/* Limitations explanation */}
+              <div className="p-3 rounded bg-white/5 border-l-2 border-gold">
+                <Text size="xs" weight="semibold" className="text-gold mb-1">Contexto Importante:</Text>
+                <Text size="xs" variant="muted">
+                  O R² de {(regression.rSquared * 100).toFixed(0)}% indica que o modelo explica apenas {(regression.rSquared * 100).toFixed(0)}% da variação na receita.
+                  Isso é esperado: a receita de uma clínica depende de muitos fatores além do marketing (sazonalidade, capacidade operacional,
+                  ticket médio, indicações). O modelo é útil para estimar tendências, mas não deve ser usado para projeções precisas.
+                </Text>
               </div>
             </CardContent>
           </Card>

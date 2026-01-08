@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Video, Image as ImageIcon, LayoutGrid, Award, TrendingUp, Eye, MessageCircle } from 'lucide-react';
+import { Video, Image as ImageIcon, LayoutGrid, TrendingUp, Eye, MessageCircle, Star } from 'lucide-react';
 import Image from 'next/image';
 import { Heading, Text, Label } from '../ui/Typography';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/Card';
@@ -10,18 +10,11 @@ import { ProgressBar } from '../ui/ProgressBar';
 import { formatCurrency, formatNumber } from '@/lib/utils';
 
 // Import data
-import {
-  topMensagemCreatives,
-  topAudienciaCreatives,
-  creativeSummary,
-} from '@/lib/data/creatives';
-
+import { creativeSummary } from '@/lib/data/creatives';
 import { successPatterns } from '@/lib/data/research';
 
-// Image mapping for creatives based on date in name
+// Image mapping for creatives with thumbnails
 const creativeImages: Record<string, string> = {
-  '09/09': '/creatives/post-09-09.png',
-  '04/09': '/creatives/post-04-09.png',
   '05/11': '/creatives/post-05-11.png',
   '07.11': '/creatives/post-07-11.png',
   '07/11': '/creatives/post-07-11.png',
@@ -29,6 +22,75 @@ const creativeImages: Record<string, string> = {
   '12/11': '/creatives/post-12-11.png',
   '28/09': '/creatives/post-28-09.png',
 };
+
+// Melhores Criativos - Lista unificada com dados verificados
+const melhoresCreativos = [
+  {
+    id: 'bioestimulador',
+    name: 'Video Bioestimulador',
+    campaignName: '[ILP] [Audiencia] [Trafego -> View Ig] [Pub. Frio]',
+    campaignType: 'MENSAGEM' as const,
+    format: 'VIDEO' as const,
+    metrics: {
+      results: 1510,
+      resultType: 'Visitas ao perfil do Instagram',
+      costPerResult: 0.43,
+    },
+    hasThumb: false,
+  },
+  {
+    id: 'post-07-11',
+    name: 'Post IG (07.11)',
+    campaignName: '[ILP] [BF] [Audiencia] [Trafego -> Visitou Perfil IG]',
+    campaignType: 'AUDIENCIA' as const,
+    format: 'IMAGE' as const,
+    metrics: {
+      results: 2825,
+      resultType: 'Visitas ao perfil do Instagram',
+      costPerResult: 0.41,
+    },
+    hasThumb: true,
+  },
+  {
+    id: 'post-12-11',
+    name: 'Post IG (12.11) - Dra. Yasmin',
+    campaignName: '[ILP] [BF] [Audiencia] [Trafego -> Visitou Perfil IG]',
+    campaignType: 'AUDIENCIA' as const,
+    format: 'IMAGE' as const,
+    metrics: {
+      results: 1957,
+      resultType: 'Visitas ao perfil do Instagram',
+      costPerResult: 0.40,
+    },
+    hasThumb: true,
+  },
+  {
+    id: 'post-28-09',
+    name: 'Post Reels 28/09 (Dra. Yasmin)',
+    campaignName: '[ILP] [Audiencia] [Trafego -> Visitou Perfil IG]',
+    campaignType: 'AUDIENCIA' as const,
+    format: 'IMAGE' as const,
+    metrics: {
+      results: 1502,
+      resultType: 'Visitas ao perfil do Instagram',
+      costPerResult: 0.37,
+    },
+    hasThumb: true,
+  },
+  {
+    id: 'post-05-11',
+    name: 'Post Carrossel 05/11',
+    campaignName: '[ILP] [BF] [Msg] [Vendas -> Wpp] [Rmkt]',
+    campaignType: 'MENSAGEM' as const,
+    format: 'CAROUSEL' as const,
+    metrics: {
+      results: 37,
+      resultType: 'Conversas por mensagem iniciadas',
+      costPerResult: 55.46,
+    },
+    hasThumb: true,
+  },
+];
 
 // Helper to find image for a creative
 const getCreativeImage = (creativeName: string): string | null => {
@@ -139,7 +201,7 @@ export function SlideCreatives() {
         </motion.div>
       </motion.div>
 
-      {/* Top Creatives - MENSAGEM */}
+      {/* Melhores Criativos - Seção Unificada */}
       <motion.section
         variants={containerVariants}
         initial="hidden"
@@ -147,21 +209,23 @@ export function SlideCreatives() {
         className="mb-8"
       >
         <motion.div variants={itemVariants} className="flex items-center gap-3 mb-4">
-          <Award className="w-6 h-6 text-accent" />
-          <Heading as="h2" size="lg">Top 5 Criativos - MENSAGEM</Heading>
+          <Star className="w-6 h-6 text-gold" />
+          <Heading as="h2" size="lg">Melhores Criativos</Heading>
+          <Badge variant="gold">Top Performers</Badge>
         </motion.div>
 
         <div className="space-y-3">
-          {topMensagemCreatives.slice(0, 5).map((creative, index) => {
+          {melhoresCreativos.map((creative, index) => {
             const imagePath = getCreativeImage(creative.name);
+            const isAudiencia = creative.campaignType === 'AUDIENCIA';
             return (
               <motion.div key={creative.id} variants={itemVariants}>
                 <Card className="p-4">
                   <div className="flex items-center gap-4">
-                    <div className="flex items-center justify-center w-8 h-8 rounded-full bg-accent/20 text-accent font-bold shrink-0">
+                    <div className={`flex items-center justify-center w-8 h-8 rounded-full ${isAudiencia ? 'bg-gold/20 text-gold' : 'bg-accent/20 text-accent'} font-bold shrink-0`}>
                       {index + 1}
                     </div>
-                    {imagePath && (
+                    {imagePath ? (
                       <div className="relative w-16 h-16 rounded-lg overflow-hidden shrink-0 border border-white/10">
                         <Image
                           src={imagePath}
@@ -171,66 +235,9 @@ export function SlideCreatives() {
                           sizes="64px"
                         />
                       </div>
-                    )}
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2">
-                        {formatIcon(creative.format)}
-                        <Text weight="semibold" className="truncate">
-                          {creative.name}
-                        </Text>
-                      </div>
-                      <Text size="sm" variant="muted" className="truncate">
-                        {creative.campaignName}
-                      </Text>
-                    </div>
-                    <div className="text-right shrink-0">
-                      <div className="flex items-center gap-1">
-                        <MessageCircle className="w-4 h-4 text-accent" />
-                        <Text weight="bold">{formatNumber(creative.metrics.results || 0)}</Text>
-                      </div>
-                      <Text size="sm" variant="muted">
-                        {formatCurrency(creative.metrics.costPerResult)}/resultado
-                      </Text>
-                    </div>
-                  </div>
-                </Card>
-              </motion.div>
-            );
-          })}
-        </div>
-      </motion.section>
-
-      {/* Top Creatives - AUDIÊNCIA */}
-      <motion.section
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-        className="mb-8"
-      >
-        <motion.div variants={itemVariants} className="flex items-center gap-3 mb-4">
-          <Award className="w-6 h-6 text-gold" />
-          <Heading as="h2" size="lg">Top 5 Criativos - AUDIÊNCIA</Heading>
-        </motion.div>
-
-        <div className="space-y-3">
-          {topAudienciaCreatives.slice(0, 5).map((creative, index) => {
-            const imagePath = getCreativeImage(creative.name);
-            return (
-              <motion.div key={creative.id} variants={itemVariants}>
-                <Card className="p-4">
-                  <div className="flex items-center gap-4">
-                    <div className="flex items-center justify-center w-8 h-8 rounded-full bg-gold/20 text-gold font-bold shrink-0">
-                      {index + 1}
-                    </div>
-                    {imagePath && (
-                      <div className="relative w-16 h-16 rounded-lg overflow-hidden shrink-0 border border-white/10">
-                        <Image
-                          src={imagePath}
-                          alt={creative.name}
-                          fill
-                          className="object-cover"
-                          sizes="64px"
-                        />
+                    ) : (
+                      <div className="w-16 h-16 rounded-lg shrink-0 border border-white/10 bg-accent/10 flex items-center justify-center">
+                        <Video className="w-6 h-6 text-accent" />
                       </div>
                     )}
                     <div className="flex-1 min-w-0">
@@ -239,15 +246,22 @@ export function SlideCreatives() {
                         <Text weight="semibold" className="truncate">
                           {creative.name}
                         </Text>
+                        <Badge variant={isAudiencia ? 'gold' : 'default'} className="text-xs">
+                          {creative.campaignType}
+                        </Badge>
                       </div>
                       <Text size="sm" variant="muted" className="truncate">
-                        {creative.campaignName}
+                        {creative.metrics.resultType}
                       </Text>
                     </div>
                     <div className="text-right shrink-0">
                       <div className="flex items-center gap-1">
-                        <Eye className="w-4 h-4 text-gold" />
-                        <Text weight="bold">{formatNumber(creative.metrics.results || 0)}</Text>
+                        {isAudiencia ? (
+                          <Eye className="w-4 h-4 text-gold" />
+                        ) : (
+                          <MessageCircle className="w-4 h-4 text-accent" />
+                        )}
+                        <Text weight="bold">{formatNumber(creative.metrics.results)}</Text>
                       </div>
                       <Text size="sm" variant="muted">
                         {formatCurrency(creative.metrics.costPerResult)}/resultado

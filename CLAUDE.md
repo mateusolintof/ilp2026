@@ -173,9 +173,12 @@ Conteudo adicionado:
 
 ### Slide 4: Criativos
 **Arquivo:** `SlideCreatives.tsx`
-**Dados importados:** `successPatterns`
+**Dados importados:** `successPatterns`, `creativeSummary`
 
 Conteudo adicionado:
+- Secao unificada "Melhores Criativos" (substitui Top 5 MSG/AUD separados)
+- 5 criativos selecionados com thumbnails (Video Bioestimulador, Post IG 07.11, Post IG 12.11, Post Reels 28/09, Post Carrossel 05/11)
+- Badge indicando tipo de campanha (MENSAGEM/AUDIENCIA)
 - Secao "Performance por Formato" (video vs imagem vs carrossel)
 - Padroes de sucesso vindos de research.ts
 - Key insight principal

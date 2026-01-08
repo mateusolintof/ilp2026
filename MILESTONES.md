@@ -22,6 +22,7 @@
 | Interatividade | 10. Navegação | ✅ Concluído |
 | Finalização | 11. Deploy | ✅ Concluído |
 | Visual | 12. Imagens dos Criativos | ✅ Concluído |
+| Refinamento | 13. Unificação de Criativos | ✅ Concluído |
 
 ---
 
@@ -188,13 +189,28 @@
 - [x] 12.5 Integrar next/image para thumbnails 64x64
 - [x] 12.6 Testar exibição no browser
 
-**Imagens Adicionadas:**
-- `post-04-09.png` - Post Reels 04/09
+**Imagens em Uso:**
 - `post-05-11.png` - Post Carrossel 05/11
 - `post-07-11.png` - Post IG 07.11
-- `post-09-09.png` - Post Reels 09/09
 - `post-12-11.png` - Post IG 12.11 (Dra. Yasmin)
 - `post-28-09.png` - Post Reels 28/09 (Dra. Yasmin)
+
+---
+
+## MILESTONE 13: Unificação de Criativos
+
+- [x] 13.1 Unificar Top 5 MSG e Top 5 AUD em seção única "Melhores Criativos"
+- [x] 13.2 Remover criativos sem thumbnail (5ps, Vídeo Osterno, Post Reels Depoimento)
+- [x] 13.3 Manter Video Bioestimulador (única exceção sem thumb, exibe ícone)
+- [x] 13.4 Adicionar badge indicando tipo de campanha (MENSAGEM/AUDIENCIA)
+- [x] 13.5 Atualizar documentação (CLAUDE.md, MILESTONES.md)
+
+**Criativos Selecionados (5):**
+1. Video Bioestimulador (MENSAGEM) - 1.510 resultados, R$ 0,43/resultado
+2. Post IG 07.11 (AUDIENCIA) - 2.825 visitas, R$ 0,41/visita
+3. Post IG 12.11 Dra. Yasmin (AUDIENCIA) - 1.957 visitas, R$ 0,40/visita
+4. Post Reels 28/09 Dra. Yasmin (AUDIENCIA) - 1.502 visitas, R$ 0,37/visita
+5. Post Carrossel 05/11 (MENSAGEM) - 37 conversas, R$ 55,46/conversa
 
 ---
 

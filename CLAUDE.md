@@ -15,22 +15,23 @@
 
 ---
 
-# Documentação do Projeto - Status Atual
+# Documentacao do Projeto - Status Atual
 
 ## Progresso Geral
 
-| Milestone | Status | Descrição |
+| Milestone | Status | Descricao |
 |-----------|--------|-----------|
-| 1. Setup e Infraestrutura | ✅ Concluído | Next.js 16.1.1, TypeScript, Tailwind v4 |
-| 2. Extração de Dados | ✅ Concluído | 4 scripts, dados estruturados |
-| 3. Pesquisa e Validação | ✅ Concluído | Benchmarks com fontes, tendências 2026 |
-| 4. Análise de Criativos | ✅ Concluído | Rankings, padrões, cruzamentos |
-| 5. Design System | ✅ Concluído | Tokens, componentes UI, gráficos, 3D |
-| 6-9. Slides | ✅ Concluído | 8 slides implementados |
-| 10. Navegação | ✅ Concluído | Setas, teclado, indicadores |
-| 11. Pesquisa de Mercado | ✅ Concluído | Benchmarks, tendências, concorrentes |
-| 12. Análise Estatística | ✅ Concluído | Correlações Pearson, p-value, regressão |
-| 13. Deploy | 🔄 Em Progresso | Vercel |
+| 1. Setup e Infraestrutura | ✅ Concluido | Next.js 16.1.1, TypeScript, Tailwind v4 |
+| 2. Extracao de Dados | ✅ Concluido | 4 scripts, dados estruturados |
+| 3. Pesquisa e Validacao | ✅ Concluido | Benchmarks com fontes, tendencias 2026 |
+| 4. Analise de Criativos | ✅ Concluido | Rankings, padroes, cruzamentos |
+| 5. Design System | ✅ Concluido | Tokens, componentes UI, graficos, 3D |
+| 6-9. Slides | ✅ Concluido | 8 slides implementados |
+| 10. Navegacao | ✅ Concluido | Setas, teclado, indicadores |
+| 11. Pesquisa de Mercado | ✅ Concluido | Benchmarks, tendencias, concorrentes |
+| 12. Analise Estatistica | ✅ Concluido | Correlacoes Pearson, p-value, regressao |
+| 13. Integracao Dados nos Slides | ✅ Concluido | Todos slides com dados reais |
+| 14. Deploy | ✅ Concluido | Vercel (auto-deploy via GitHub) |
 
 ---
 
@@ -40,28 +41,28 @@
 /ILP-Report
 ├── /src
 │   ├── /app/
-│   │   ├── page.tsx           # Página principal com navegação
+│   │   ├── page.tsx           # Pagina principal com navegacao
 │   │   ├── layout.tsx         # Layout root
 │   │   └── globals.css        # Design tokens e estilos
 │   ├── /components/
 │   │   ├── /3d/
-│   │   │   └── ParticleBackground.tsx  # Background 3D com partículas
+│   │   │   └── ParticleBackground.tsx  # Background 3D com particulas
 │   │   ├── /charts/
-│   │   │   ├── BarChart.tsx   # Gráfico de barras
-│   │   │   ├── LineChart.tsx  # Gráfico de linhas
-│   │   │   ├── PieChart.tsx   # Gráfico de pizza
-│   │   │   └── MetricCard.tsx # Card de métrica
+│   │   │   ├── BarChart.tsx   # Grafico de barras
+│   │   │   ├── LineChart.tsx  # Grafico de linhas
+│   │   │   ├── PieChart.tsx   # Grafico de pizza
+│   │   │   └── MetricCard.tsx # Card de metrica
 │   │   ├── /slides/
 │   │   │   ├── SlideCover.tsx          # 1. Capa
-│   │   │   ├── SlideExecutiveSummary.tsx # 2. Resumo Executivo
-│   │   │   ├── SlidePaidTraffic.tsx    # 3. Tráfego Pago
-│   │   │   ├── SlideCreatives.tsx      # 4. Criativos
-│   │   │   ├── SlideOrganic.tsx        # 5. Orgânico
-│   │   │   ├── SlideClosings.tsx       # 6. Fechamento
-│   │   │   ├── SlideDataCrossing.tsx   # 7. Cruzamento
-│   │   │   └── SlideInsightsTrends.tsx # 8. Insights
+│   │   │   ├── SlideExecutiveSummary.tsx # 2. Resumo Executivo + ROI
+│   │   │   ├── SlidePaidTraffic.tsx    # 3. Trafego Pago + Benchmarks
+│   │   │   ├── SlideCreatives.tsx      # 4. Criativos + Padroes
+│   │   │   ├── SlideOrganic.tsx        # 5. Organico + Competidores
+│   │   │   ├── SlideClosings.tsx       # 6. Fechamento + Tendencias
+│   │   │   ├── SlideDataCrossing.tsx   # 7. Cruzamento + Correlacoes
+│   │   │   └── SlideInsightsTrends.tsx # 8. Insights + Recomendacoes
 │   │   └── /ui/
-│   │       ├── Button.tsx     # Botões
+│   │       ├── Button.tsx     # Botoes
 │   │       ├── Card.tsx       # Cards
 │   │       ├── Badge.tsx      # Badges
 │   │       ├── ProgressBar.tsx # Barras de progresso
@@ -73,110 +74,171 @@
 │   │   │   ├── creatives.ts   # 33 criativos (15 MSG, 18 AUD)
 │   │   │   ├── organic.ts     # 502 posts (57 Feed/Reels, 445 Stories)
 │   │   │   ├── closings.ts    # 1.621 procedimentos
-│   │   │   └── analysis.ts    # Rankings, insights, comportamento
+│   │   │   ├── analysis.ts    # Rankings, insights, comportamento
+│   │   │   └── research.ts    # ⭐ NOVO: Benchmarks, correlacoes, tendencias
 │   │   └── /utils/
-│   │       └── index.ts       # Utilitários (formatCurrency, etc)
+│   │       └── index.ts       # Utilitarios (formatCurrency, etc)
 │   └── /types/
 │       └── index.ts           # Tipos TypeScript
 ├── /scripts/
-│   ├── extract-campaigns.ts   # Extração de CSVs de campanhas
-│   ├── extract-creatives.ts   # Extração de Excel de criativos
-│   ├── extract-organic.ts     # Extração de CSVs orgânicos
-│   ├── extract-closings.ts    # Extração de Excel de fechamento
-│   ├── statistical-analysis.py # Análise estatística com correlações
+│   ├── extract-campaigns.ts   # Extracao de CSVs de campanhas
+│   ├── extract-creatives.ts   # Extracao de Excel de criativos
+│   ├── extract-organic.ts     # Extracao de CSVs organicos
+│   ├── extract-closings.ts    # Extracao de Excel de fechamento
+│   ├── statistical-analysis.py # Analise estatistica com correlacoes
 │   └── /agents/
-│       ├── creative-analyzer.ts   # Análise de criativos
-│       └── behavior-analyzer.ts   # Padrões comportamentais
-├── /outputs/                   # ⭐ NOVA PASTA - Pesquisa e Análise
+│       ├── creative-analyzer.ts   # Analise de criativos
+│       └── behavior-analyzer.ts   # Padroes comportamentais
+├── /outputs/
 │   ├── /research/
-│   │   ├── benchmarks-meta-ads-2025.md  # Benchmarks com fontes verificáveis
-│   │   └── market-trends-2026.md        # Tendências do setor
+│   │   ├── benchmarks-meta-ads-2025.md  # Benchmarks com fontes verificaveis
+│   │   └── market-trends-2026.md        # Tendencias do setor
 │   ├── /scraped-data/
 │   │   ├── ilp-instagram-profile.json   # Dados do @institutolucianeprado
 │   │   └── competitors-instagram.json   # Perfis dos concorrentes
 │   ├── /analysis/
-│   │   └── statistical-correlations.json # Correlações Pearson, p-value
+│   │   └── statistical-correlations.json # Correlacoes Pearson, p-value
 │   └── /assets/
 │       ├── /ilp-creatives/              # Thumbnails do ILP
 │       └── /competitor-creatives/       # Thumbnails concorrentes
 └── /docs/
-    ├── PLANO-ESTRATEGICO.md   # Plano aprovado de transformação
-    └── marketing-research.md  # Benchmarks e tendências (legado)
+    ├── PLANO-ESTRATEGICO.md   # Plano aprovado de transformacao
+    └── marketing-research.md  # Benchmarks e tendencias (legado)
 ```
 
 ---
 
-## Outputs de Pesquisa (NOVO)
+## Arquivo de Dados Centralizado (research.ts)
 
-### /outputs/research/
+O arquivo `src/lib/data/research.ts` centraliza todos os dados de pesquisa e analise estatistica:
 
-| Arquivo | Descrição | Fontes |
-|---------|-----------|--------|
-| `benchmarks-meta-ads-2025.md` | Benchmarks CTR, CPC, CPM, CVR por setor | WordStream, Superads, Bestever AI, LocalIQ |
-| `market-trends-2026.md` | Tendências dermatologia estética 2026 | PR Newswire, Forbes, Galderma |
+### Exports Disponiveis
 
-### /outputs/scraped-data/
+| Export | Descricao | Uso |
+|--------|-----------|-----|
+| `benchmarks` | Meta Ads benchmarks 2025 por setor | SlidePaidTraffic |
+| `ilpVsBenchmarks` | Comparacao ILP vs mercado | SlideExecutiveSummary, SlidePaidTraffic |
+| `correlations` | Correlacoes Pearson com p-value | SlideDataCrossing |
+| `regression` | Modelo de regressao linear | SlideDataCrossing |
+| `performanceMetrics` | ROI, custo/procedimento, ticket medio | SlideExecutiveSummary, SlideClosings |
+| `seasonality` | Padroes por dia, hora, mes | SlideDataCrossing |
+| `competitors` | Analise competitiva Instagram | SlideOrganic |
+| `trends2026` | Tendencias dermatologia 2026 | SlideInsightsTrends, SlideClosings |
+| `successPatterns` | Padroes de sucesso criativos | SlideCreatives |
+| `actionableInsights` | Insights acionaveis | SlideInsightsTrends |
+| `strategicRecommendations` | Recomendacoes por prazo | SlideInsightsTrends |
 
-| Arquivo | Descrição | Ferramenta |
-|---------|-----------|------------|
-| `ilp-instagram-profile.json` | Perfil completo @institutolucianeprado | Apify Instagram Scraper |
-| `competitors-instagram.json` | 4 concorrentes analisados | Apify Instagram Scraper |
+### Fontes Verificadas
 
-### /outputs/analysis/
-
-| Arquivo | Descrição | Método |
-|---------|-----------|--------|
-| `statistical-correlations.json` | Correlações Pearson com p-value | Python (scipy equivalent) |
+- **WordStream 2025** - Benchmarks CTR, CPC por industria
+- **Superads** - CPC Facebook Ads
+- **Bestever AI** - CTR, CVR Beauty/Healthcare
+- **LocalIQ** - CPL por setor
+- **Lebesgue** - CPM, CAC Beauty
+- **Madgicx** - Meta Ads benchmarking
+- **Apify** - Scraping Instagram (perfis, posts)
+- **Tavily** - Pesquisa tendencias 2026
 
 ---
 
-## Análise Estatística
+## Detalhes por Slide
 
-### Correlações Calculadas (Pearson)
+### Slide 2: Resumo Executivo
+**Arquivo:** `SlideExecutiveSummary.tsx`
+**Dados importados:** `performanceMetrics`, `ilpVsBenchmarks`
 
-| Correlação | r | p-value | Significância |
+Conteudo adicionado:
+- Secao ROI Highlight com 4 metricas-chave
+- Comparacao ILP vs benchmarks de mercado
+- Status indicators (EXCELENTE, DENTRO, EXCEPCIONAL)
+
+### Slide 3: Trafego Pago
+**Arquivo:** `SlidePaidTraffic.tsx`
+**Dados importados:** `benchmarks`, `ilpVsBenchmarks`
+
+Conteudo adicionado:
+- Secao "ILP vs Benchmarks de Mercado"
+- Cards comparativos CTR, CPL, CPC, CVR
+- Citacao de fontes (WordStream, LocalIQ, Bestever AI)
+- Insights box atualizado com dados reais
+
+### Slide 4: Criativos
+**Arquivo:** `SlideCreatives.tsx`
+**Dados importados:** `successPatterns`
+
+Conteudo adicionado:
+- Secao "Performance por Formato" (video vs imagem vs carrossel)
+- Padroes de sucesso vindos de research.ts
+- Key insight principal
+- Recomendacoes baseadas em dados
+
+### Slide 5: Organico
+**Arquivo:** `SlideOrganic.tsx`
+**Dados importados:** `competitors`, `correlations`
+
+Conteudo adicionado:
+- Secao "Analise Competitiva" com 3 cards:
+  - ILP (@institutolucianeprado)
+  - Benchmark (@drlucasmiranda.dermato)
+  - Potencial de Crescimento
+- Card insight correlacao pago-organico (r=0.99)
+- Gap vs benchmark atualizado
+
+### Slide 6: Fechamento
+**Arquivo:** `SlideClosings.tsx`
+**Dados importados:** `trends2026`, `performanceMetrics`
+
+Conteudo adicionado:
+- Secao "Alinhamento com Tendencias 2026"
+- Macro trend (Regeneracao > Preenchimento)
+- Matrix servicos vs tendencias com acoes
+- Insights box com ROI e custo/procedimento
+
+### Slide 7: Cruzamento
+**Arquivo:** `SlideDataCrossing.tsx`
+**Dados importados:** `correlations`, `regression`, `seasonality`
+
+Conteudo adicionado:
+- Secao "Correlacoes Estatisticas (Pearson)"
+- 4 cards com r, p-value, interpretacao
+- Indicadores de significancia estatistica
+- Modelo de regressao linear
+- Insight principal com citacao metodologica
+
+### Slide 8: Insights
+**Arquivo:** `SlideInsightsTrends.tsx`
+**Dados importados:** `actionableInsights`, `trends2026`, `strategicRecommendations`
+
+Conteudo adicionado:
+- 5 insights acionaveis com prioridade
+- Tendencias dermatologia 2026
+- Influencia K-Beauty
+- Recomendacoes por prazo (imediato, curto, longo)
+
+---
+
+## Analise Estatistica
+
+### Correlacoes Calculadas (Pearson)
+
+| Correlacao | r | p-value | Significancia |
 |------------|---|---------|---------------|
-| Investimento Pago → Views Orgânicos | 0.99 | 0.02 | ✅ Significativo |
-| Views Orgânicos → Procedimentos | 0.42 | 0.83 | ❌ Não significativo |
-| Investimento → Receita | 0.35 | 0.88 | ❌ Não significativo |
-| Resultados Pagos → Procedimentos | 0.33 | 0.89 | ❌ Não significativo |
+| Investimento Pago → Views Organicos | 0.99 | 0.02 | ✅ Significativo |
+| Views Organicos → Procedimentos | 0.42 | 0.83 | ❌ Nao significativo |
+| Investimento → Receita | 0.35 | 0.88 | ❌ Nao significativo |
+| Resultados Pagos → Procedimentos | 0.33 | 0.89 | ❌ Nao significativo |
 
 ### Insight Principal
-**Correlação r=0.99** entre investimento pago e views orgânicos indica que campanhas pagas **amplificam** o alcance orgânico, não competem com ele.
+**Correlacao r=0.99** entre investimento pago e views organicos indica que campanhas pagas **amplificam** o alcance organico, nao competem com ele.
 
-### Regressão Linear
-- **Modelo**: Receita = 57.50 × Investimento + 269.870
-- **R²**: 0.12 (modelo explicativo fraco - muitas variáveis externas)
-- **Interpretação prática**: Cada R$ 1 em marketing gera ~R$ 57 em receita adicional
-
----
-
-## Dados Extraídos
-
-### Campanhas Pagas (`campaigns.ts`)
-- **Total:** 30 campanhas
-- **MENSAGEM:** 11 campanhas | R$ 11.432,47 | 265 conversas WhatsApp
-- **AUDIÊNCIA:** 19 campanhas | R$ 10.207,61 | 22.411 visitas ao perfil
-
-### Criativos (`creatives.ts`)
-- **Total:** 33 criativos
-- **Formatos:** 7 vídeos, 24 imagens, 2 carrosséis
-- **Top MENSAGEM:** Video Bioestimulador (1.510 resultados, R$ 0,43/resultado)
-- **Top AUDIÊNCIA:** Post IG 07.11 (2.825 visitas, R$ 0,41/visita)
-
-### Orgânico (`organic.ts`)
-- **Feed/Reels:** 57 posts | 1.376.909 views | 451.965 alcance
-- **Stories:** 445 stories | 163.087 views | 132.128 alcance
-- **Tipos:** 36 Reels, 18 Carrosséis, 3 Imagens
-
-### Fechamento (`closings.ts`)
-- **Total:** 1.621 procedimentos | R$ 2.323.874,90
-- **Top Categoria:** Toxina Botulínica (30,7% da receita)
-- **Mês mais forte:** Novembro (R$ 707.847,43)
+### Regressao Linear
+- **Modelo**: Receita = 57.50 x Investimento + 269.870
+- **R2**: 0.12 (modelo explicativo fraco - muitas variaveis externas)
+- **Interpretacao pratica**: Cada R$ 1 em marketing gera ~R$ 57 em receita adicional
 
 ---
 
-## Métricas Principais
+## Metricas Principais
 
 ### ROI e Performance
 - **ROI Marketing:** 10.639%
@@ -185,58 +247,81 @@
 - **Investimento total:** R$ 21.640,08
 - **Faturamento total:** R$ 2.323.874,90
 
-### Padrões de Sucesso
-- **REELS:** 40% dos top performers
-- **MEDICO_PRESENTE:** 40% dos top performers
-- **BLACK_FRIDAY:** 40% dos top performers
-- **VIDEO:** 20% dos top performers
+### Padroes de Sucesso (Top 10 Criativos)
+- **REELS:** 40% (4 de 10)
+- **MEDICO_PRESENTE:** 40% (4 de 10)
+- **BLACK_FRIDAY:** 40% (4 de 10)
+- **VIDEO:** 20% (2 de 10)
+- **BIOESTIMULADOR:** 10% (1 de 10)
 
-### Padrões Comportamentais
+### Performance por Formato
+| Formato | Resultados Medios | Custo/Resultado |
+|---------|-------------------|-----------------|
+| Video | 764 | R$ 15,30 |
+| Imagem | 716 | R$ 20,49 |
+| Carrossel | 19 | R$ 40,75 |
+
+### Padroes Comportamentais
 - **Melhor dia:** Sexta-feira (58.000 views - 107% melhor que domingo)
-- **Melhor horário:** Manhã 6h-12h (132.600 views/post)
-- **Mês mais forte:** Novembro (R$ 707.847,43)
+- **Melhor horario:** Manha 6h-12h (132.600 views/post)
+- **Mes mais forte:** Novembro (R$ 707.847,43)
 
 ---
 
-## Navegação do Dashboard
+## Analise Competitiva
 
-O dashboard possui 8 slides navegáveis:
+| Perfil | Seguidores | Posts | Relevancia |
+|--------|------------|-------|------------|
+| @drlucasmiranda.dermato | 125.467 | 1.969 | ALTA - Benchmark nacional |
+| @institutolucianeprado (ILP) | 24.643 | 739 | 2o lugar |
+| @clinicamichelineneves | 8.710 | 1.169 | MEDIA - Posicionamento similar |
+
+### Gap vs Benchmark
+- **Seguidores:** +100.824 para alcançar benchmark
+- **Posts:** +1.230 para alcançar benchmark
+- **Verificacao:** Oportunidade (benchmark e verificado)
+
+---
+
+## Navegacao do Dashboard
+
+O dashboard possui 8 slides navegaveis:
 
 1. **Capa** - Contexto e KPIs principais
-2. **Resumo Executivo** - TL;DR com ROI e performance
-3. **Tráfego Pago** - Campanhas MSG e AUD
-4. **Criativos** - Top 5 rankings e padrões
-5. **Orgânico** - Feed/Reels e Stories
-6. **Fechamento** - Receita e procedimentos
-7. **Cruzamento** - Correlações de dados
-8. **Insights** - Tendências 2026 e recomendações
+2. **Resumo Executivo** - ROI highlight, benchmarks, status
+3. **Trafego Pago** - Campanhas MSG/AUD, ILP vs mercado
+4. **Criativos** - Performance por formato, padroes de sucesso
+5. **Organico** - Analise competitiva, correlacao pago-organico
+6. **Fechamento** - Tendencias 2026, oportunidades por servico
+7. **Cruzamento** - Correlacoes Pearson, regressao, sazonalidade
+8. **Insights** - Insights acionaveis, recomendacoes estrategicas
 
-### Controles de Navegação
+### Controles de Navegacao
 - **Setas na tela** - Clique para navegar
-- **Teclado:** ← → (navegação), Space (próximo), Home/End (início/fim)
+- **Teclado:** ← → (navegacao), Space (proximo), Home/End (inicio/fim)
 - **Indicadores** - Clique nos pontos para ir ao slide
 
 ---
 
-## Comandos Úteis
+## Comandos Uteis
 
 ```bash
 # Desenvolvimento
 npm run dev          # Servidor de desenvolvimento
-npm run build        # Build de produção
+npm run build        # Build de producao
 npm run lint         # Verificar ESLint
 
-# Scripts de extração (TypeScript)
+# Scripts de extracao (TypeScript)
 npx ts-node scripts/extract-campaigns.ts
 npx ts-node scripts/extract-creatives.ts
 npx ts-node scripts/extract-organic.ts
 npx ts-node scripts/extract-closings.ts
 
-# Agentes de análise (TypeScript)
+# Agentes de analise (TypeScript)
 npx ts-node scripts/agents/creative-analyzer.ts
 npx ts-node scripts/agents/behavior-analyzer.ts
 
-# Análise estatística (Python)
+# Analise estatistica (Python)
 python3 scripts/statistical-analysis.py
 ```
 
@@ -245,39 +330,48 @@ python3 scripts/statistical-analysis.py
 ## Tecnologias
 
 - **Framework:** Next.js 16.1.1
-- **Linguagem:** TypeScript + Python (análise)
-- **Estilização:** Tailwind CSS v4
-- **Animações:** Framer Motion
+- **Linguagem:** TypeScript + Python (analise)
+- **Estilizacao:** Tailwind CSS v4
+- **Animacoes:** Framer Motion
 - **3D:** React Three Fiber
-- **Gráficos:** Recharts
-- **Ícones:** Lucide React
+- **Graficos:** Recharts
+- **Icones:** Lucide React
 
 ---
 
 ## APIs Utilizadas
 
-- ✅ **Tavily** - Pesquisa de tendências e benchmarks
+- ✅ **Tavily** - Pesquisa de tendencias e benchmarks
 - ✅ **Apify** - Scraping Instagram e Meta Ads
-- ⏳ **OpenAI** - Solicitar se necessário para análise visual
+- ⏳ **OpenAI** - Disponivel se necessario para analise visual
 
 ---
 
-## Concorrentes Analisados
+## Deploy
 
-| Perfil | Seguidores | Posts | Relevância |
-|--------|------------|-------|------------|
-| @drlucasmiranda.dermato | 125.467 | 1.969 | ALTA - Benchmark nacional |
-| @clinicamichelineneves | 8.710 | 1.169 | MÉDIA - Posicionamento similar |
-| @institutofelici | 453 | 89 | BAIXA - Modelo diferente |
-| @belapele.derma | 14 | 16 | BAIXA - Não concorrente |
-
-**ILP Position:** 24.643 seguidores | 739 posts | 2º lugar entre analisados
+- **Plataforma:** Vercel
+- **Repositorio:** https://github.com/mateusolintof/ilp2026.git
+- **Auto-deploy:** Ativado (push → deploy automatico)
+- **Status:** ✅ Producao
 
 ---
 
-## Próximos Passos
+## Historico de Commits Relevantes
 
-1. ⏳ Atualizar slides com dados de pesquisa real
-2. ⏳ Adicionar componentes de benchmark comparativo
-3. ⏳ Incluir galeria de criativos nos slides
-4. ⏳ Deploy em Vercel
+| Data | Commit | Descricao |
+|------|--------|-----------|
+| 2026-01-08 | a03e409 | feat: Add data-driven research, statistical analysis |
+| 2026-01-08 | 04e1624 | feat: Add data-driven research (previous) |
+| 2026-01-07 | a6f5829 | fix: Ajustes visuais nos slides |
+| 2026-01-07 | d70a496 | fix: Remove hamburger menu |
+| 2026-01-07 | ff66454 | feat: Complete Milestones 5-10 |
+
+---
+
+## Proximos Passos (Opcoes Futuras)
+
+1. ⏳ Adicionar galeria visual de criativos (thumbnails)
+2. ⏳ Implementar exportacao PDF dos slides
+3. ⏳ Criar versao interativa com filtros
+4. ⏳ Adicionar mais metricas de tendencias em tempo real
+5. ⏳ Dashboard de acompanhamento continuo

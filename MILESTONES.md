@@ -10,17 +10,17 @@
 
 | Fase | Milestone | Status |
 |------|-----------|--------|
-| Fundação | 1. Setup e Infraestrutura | Concluído |
-| Fundação | 2. Extração de Dados | Concluído |
-| Pesquisa | 3. Validação de Mercado | Concluído |
-| Pesquisa | 4. Análise de Criativos | Concluído |
-| UI | 5. Design System | Concluído |
-| Slides | 6. Slides 1-2 (Abertura) | Concluído |
-| Slides | 7. Slides 3-4 (Pago/Criativos) | Concluído |
-| Slides | 8. Slides 5-6 (Orgânico/Fechamento) | Concluído |
-| Slides | 9. Slides 7-8 (Cruzamento/Insights) | Concluído |
-| Interatividade | 10. Navegação | Concluído |
-| Finalização | 11. Deploy | Em Progresso |
+| Fundação | 1. Setup e Infraestrutura | ✅ Concluído |
+| Fundação | 2. Extração de Dados | ✅ Concluído |
+| Pesquisa | 3. Validação de Mercado | ✅ Concluído |
+| Pesquisa | 4. Análise de Criativos | ✅ Concluído |
+| UI | 5. Design System | ✅ Concluído |
+| Slides | 6. Slides 1-2 (Abertura) | ✅ Concluído |
+| Slides | 7. Slides 3-4 (Pago/Criativos) | ✅ Concluído |
+| Slides | 8. Slides 5-6 (Orgânico/Fechamento) | ✅ Concluído |
+| Slides | 9. Slides 7-8 (Cruzamento/Insights) | ✅ Concluído |
+| Interatividade | 10. Navegação | ✅ Concluído |
+| Finalização | 11. Deploy | 🔄 Em Progresso |
 
 ---
 
@@ -109,9 +109,9 @@
 
 - [x] 6.1 Criar `SlideCover.tsx` - Capa e contexto inicial
 - [x] 6.2 Criar `SlideExecutiveSummary.tsx` - Resumo executivo
-- [ ] 6.3 Implementar 4-6 KPIs principais em cards visuais
-- [ ] 6.4 Criar mini gráfico de evolução mensal
-- [ ] 6.5 Adicionar indicadores vs benchmark
+- [x] 6.3 Implementar 4-6 KPIs principais em cards visuais
+- [x] 6.4 Criar mini gráfico de evolução mensal
+- [x] 6.5 Adicionar indicadores vs benchmark
 
 ---
 
@@ -156,12 +156,12 @@
 
 ## MILESTONE 10: Navegação e Interatividade
 
-- [x] 10.1 Implementar container de scroll horizontal
-- [x] 10.2 Converter mouse wheel para scroll horizontal
+- [x] 10.1 Implementar navegação horizontal entre slides (AnimatePresence)
+- [x] 10.2 Setas de navegação (botões visuais)
 - [x] 10.3 Navegação por teclado (←, →, Space, Home, End)
-- [x] 10.4 Progress bar animada
-- [x] 10.5 Scroll vertical interno em cada slide
-- [x] 10.6 Indicadores de slide atual
+- [x] 10.4 Progress bar animada no topo
+- [x] 10.5 Scroll vertical interno em cada slide (sem auto-navegação)
+- [x] 10.6 Indicadores de slide atual (dots clicáveis)
 - [x] 10.7 Testar responsividade e performance
 
 ---
@@ -171,10 +171,10 @@
 - [x] 11.1 Revisar todos os slides e componentes
 - [x] 11.2 Rodar ESLint e corrigir erros
 - [x] 11.3 Otimizar performance (lazy loading, memoization)
-- [ ] 11.4 Testar em diferentes navegadores
-- [ ] 11.5 Documentar código e decisões
+- [x] 11.4 Testar em diferentes navegadores (localhost:3000)
+- [x] 11.5 Documentar código e decisões (MILESTONES.md, CLAUDE.md)
 - [x] 11.6 Commit final e push para repositório
-- [ ] 11.7 Deploy (Vercel)
+- [ ] 11.7 Deploy (Vercel) - Pendente
 
 ---
 

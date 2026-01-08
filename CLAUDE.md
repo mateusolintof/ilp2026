@@ -25,36 +25,67 @@
 | 2. Extração de Dados | ✅ Concluído | 4 scripts, dados estruturados |
 | 3. Pesquisa e Validação | ✅ Concluído | Benchmarks validados, tendências 2026 |
 | 4. Análise de Criativos | ✅ Concluído | Rankings, padrões, cruzamentos |
-| 5. Design System | 🔄 Pendente | Próximo milestone |
-| 6-9. Slides | 🔄 Pendente | 8 slides a implementar |
-| 10. Navegação | 🔄 Pendente | Scroll horizontal, teclado |
-| 11. Deploy | 🔄 Pendente | Vercel |
+| 5. Design System | ✅ Concluído | Tokens, componentes UI, gráficos, 3D |
+| 6-9. Slides | ✅ Concluído | 8 slides implementados |
+| 10. Navegação | ✅ Concluído | Setas, teclado, indicadores |
+| 11. Deploy | 🔄 Em Progresso | Vercel |
 
 ---
 
-## Estrutura de Arquivos Criados
+## Estrutura de Arquivos
 
 ```
 /ILP-Report
 ├── /src
-│   ├── /lib/data/
-│   │   ├── campaigns.ts      # 30 campanhas (11 MSG, 19 AUD)
-│   │   ├── creatives.ts      # 33 criativos (15 MSG, 18 AUD)
-│   │   ├── organic.ts        # 502 posts (57 Feed/Reels, 445 Stories)
-│   │   ├── closings.ts       # 1.621 procedimentos
-│   │   └── analysis.ts       # Rankings, insights, comportamento
+│   ├── /app/
+│   │   ├── page.tsx           # Página principal com navegação
+│   │   ├── layout.tsx         # Layout root
+│   │   └── globals.css        # Design tokens e estilos
+│   ├── /components/
+│   │   ├── /3d/
+│   │   │   └── ParticleBackground.tsx  # Background 3D com partículas
+│   │   ├── /charts/
+│   │   │   ├── BarChart.tsx   # Gráfico de barras
+│   │   │   ├── LineChart.tsx  # Gráfico de linhas
+│   │   │   ├── PieChart.tsx   # Gráfico de pizza
+│   │   │   └── MetricCard.tsx # Card de métrica
+│   │   ├── /slides/
+│   │   │   ├── SlideCover.tsx          # 1. Capa
+│   │   │   ├── SlideExecutiveSummary.tsx # 2. Resumo Executivo
+│   │   │   ├── SlidePaidTraffic.tsx    # 3. Tráfego Pago
+│   │   │   ├── SlideCreatives.tsx      # 4. Criativos
+│   │   │   ├── SlideOrganic.tsx        # 5. Orgânico
+│   │   │   ├── SlideClosings.tsx       # 6. Fechamento
+│   │   │   ├── SlideDataCrossing.tsx   # 7. Cruzamento
+│   │   │   └── SlideInsightsTrends.tsx # 8. Insights
+│   │   └── /ui/
+│   │       ├── Button.tsx     # Botões
+│   │       ├── Card.tsx       # Cards
+│   │       ├── Badge.tsx      # Badges
+│   │       ├── ProgressBar.tsx # Barras de progresso
+│   │       ├── Tooltip.tsx    # Tooltips
+│   │       └── Typography.tsx # Tipografia
+│   ├── /lib/
+│   │   ├── /data/
+│   │   │   ├── campaigns.ts   # 30 campanhas (11 MSG, 19 AUD)
+│   │   │   ├── creatives.ts   # 33 criativos (15 MSG, 18 AUD)
+│   │   │   ├── organic.ts     # 502 posts (57 Feed/Reels, 445 Stories)
+│   │   │   ├── closings.ts    # 1.621 procedimentos
+│   │   │   └── analysis.ts    # Rankings, insights, comportamento
+│   │   └── /utils/
+│   │       └── index.ts       # Utilitários (formatCurrency, etc)
 │   └── /types/
-│       └── index.ts          # Tipos TypeScript
+│       └── index.ts           # Tipos TypeScript
 ├── /scripts/
-│   ├── extract-campaigns.ts  # Extração de CSVs de campanhas
-│   ├── extract-creatives.ts  # Extração de Excel de criativos
-│   ├── extract-organic.ts    # Extração de CSVs orgânicos
-│   ├── extract-closings.ts   # Extração de Excel de fechamento
+│   ├── extract-campaigns.ts   # Extração de CSVs de campanhas
+│   ├── extract-creatives.ts   # Extração de Excel de criativos
+│   ├── extract-organic.ts     # Extração de CSVs orgânicos
+│   ├── extract-closings.ts    # Extração de Excel de fechamento
 │   └── /agents/
-│       ├── creative-analyzer.ts   # Análise de criativos e cruzamentos
+│       ├── creative-analyzer.ts   # Análise de criativos
 │       └── behavior-analyzer.ts   # Padrões comportamentais
 └── /docs/
-    └── marketing-research.md  # Benchmarks e tendências (atualizado)
+    └── marketing-research.md  # Benchmarks e tendências
 ```
 
 ---
@@ -84,36 +115,20 @@
 
 ---
 
-## Análise Realizada (`analysis.ts`)
+## Métricas Principais
 
-### Top 5 Criativos - MENSAGEM
-| Criativo | Conversas | Custo/Conv | Padrões |
-|----------|-----------|------------|---------|
-| Video Bioestimulador | 1.510 | R$ 0,43 | VIDEO, BIOESTIMULADOR |
-| Post Reels 09/09 | 270 | R$ 0,60 | REELS |
-| Post Reels 04/09 | 71 | R$ 0,63 | REELS |
-| Carrossel 05/11 | 37 | R$ 55,46 | CAROUSEL, BLACK_FRIDAY |
-| Vídeo Osterno | 29 | R$ 70,49 | VIDEO, MEDICO_PRESENTE |
+### ROI e Performance
+- **ROI Marketing:** 10.639%
+- **Receita por R$ 1 investido:** R$ 107,39
+- **Custo por procedimento:** R$ 13,35
+- **Investimento total:** R$ 21.640,08
+- **Faturamento total:** R$ 2.323.874,90
 
-### Top 5 Criativos - AUDIÊNCIA
-| Criativo | Visitas | Custo/Visita | Padrões |
-|----------|---------|--------------|---------|
-| Post IG (07.11) | 2.825 | R$ 0,41 | MEDICO_PRESENTE |
-| 5ps | 2.172 | R$ 0,56 | - |
-| Dra. Yasmin (12.11) | 1.957 | R$ 0,40 | MEDICO_PRESENTE |
-| Depoimento Ultraformer | 1.574 | R$ 0,35 | REELS |
-| Dra. Yasmin (28/09) | 1.502 | R$ 0,37 | REELS, MEDICO_PRESENTE |
-
-### Padrões de Sucesso Identificados
+### Padrões de Sucesso
 - **REELS:** 40% dos top performers
 - **MEDICO_PRESENTE:** 40% dos top performers
 - **BLACK_FRIDAY:** 40% dos top performers
 - **VIDEO:** 20% dos top performers
-
-### Métricas de Cruzamento
-- **ROI Marketing:** 10.639%
-- **Receita por R$ 1 investido:** R$ 107,39
-- **Custo por procedimento:** R$ 13,35
 
 ### Padrões Comportamentais
 - **Melhor dia:** Sexta-feira (233.186 views/post)
@@ -122,48 +137,61 @@
 
 ---
 
-## Insights Gerados
+## Navegação do Dashboard
 
-1. **Vídeos com médicos performam melhor** - Presença do Dr. Osterno ou Dra. Yasmin aumenta engajamento
-2. **AUDIÊNCIA tem melhor custo-benefício** - Manter 60% do budget para awareness
-3. **Toxina Botulínica é o carro-chefe** - 30,7% da receita, criar campanhas específicas
-4. **Conteúdo orgânico deve ser impulsionado** - Posts com >10k views para AUDIÊNCIA
-5. **ROI justifica aumento de investimento** - Aumentar budget 30% em Q1 2026
+O dashboard possui 8 slides navegáveis:
+
+1. **Capa** - Contexto e KPIs principais
+2. **Resumo Executivo** - TL;DR com ROI e performance
+3. **Tráfego Pago** - Campanhas MSG e AUD
+4. **Criativos** - Top 5 rankings e padrões
+5. **Orgânico** - Feed/Reels e Stories
+6. **Fechamento** - Receita e procedimentos
+7. **Cruzamento** - Correlações de dados
+8. **Insights** - Tendências 2026 e recomendações
+
+### Controles de Navegação
+- **Setas na tela** - Clique para navegar
+- **Teclado:** ← → (navegação), Space (próximo), Home/End (início/fim)
+- **Indicadores** - Clique nos pontos para ir ao slide
 
 ---
 
-## Próximos Passos
-
-### Milestone 5: Design System
-- [ ] Definir Design Tokens (cores, tipografia)
-- [ ] Criar componentes base (Button, Card, Badge)
-- [ ] Criar componentes de gráficos (BarChart, LineChart, PieChart)
-- [ ] Criar Background 3D com partículas
-- [ ] Criar SlideContainer
-
-### Comandos Úteis
+## Comandos Úteis
 
 ```bash
-# Rodar scripts de extração
+# Desenvolvimento
+npm run dev          # Servidor de desenvolvimento
+npm run build        # Build de produção
+npm run lint         # Verificar ESLint
+
+# Scripts de extração
 npx ts-node scripts/extract-campaigns.ts
 npx ts-node scripts/extract-creatives.ts
 npx ts-node scripts/extract-organic.ts
 npx ts-node scripts/extract-closings.ts
 
-# Rodar agentes de análise
+# Agentes de análise
 npx ts-node scripts/agents/creative-analyzer.ts
 npx ts-node scripts/agents/behavior-analyzer.ts
-
-# Build e desenvolvimento
-npm run dev
-npm run build
-npm run lint
 ```
+
+---
+
+## Tecnologias
+
+- **Framework:** Next.js 16.1.1
+- **Linguagem:** TypeScript
+- **Estilização:** Tailwind CSS v4
+- **Animações:** Framer Motion
+- **3D:** React Three Fiber
+- **Gráficos:** Recharts
+- **Ícones:** Lucide React
 
 ---
 
 ## APIs Utilizadas
 
 - ✅ **Tavily** - Pesquisa de tendências e benchmarks
-- ✅ **Apify** - Disponível para scraping (não utilizado ainda)
+- ✅ **Apify** - Disponível para scraping
 - ⏳ **OpenAI** - Solicitar se necessário para análise visual

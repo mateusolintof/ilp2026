@@ -20,7 +20,8 @@
 | Slides | 8. Slides 5-6 (Orgânico/Fechamento) | ✅ Concluído |
 | Slides | 9. Slides 7-8 (Cruzamento/Insights) | ✅ Concluído |
 | Interatividade | 10. Navegação | ✅ Concluído |
-| Finalização | 11. Deploy | 🔄 Em Progresso |
+| Finalização | 11. Deploy | ✅ Concluído |
+| Visual | 12. Imagens dos Criativos | ✅ Concluído |
 
 ---
 
@@ -174,7 +175,26 @@
 - [x] 11.4 Testar em diferentes navegadores (localhost:3000)
 - [x] 11.5 Documentar código e decisões (MILESTONES.md, CLAUDE.md)
 - [x] 11.6 Commit final e push para repositório
-- [ ] 11.7 Deploy (Vercel) - Pendente
+- [x] 11.7 Deploy (Vercel) - Concluído
+
+---
+
+## MILESTONE 12: Imagens dos Criativos
+
+- [x] 12.1 Identificar posts Instagram das datas dos criativos top performers
+- [x] 12.2 Baixar screenshots dos posts via Playwright (6 imagens)
+- [x] 12.3 Copiar imagens para `/public/creatives/`
+- [x] 12.4 Atualizar SlideCreatives.tsx com mapeamento de imagens
+- [x] 12.5 Integrar next/image para thumbnails 64x64
+- [x] 12.6 Testar exibição no browser
+
+**Imagens Adicionadas:**
+- `post-04-09.png` - Post Reels 04/09
+- `post-05-11.png` - Post Carrossel 05/11
+- `post-07-11.png` - Post IG 07.11
+- `post-09-09.png` - Post Reels 09/09
+- `post-12-11.png` - Post IG 12.11 (Dra. Yasmin)
+- `post-28-09.png` - Post Reels 28/09 (Dra. Yasmin)
 
 ---
 

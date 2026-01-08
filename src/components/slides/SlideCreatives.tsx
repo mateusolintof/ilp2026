@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Video, Image as ImageIcon, LayoutGrid, Award, TrendingUp, Eye, MessageCircle } from 'lucide-react';
+import Image from 'next/image';
 import { Heading, Text, Label } from '../ui/Typography';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/Card';
 import { Badge } from '../ui/Badge';
@@ -16,6 +17,28 @@ import {
 } from '@/lib/data/creatives';
 
 import { successPatterns } from '@/lib/data/research';
+
+// Image mapping for creatives based on date in name
+const creativeImages: Record<string, string> = {
+  '09/09': '/creatives/post-09-09.png',
+  '04/09': '/creatives/post-04-09.png',
+  '05/11': '/creatives/post-05-11.png',
+  '07.11': '/creatives/post-07-11.png',
+  '07/11': '/creatives/post-07-11.png',
+  '12.11': '/creatives/post-12-11.png',
+  '12/11': '/creatives/post-12-11.png',
+  '28/09': '/creatives/post-28-09.png',
+};
+
+// Helper to find image for a creative
+const getCreativeImage = (creativeName: string): string | null => {
+  for (const [dateKey, imagePath] of Object.entries(creativeImages)) {
+    if (creativeName.includes(dateKey)) {
+      return imagePath;
+    }
+  }
+  return null;
+};
 
 export function SlideCreatives() {
   const containerVariants = {
@@ -129,37 +152,51 @@ export function SlideCreatives() {
         </motion.div>
 
         <div className="space-y-3">
-          {topMensagemCreatives.slice(0, 5).map((creative, index) => (
-            <motion.div key={creative.id} variants={itemVariants}>
-              <Card className="p-4">
-                <div className="flex items-center gap-4">
-                  <div className="flex items-center justify-center w-8 h-8 rounded-full bg-accent/20 text-accent font-bold">
-                    {index + 1}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2">
-                      {formatIcon(creative.format)}
-                      <Text weight="semibold" className="truncate">
-                        {creative.name}
+          {topMensagemCreatives.slice(0, 5).map((creative, index) => {
+            const imagePath = getCreativeImage(creative.name);
+            return (
+              <motion.div key={creative.id} variants={itemVariants}>
+                <Card className="p-4">
+                  <div className="flex items-center gap-4">
+                    <div className="flex items-center justify-center w-8 h-8 rounded-full bg-accent/20 text-accent font-bold shrink-0">
+                      {index + 1}
+                    </div>
+                    {imagePath && (
+                      <div className="relative w-16 h-16 rounded-lg overflow-hidden shrink-0 border border-white/10">
+                        <Image
+                          src={imagePath}
+                          alt={creative.name}
+                          fill
+                          className="object-cover"
+                          sizes="64px"
+                        />
+                      </div>
+                    )}
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2">
+                        {formatIcon(creative.format)}
+                        <Text weight="semibold" className="truncate">
+                          {creative.name}
+                        </Text>
+                      </div>
+                      <Text size="sm" variant="muted" className="truncate">
+                        {creative.campaignName}
                       </Text>
                     </div>
-                    <Text size="sm" variant="muted" className="truncate">
-                      {creative.campaignName}
-                    </Text>
-                  </div>
-                  <div className="text-right">
-                    <div className="flex items-center gap-1">
-                      <MessageCircle className="w-4 h-4 text-accent" />
-                      <Text weight="bold">{formatNumber(creative.metrics.results || 0)}</Text>
+                    <div className="text-right shrink-0">
+                      <div className="flex items-center gap-1">
+                        <MessageCircle className="w-4 h-4 text-accent" />
+                        <Text weight="bold">{formatNumber(creative.metrics.results || 0)}</Text>
+                      </div>
+                      <Text size="sm" variant="muted">
+                        {formatCurrency(creative.metrics.costPerResult)}/resultado
+                      </Text>
                     </div>
-                    <Text size="sm" variant="muted">
-                      {formatCurrency(creative.metrics.costPerResult)}/resultado
-                    </Text>
                   </div>
-                </div>
-              </Card>
-            </motion.div>
-          ))}
+                </Card>
+              </motion.div>
+            );
+          })}
         </div>
       </motion.section>
 
@@ -176,37 +213,51 @@ export function SlideCreatives() {
         </motion.div>
 
         <div className="space-y-3">
-          {topAudienciaCreatives.slice(0, 5).map((creative, index) => (
-            <motion.div key={creative.id} variants={itemVariants}>
-              <Card className="p-4">
-                <div className="flex items-center gap-4">
-                  <div className="flex items-center justify-center w-8 h-8 rounded-full bg-gold/20 text-gold font-bold">
-                    {index + 1}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2">
-                      {formatIcon(creative.format)}
-                      <Text weight="semibold" className="truncate">
-                        {creative.name}
+          {topAudienciaCreatives.slice(0, 5).map((creative, index) => {
+            const imagePath = getCreativeImage(creative.name);
+            return (
+              <motion.div key={creative.id} variants={itemVariants}>
+                <Card className="p-4">
+                  <div className="flex items-center gap-4">
+                    <div className="flex items-center justify-center w-8 h-8 rounded-full bg-gold/20 text-gold font-bold shrink-0">
+                      {index + 1}
+                    </div>
+                    {imagePath && (
+                      <div className="relative w-16 h-16 rounded-lg overflow-hidden shrink-0 border border-white/10">
+                        <Image
+                          src={imagePath}
+                          alt={creative.name}
+                          fill
+                          className="object-cover"
+                          sizes="64px"
+                        />
+                      </div>
+                    )}
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2">
+                        {formatIcon(creative.format)}
+                        <Text weight="semibold" className="truncate">
+                          {creative.name}
+                        </Text>
+                      </div>
+                      <Text size="sm" variant="muted" className="truncate">
+                        {creative.campaignName}
                       </Text>
                     </div>
-                    <Text size="sm" variant="muted" className="truncate">
-                      {creative.campaignName}
-                    </Text>
-                  </div>
-                  <div className="text-right">
-                    <div className="flex items-center gap-1">
-                      <Eye className="w-4 h-4 text-gold" />
-                      <Text weight="bold">{formatNumber(creative.metrics.results || 0)}</Text>
+                    <div className="text-right shrink-0">
+                      <div className="flex items-center gap-1">
+                        <Eye className="w-4 h-4 text-gold" />
+                        <Text weight="bold">{formatNumber(creative.metrics.results || 0)}</Text>
+                      </div>
+                      <Text size="sm" variant="muted">
+                        {formatCurrency(creative.metrics.costPerResult)}/resultado
+                      </Text>
                     </div>
-                    <Text size="sm" variant="muted">
-                      {formatCurrency(creative.metrics.costPerResult)}/resultado
-                    </Text>
                   </div>
-                </div>
-              </Card>
-            </motion.div>
-          ))}
+                </Card>
+              </motion.div>
+            );
+          })}
         </div>
       </motion.section>
 

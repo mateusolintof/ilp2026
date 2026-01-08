@@ -1,36 +1,85 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ILP Performance Report 2026
 
-## Getting Started
+Dashboard interativo de Performance de Marketing Digital para o Instituto Luciane Prado (Dermatologia & Estética).
 
-First, run the development server:
+## Sobre o Projeto
+
+Apresentação horizontal com 8 slides interativos que consolidam dados de:
+- Tráfego Pago (Meta Ads) - Set/Dez 2025
+- Análise de Criativos com thumbnails visuais
+- Performance Orgânica (Instagram)
+- Fechamento da Clínica (Procedimentos e Receita)
+- Correlações Estatísticas (Pearson)
+- Insights e Tendências 2026
+
+## Métricas Principais
+
+| Métrica | Valor |
+|---------|-------|
+| Investimento Total | R$ 21.640,08 |
+| Faturamento Total | R$ 2.323.874,90 |
+| ROI Marketing | 10.639% |
+| Procedimentos | 1.621 |
+| Correlação Pago→Orgânico | r = 0.99 |
+
+## Stack Tecnológico
+
+- **Framework:** Next.js 16.1.1
+- **Linguagem:** TypeScript
+- **Estilização:** Tailwind CSS v4
+- **Animações:** Framer Motion
+- **3D:** React Three Fiber
+- **Gráficos:** Recharts
+- **Ícones:** Lucide React
+
+## Executando o Projeto
 
 ```bash
+# Instalar dependências
+npm install
+
+# Desenvolvimento
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Build de produção
+npm run build
+
+# Verificar ESLint
+npm run lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abra [http://localhost:3000](http://localhost:3000) no browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Navegação
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Setas na tela** - Clique para navegar
+- **Teclado:** ← → (navegação), Space (próximo), Home/End (início/fim)
+- **Indicadores** - Clique nos pontos para ir ao slide
 
-## Learn More
+## Estrutura de Slides
 
-To learn more about Next.js, take a look at the following resources:
+1. **Capa** - Contexto e KPIs principais
+2. **Resumo Executivo** - ROI, benchmarks, status
+3. **Tráfego Pago** - Campanhas MSG/AUD vs mercado
+4. **Criativos** - Top 5 com imagens, padrões de sucesso
+5. **Orgânico** - Análise competitiva, correlação pago-orgânico
+6. **Fechamento** - Tendências 2026, oportunidades
+7. **Cruzamento** - Correlações Pearson, regressão
+8. **Insights** - Recomendações estratégicas
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Documentação
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `CLAUDE.md` - Documentação técnica completa
+- `MILESTONES.md` - Progresso do projeto
+- `spec.md` - Especificação original
+- `docs/` - Contexto e pesquisa de mercado
 
-## Deploy on Vercel
+## Deploy
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Plataforma:** Vercel
+- **Repositório:** https://github.com/mateusolintof/ilp2026.git
+- **Auto-deploy:** Ativado
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+**Instituto Luciane Prado** - Performance Marketing Report | Set-Dez 2025

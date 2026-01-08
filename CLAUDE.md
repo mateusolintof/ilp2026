@@ -32,6 +32,7 @@
 | 12. Analise Estatistica | ✅ Concluido | Correlacoes Pearson, p-value, regressao |
 | 13. Integracao Dados nos Slides | ✅ Concluido | Todos slides com dados reais |
 | 14. Deploy | ✅ Concluido | Vercel (auto-deploy via GitHub) |
+| 15. Imagens dos Criativos | ✅ Concluido | 6 thumbnails Instagram nos Top 5 |
 
 ---
 
@@ -39,6 +40,14 @@
 
 ```
 /ILP-Report
+├── /public
+│   └── /creatives/            # ⭐ NOVO: Thumbnails dos criativos Instagram
+│       ├── post-04-09.png     # Post Reels 04/09
+│       ├── post-05-11.png     # Post Carrossel 05/11
+│       ├── post-07-11.png     # Post IG 07.11
+│       ├── post-09-09.png     # Post Reels 09/09
+│       ├── post-12-11.png     # Post IG 12.11 (Dra. Yasmin)
+│       └── post-28-09.png     # Post Reels 28/09 (Dra. Yasmin)
 ├── /src
 │   ├── /app/
 │   │   ├── page.tsx           # Pagina principal com navegacao
@@ -56,7 +65,7 @@
 │   │   │   ├── SlideCover.tsx          # 1. Capa
 │   │   │   ├── SlideExecutiveSummary.tsx # 2. Resumo Executivo + ROI
 │   │   │   ├── SlidePaidTraffic.tsx    # 3. Trafego Pago + Benchmarks
-│   │   │   ├── SlideCreatives.tsx      # 4. Criativos + Padroes
+│   │   │   ├── SlideCreatives.tsx      # 4. Criativos + Imagens + Padroes
 │   │   │   ├── SlideOrganic.tsx        # 5. Organico + Competidores
 │   │   │   ├── SlideClosings.tsx       # 6. Fechamento + Tendencias
 │   │   │   ├── SlideDataCrossing.tsx   # 7. Cruzamento + Correlacoes
@@ -370,7 +379,7 @@ python3 scripts/statistical-analysis.py
 
 ## Proximos Passos (Opcoes Futuras)
 
-1. ⏳ Adicionar galeria visual de criativos (thumbnails)
+1. ✅ Adicionar galeria visual de criativos (thumbnails) - CONCLUIDO
 2. ⏳ Implementar exportacao PDF dos slides
 3. ⏳ Criar versao interativa com filtros
 4. ⏳ Adicionar mais metricas de tendencias em tempo real

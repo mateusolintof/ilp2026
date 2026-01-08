@@ -6,13 +6,10 @@ import { Heading, Text, Label } from '../ui/Typography';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/Card';
 import { Badge } from '../ui/Badge';
 import { MetricCard } from '../charts/MetricCard';
-import { BarChart } from '../charts/BarChart';
 import { formatCurrency, formatNumber, formatPercent } from '@/lib/utils';
 
 // Import data
 import {
-  mensagemCampaigns,
-  audienciaCampaigns,
   mensagemSummary,
   audienciaSummary,
 } from '@/lib/data/campaigns';
@@ -32,64 +29,6 @@ export function SlidePaidTraffic() {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0 },
   };
-
-  // Helper function to create short readable campaign names
-  const formatCampaignName = (name: string): string => {
-    // Extract key identifiers from campaign name
-    const parts = name.split(/[\[\]_\-\s]+/).filter(Boolean);
-
-    // Look for meaningful parts
-    const hasBlackFriday = name.toLowerCase().includes('bf') || name.toLowerCase().includes('black');
-    const hasEngaja = name.toLowerCase().includes('engaja');
-    const hasVendas = name.toLowerCase().includes('vendas');
-    const hasConversas = name.toLowerCase().includes('conversas');
-    const hasView = name.toLowerCase().includes('view');
-    const hasTrafego = name.toLowerCase().includes('trafego') || name.toLowerCase().includes('tráfego');
-
-    // Build a cleaner name
-    let cleanName = '';
-
-    if (hasBlackFriday) cleanName = 'Black Friday';
-    else if (hasEngaja) cleanName = 'Engajamento';
-    else if (hasVendas) cleanName = 'Vendas';
-    else if (hasConversas) cleanName = 'Conversas';
-    else if (hasView) cleanName = 'View Instagram';
-    else if (hasTrafego) cleanName = 'Tráfego';
-    else cleanName = parts.slice(0, 2).join(' ');
-
-    // Add date if present (look for patterns like 09/09, 07.11, etc)
-    const dateMatch = name.match(/(\d{2}[\/\.]\d{2})/);
-    if (dateMatch) {
-      cleanName += ` (${dateMatch[1]})`;
-    }
-
-    // Add number indicator if present
-    const numMatch = name.match(/\[(\d+)\]/);
-    if (numMatch) {
-      cleanName += ` #${numMatch[1]}`;
-    }
-
-    return cleanName.length > 20 ? cleanName.substring(0, 18) + '...' : cleanName;
-  };
-
-  // Prepare chart data for campaigns
-  const mensagemChartData = mensagemCampaigns
-    .filter(c => (c.metrics.conversationsStarted || 0) > 0)
-    .sort((a, b) => (b.metrics.conversationsStarted || 0) - (a.metrics.conversationsStarted || 0))
-    .slice(0, 5)
-    .map(c => ({
-      name: formatCampaignName(c.name),
-      value: c.metrics.conversationsStarted || 0,
-    }));
-
-  const audienciaChartData = audienciaCampaigns
-    .filter(c => (c.metrics.profileVisits || 0) > 0)
-    .sort((a, b) => (b.metrics.profileVisits || 0) - (a.metrics.profileVisits || 0))
-    .slice(0, 5)
-    .map(c => ({
-      name: formatCampaignName(c.name),
-      value: c.metrics.profileVisits || 0,
-    }));
 
   return (
     <div className="min-h-full pb-8">
@@ -164,21 +103,6 @@ export function SlidePaidTraffic() {
           </motion.div>
         </div>
 
-        <motion.div variants={itemVariants}>
-          <Card>
-            <CardHeader>
-              <CardTitle>Top 5 Campanhas - Conversas</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <BarChart
-                data={mensagemChartData}
-                height={200}
-                layout="vertical"
-                colors={['var(--color-accent)']}
-              />
-            </CardContent>
-          </Card>
-        </motion.div>
       </motion.section>
 
       {/* AUDIÊNCIA Section */}
@@ -237,21 +161,6 @@ export function SlidePaidTraffic() {
           </motion.div>
         </div>
 
-        <motion.div variants={itemVariants}>
-          <Card>
-            <CardHeader>
-              <CardTitle>Top 5 Campanhas - Visitas ao Perfil</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <BarChart
-                data={audienciaChartData}
-                height={200}
-                layout="vertical"
-                colors={['var(--color-gold)']}
-              />
-            </CardContent>
-          </Card>
-        </motion.div>
       </motion.section>
 
       {/* Benchmark Comparison */}

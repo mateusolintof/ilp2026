@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { MessageCircle, Eye, FileText, DollarSign, Briefcase, TrendingUp, Users, Target, Award, ArrowUpRight, CheckCircle2, ExternalLink } from 'lucide-react';
+import { MessageCircle, Eye, FileText, DollarSign, Briefcase, TrendingUp, Users, Target, Award, CheckCircle2, ExternalLink } from 'lucide-react';
 import { Heading, Text, Label } from '../ui/Typography';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/Card';
 import { Badge } from '../ui/Badge';
@@ -14,7 +14,7 @@ import { formatCurrency, formatNumber } from '@/lib/utils';
 import { mensagemSummary, audienciaSummary } from '@/lib/data/campaigns';
 import { organicSummary } from '@/lib/data/organic';
 import { consolidatedClosingSummary, monthlySummaries } from '@/lib/data/closings';
-import { performanceMetrics, ilpVsBenchmarks } from '@/lib/data/research';
+import { ilpVsBenchmarks } from '@/lib/data/research';
 
 export function SlideExecutiveSummary() {
   const totalInvestment = mensagemSummary.consolidated.spent + audienciaSummary.consolidated.spent;
@@ -62,51 +62,6 @@ export function SlideExecutiveSummary() {
         <Text variant="muted" size="lg">
           Visão geral da performance de marketing do período Set-Dez 2025
         </Text>
-      </motion.div>
-
-      {/* ROI Highlight - NEW */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        className="mb-6"
-      >
-        <Card variant="glow" className="bg-gradient-to-r from-success/10 to-gold/10">
-          <CardContent className="p-4">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
-              <div className="text-center md:border-r md:border-white/10 pr-4">
-                <Text size="xs" variant="muted">ROI Marketing</Text>
-                <Text size="3xl" weight="bold" className="text-success">
-                  {formatNumber(performanceMetrics.roi.value)}%
-                </Text>
-                <Badge variant="success" className="mt-1">
-                  <ArrowUpRight className="w-3 h-3 mr-1" />
-                  21x acima da média
-                </Badge>
-              </div>
-              <div className="text-center md:border-r md:border-white/10 pr-4">
-                <Text size="xs" variant="muted">Receita por R$ 1 Investido</Text>
-                <Text size="3xl" weight="bold" className="text-gold">
-                  R$ {performanceMetrics.revenuePerReal.value.toFixed(2)}
-                </Text>
-                <Text size="xs" variant="muted">Retorno excepcional</Text>
-              </div>
-              <div className="text-center md:border-r md:border-white/10 pr-4">
-                <Text size="xs" variant="muted">Custo por Procedimento</Text>
-                <Text size="3xl" weight="bold" className="text-accent">
-                  R$ {performanceMetrics.costPerProcedure.value.toFixed(2)}
-                </Text>
-                <Text size="xs" variant="muted">Marketing eficiente</Text>
-              </div>
-              <div className="text-center">
-                <Text size="xs" variant="muted">Ticket Médio</Text>
-                <Text size="3xl" weight="bold" className="text-info">
-                  {formatCurrency(performanceMetrics.avgTicket.value)}
-                </Text>
-                <Text size="xs" variant="muted">Receita/procedimento</Text>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
       </motion.div>
 
       {/* Key Metrics Row */}

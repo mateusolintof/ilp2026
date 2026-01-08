@@ -12572,8 +12572,8 @@ export const organicData = {
   }
 } as const;
 
-export const feedReelsPosts: OrganicPost[] = organicData.posts.feedReels;
-export const storiesPosts: OrganicPost[] = organicData.posts.stories;
+export const feedReelsPosts = [...organicData.posts.feedReels] as unknown as OrganicPost[];
+export const storiesPosts = [...organicData.posts.stories] as unknown as OrganicPost[];
 
 export const topFeedReelsPosts = organicData.topPerformers.feedReels;
 export const topStoriesPosts = organicData.topPerformers.stories;

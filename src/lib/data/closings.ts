@@ -36401,9 +36401,9 @@ export const closingData = {
   }
 } as const;
 
-export const allClosingRecords: ClosingRecord[] = closingData.records.all;
+export const allClosingRecords = [...closingData.records.all] as unknown as ClosingRecord[];
 export const closingsByMonth = closingData.records.byMonth;
 
 export const consolidatedClosingSummary = closingData.summary.consolidated;
-export const closingsByCategory: CategorySummary[] = closingData.summary.byCategory;
-export const monthlySummaries: ClosingSummary[] = closingData.summary.monthly;
+export const closingsByCategory = [...closingData.summary.byCategory] as unknown as CategorySummary[];
+export const monthlySummaries = [...closingData.summary.monthly] as unknown as ClosingSummary[];

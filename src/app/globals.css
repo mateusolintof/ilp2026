@@ -2,17 +2,93 @@
 
 :root {
   /* Design System - ILP Dashboard */
+
+  /* Core Colors */
   --color-primary: #1A1A2E;
   --color-secondary: #16213E;
   --color-accent: #E94560;
   --color-gold: #D4AF37;
   --color-background: #0F0F1A;
   --color-surface: #1A1A2E;
+  --color-surface-elevated: #242444;
   --color-text: #FAFAFA;
   --color-text-muted: #8B8B8B;
+  --color-text-subtle: #6B6B6B;
+
+  /* Semantic Colors */
   --color-success: #10B981;
+  --color-success-muted: rgba(16, 185, 129, 0.15);
   --color-warning: #F59E0B;
+  --color-warning-muted: rgba(245, 158, 11, 0.15);
   --color-error: #EF4444;
+  --color-error-muted: rgba(239, 68, 68, 0.15);
+  --color-info: #3B82F6;
+  --color-info-muted: rgba(59, 130, 246, 0.15);
+
+  /* Chart Colors */
+  --color-chart-1: #E94560;
+  --color-chart-2: #D4AF37;
+  --color-chart-3: #3B82F6;
+  --color-chart-4: #10B981;
+  --color-chart-5: #8B5CF6;
+  --color-chart-6: #EC4899;
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #E94560 0%, #D4AF37 100%);
+  --gradient-surface: linear-gradient(180deg, #1A1A2E 0%, #0F0F1A 100%);
+  --gradient-glow: radial-gradient(ellipse at center, rgba(233, 69, 96, 0.15) 0%, transparent 70%);
+
+  /* Borders */
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-color-strong: rgba(255, 255, 255, 0.2);
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 20px rgba(233, 69, 96, 0.3);
+
+  /* Typography Scale */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  --text-5xl: 3rem;
+  --text-6xl: 3.75rem;
+
+  /* Line Heights */
+  --leading-tight: 1.25;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.75;
+
+  /* Spacing */
+  --spacing-1: 0.25rem;
+  --spacing-2: 0.5rem;
+  --spacing-3: 0.75rem;
+  --spacing-4: 1rem;
+  --spacing-6: 1.5rem;
+  --spacing-8: 2rem;
+  --spacing-12: 3rem;
+  --spacing-16: 4rem;
+  --spacing-24: 6rem;
+
+  /* Border Radius */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  --radius-full: 9999px;
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-normal: 300ms ease;
+  --transition-slow: 500ms ease;
+  --transition-bounce: 500ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
 @theme inline {
@@ -23,14 +99,26 @@
   --color-gold: var(--color-gold);
   --color-background: var(--color-background);
   --color-surface: var(--color-surface);
+  --color-surface-elevated: var(--color-surface-elevated);
   --color-foreground: var(--color-text);
   --color-muted: var(--color-text-muted);
+  --color-subtle: var(--color-text-subtle);
   --color-success: var(--color-success);
   --color-warning: var(--color-warning);
   --color-error: var(--color-error);
+  --color-info: var(--color-info);
+
+  /* Chart Colors */
+  --color-chart-1: var(--color-chart-1);
+  --color-chart-2: var(--color-chart-2);
+  --color-chart-3: var(--color-chart-3);
+  --color-chart-4: var(--color-chart-4);
+  --color-chart-5: var(--color-chart-5);
+  --color-chart-6: var(--color-chart-6);
 
   /* Typography */
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-display: 'Inter', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 
   /* Spacing */
@@ -38,8 +126,8 @@
   --spacing-section: 4rem;
 
   /* Transitions */
-  --transition-smooth: 0.3s ease;
-  --transition-bounce: 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --transition-smooth: var(--transition-normal);
+  --transition-bounce: var(--transition-bounce);
 }
 
 * {

@@ -926,8 +926,8 @@ export const campaignData = {
   }
 } as const;
 
-export const mensagemCampaigns: CampaignData[] = campaignData.campaigns.mensagem;
-export const audienciaCampaigns: CampaignData[] = campaignData.campaigns.audiencia;
+export const mensagemCampaigns: CampaignData[] = [...campaignData.campaigns.mensagem] as CampaignData[];
+export const audienciaCampaigns: CampaignData[] = [...campaignData.campaigns.audiencia] as CampaignData[];
 
 export const mensagemSummary = campaignData.summary.mensagem;
 export const audienciaSummary = campaignData.summary.audiencia;

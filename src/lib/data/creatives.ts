@@ -1090,8 +1090,8 @@ export const creativeData = {
   }
 } as const;
 
-export const mensagemCreatives: CreativeData[] = creativeData.creatives.mensagem;
-export const audienciaCreatives: CreativeData[] = creativeData.creatives.audiencia;
+export const mensagemCreatives = [...creativeData.creatives.mensagem] as unknown as CreativeData[];
+export const audienciaCreatives = [...creativeData.creatives.audiencia] as unknown as CreativeData[];
 
 export const topMensagemCreatives = creativeData.topPerformers.mensagem;
 export const topAudienciaCreatives = creativeData.topPerformers.audiencia;

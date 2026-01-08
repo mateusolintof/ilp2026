@@ -14,13 +14,13 @@
 | Fundação | 2. Extração de Dados | Concluído |
 | Pesquisa | 3. Validação de Mercado | Concluído |
 | Pesquisa | 4. Análise de Criativos | Concluído |
-| UI | 5. Design System | Pendente |
-| Slides | 6. Slides 1-2 (Abertura) | Pendente |
-| Slides | 7. Slides 3-4 (Pago/Criativos) | Pendente |
-| Slides | 8. Slides 5-6 (Orgânico/Fechamento) | Pendente |
-| Slides | 9. Slides 7-8 (Cruzamento/Insights) | Pendente |
-| Interatividade | 10. Navegação | Pendente |
-| Finalização | 11. Deploy | Pendente |
+| UI | 5. Design System | Concluído |
+| Slides | 6. Slides 1-2 (Abertura) | Concluído |
+| Slides | 7. Slides 3-4 (Pago/Criativos) | Concluído |
+| Slides | 8. Slides 5-6 (Orgânico/Fechamento) | Concluído |
+| Slides | 9. Slides 7-8 (Cruzamento/Insights) | Concluído |
+| Interatividade | 10. Navegação | Concluído |
+| Finalização | 11. Deploy | Em Progresso |
 
 ---
 
@@ -86,12 +86,12 @@
 
 ## MILESTONE 5: Design System e Componentes UI
 
-- [ ] 5.1 Definir Design Tokens (cores, tipografia, espaçamento)
-- [ ] 5.2 Criar componentes base (Button, Card, Badge, Tooltip, ProgressBar)
-- [ ] 5.3 Criar componentes de tipografia (Heading, Text)
-- [ ] 5.4 Criar componentes de gráficos (BarChart, LineChart, PieChart, MetricCard)
-- [ ] 5.5 Criar Background 3D com partículas (React Three Fiber)
-- [ ] 5.6 Criar componente SlideContainer
+- [x] 5.1 Definir Design Tokens (cores, tipografia, espaçamento) - `globals.css`
+- [x] 5.2 Criar componentes base (Button, Card, Badge, Tooltip, ProgressBar) - `src/components/ui/`
+- [x] 5.3 Criar componentes de tipografia (Heading, Text, Label) - `Typography.tsx`
+- [x] 5.4 Criar componentes de gráficos (BarChart, LineChart, PieChart, MetricCard) - `src/components/charts/`
+- [x] 5.5 Criar Background 3D com partículas (React Three Fiber) - `ParticleBackground.tsx`
+- [x] 5.6 Criar componente SlideContainer - `SlideContainer.tsx`
 
 **Design Tokens:**
 ```css
@@ -107,8 +107,8 @@
 
 ## MILESTONE 6: Slides 1-2 (Abertura)
 
-- [ ] 6.1 Criar `SlideCover.tsx` - Capa e contexto inicial
-- [ ] 6.2 Criar `SlideExecutiveSummary.tsx` - Resumo executivo
+- [x] 6.1 Criar `SlideCover.tsx` - Capa e contexto inicial
+- [x] 6.2 Criar `SlideExecutiveSummary.tsx` - Resumo executivo
 - [ ] 6.3 Implementar 4-6 KPIs principais em cards visuais
 - [ ] 6.4 Criar mini gráfico de evolução mensal
 - [ ] 6.5 Adicionar indicadores vs benchmark
@@ -117,11 +117,11 @@
 
 ## MILESTONE 7: Slides 3-4 (Tráfego Pago e Criativos)
 
-- [ ] 7.1 Criar `SlidePaidTraffic.tsx` - Tráfego Pago Completo
+- [x] 7.1 Criar `SlidePaidTraffic.tsx` - Tráfego Pago Completo
   - Seção 1: Campanhas de Mensagem
   - Seção 2: Campanhas de Audiência
   - Seção 3: Comparativo Mensal
-- [ ] 7.2 Criar `SlideCreatives.tsx` - Análise de Criativos
+- [x] 7.2 Criar `SlideCreatives.tsx` - Análise de Criativos
   - Top 5 MENSAGEM
   - Top 5 AUDIÊNCIA
   - Padrões identificados
@@ -130,11 +130,11 @@
 
 ## MILESTONE 8: Slides 5-6 (Orgânico e Fechamento)
 
-- [ ] 8.1 Criar `SlideOrganic.tsx` - Tráfego Orgânico Completo
+- [x] 8.1 Criar `SlideOrganic.tsx` - Tráfego Orgânico Completo
   - Seção 1: Feed/Reels
   - Seção 2: Stories
   - Conteúdos para impulsionamento
-- [ ] 8.2 Criar `SlideClosings.tsx` - Fechamento da Clínica
+- [x] 8.2 Criar `SlideClosings.tsx` - Fechamento da Clínica
   - Total procedimentos
   - Receita por categoria
   - Serviços mais realizados
@@ -143,11 +143,11 @@
 
 ## MILESTONE 9: Slides 7-8 (Cruzamento e Conclusão)
 
-- [ ] 9.1 Criar `SlideDataCrossing.tsx` - Cruzamento de Dados
+- [x] 9.1 Criar `SlideDataCrossing.tsx` - Cruzamento de Dados
   - Timeline: investimento pago ↔ picos orgânicos
   - Correlação Marketing ↔ Fechamento
   - Serviços promovidos vs realizados
-- [ ] 9.2 Criar `SlideInsightsTrends.tsx` - Insights e Tendências 2026
+- [x] 9.2 Criar `SlideInsightsTrends.tsx` - Insights e Tendências 2026
   - 3-5 Insights principais
   - 3-5 Recomendações
   - Tendências do nicho
@@ -156,21 +156,21 @@
 
 ## MILESTONE 10: Navegação e Interatividade
 
-- [ ] 10.1 Implementar container de scroll horizontal
-- [ ] 10.2 Converter mouse wheel para scroll horizontal
-- [ ] 10.3 Navegação por teclado (←, →, Space, Home, End)
-- [ ] 10.4 Progress bar animada
-- [ ] 10.5 Scroll vertical interno em cada slide
-- [ ] 10.6 Indicadores de slide atual
-- [ ] 10.7 Testar responsividade e performance
+- [x] 10.1 Implementar container de scroll horizontal
+- [x] 10.2 Converter mouse wheel para scroll horizontal
+- [x] 10.3 Navegação por teclado (←, →, Space, Home, End)
+- [x] 10.4 Progress bar animada
+- [x] 10.5 Scroll vertical interno em cada slide
+- [x] 10.6 Indicadores de slide atual
+- [x] 10.7 Testar responsividade e performance
 
 ---
 
 ## MILESTONE 11: Finalização e Deploy
 
-- [ ] 11.1 Revisar todos os slides e componentes
-- [ ] 11.2 Rodar ESLint e corrigir erros
-- [ ] 11.3 Otimizar performance (lazy loading, memoization)
+- [x] 11.1 Revisar todos os slides e componentes
+- [x] 11.2 Rodar ESLint e corrigir erros
+- [x] 11.3 Otimizar performance (lazy loading, memoization)
 - [ ] 11.4 Testar em diferentes navegadores
 - [ ] 11.5 Documentar código e decisões
 - [ ] 11.6 Commit final e push para repositório

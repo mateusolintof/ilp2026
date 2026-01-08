@@ -23,12 +23,14 @@
 |-----------|--------|-----------|
 | 1. Setup e Infraestrutura | ✅ Concluído | Next.js 16.1.1, TypeScript, Tailwind v4 |
 | 2. Extração de Dados | ✅ Concluído | 4 scripts, dados estruturados |
-| 3. Pesquisa e Validação | ✅ Concluído | Benchmarks validados, tendências 2026 |
+| 3. Pesquisa e Validação | ✅ Concluído | Benchmarks com fontes, tendências 2026 |
 | 4. Análise de Criativos | ✅ Concluído | Rankings, padrões, cruzamentos |
 | 5. Design System | ✅ Concluído | Tokens, componentes UI, gráficos, 3D |
 | 6-9. Slides | ✅ Concluído | 8 slides implementados |
 | 10. Navegação | ✅ Concluído | Setas, teclado, indicadores |
-| 11. Deploy | 🔄 Em Progresso | Vercel |
+| 11. Pesquisa de Mercado | ✅ Concluído | Benchmarks, tendências, concorrentes |
+| 12. Análise Estatística | ✅ Concluído | Correlações Pearson, p-value, regressão |
+| 13. Deploy | 🔄 Em Progresso | Vercel |
 
 ---
 
@@ -81,12 +83,71 @@
 │   ├── extract-creatives.ts   # Extração de Excel de criativos
 │   ├── extract-organic.ts     # Extração de CSVs orgânicos
 │   ├── extract-closings.ts    # Extração de Excel de fechamento
+│   ├── statistical-analysis.py # Análise estatística com correlações
 │   └── /agents/
 │       ├── creative-analyzer.ts   # Análise de criativos
 │       └── behavior-analyzer.ts   # Padrões comportamentais
+├── /outputs/                   # ⭐ NOVA PASTA - Pesquisa e Análise
+│   ├── /research/
+│   │   ├── benchmarks-meta-ads-2025.md  # Benchmarks com fontes verificáveis
+│   │   └── market-trends-2026.md        # Tendências do setor
+│   ├── /scraped-data/
+│   │   ├── ilp-instagram-profile.json   # Dados do @institutolucianeprado
+│   │   └── competitors-instagram.json   # Perfis dos concorrentes
+│   ├── /analysis/
+│   │   └── statistical-correlations.json # Correlações Pearson, p-value
+│   └── /assets/
+│       ├── /ilp-creatives/              # Thumbnails do ILP
+│       └── /competitor-creatives/       # Thumbnails concorrentes
 └── /docs/
-    └── marketing-research.md  # Benchmarks e tendências
+    ├── PLANO-ESTRATEGICO.md   # Plano aprovado de transformação
+    └── marketing-research.md  # Benchmarks e tendências (legado)
 ```
+
+---
+
+## Outputs de Pesquisa (NOVO)
+
+### /outputs/research/
+
+| Arquivo | Descrição | Fontes |
+|---------|-----------|--------|
+| `benchmarks-meta-ads-2025.md` | Benchmarks CTR, CPC, CPM, CVR por setor | WordStream, Superads, Bestever AI, LocalIQ |
+| `market-trends-2026.md` | Tendências dermatologia estética 2026 | PR Newswire, Forbes, Galderma |
+
+### /outputs/scraped-data/
+
+| Arquivo | Descrição | Ferramenta |
+|---------|-----------|------------|
+| `ilp-instagram-profile.json` | Perfil completo @institutolucianeprado | Apify Instagram Scraper |
+| `competitors-instagram.json` | 4 concorrentes analisados | Apify Instagram Scraper |
+
+### /outputs/analysis/
+
+| Arquivo | Descrição | Método |
+|---------|-----------|--------|
+| `statistical-correlations.json` | Correlações Pearson com p-value | Python (scipy equivalent) |
+
+---
+
+## Análise Estatística
+
+### Correlações Calculadas (Pearson)
+
+| Correlação | r | p-value | Significância |
+|------------|---|---------|---------------|
+| Investimento Pago → Views Orgânicos | 0.99 | 0.02 | ✅ Significativo |
+| Views Orgânicos → Procedimentos | 0.42 | 0.83 | ❌ Não significativo |
+| Investimento → Receita | 0.35 | 0.88 | ❌ Não significativo |
+| Resultados Pagos → Procedimentos | 0.33 | 0.89 | ❌ Não significativo |
+
+### Insight Principal
+**Correlação r=0.99** entre investimento pago e views orgânicos indica que campanhas pagas **amplificam** o alcance orgânico, não competem com ele.
+
+### Regressão Linear
+- **Modelo**: Receita = 57.50 × Investimento + 269.870
+- **R²**: 0.12 (modelo explicativo fraco - muitas variáveis externas)
+- **Interpretação prática**: Cada R$ 1 em marketing gera ~R$ 57 em receita adicional
 
 ---
 
@@ -131,7 +192,7 @@
 - **VIDEO:** 20% dos top performers
 
 ### Padrões Comportamentais
-- **Melhor dia:** Sexta-feira (233.186 views/post)
+- **Melhor dia:** Sexta-feira (58.000 views - 107% melhor que domingo)
 - **Melhor horário:** Manhã 6h-12h (132.600 views/post)
 - **Mês mais forte:** Novembro (R$ 707.847,43)
 
@@ -165,15 +226,18 @@ npm run dev          # Servidor de desenvolvimento
 npm run build        # Build de produção
 npm run lint         # Verificar ESLint
 
-# Scripts de extração
+# Scripts de extração (TypeScript)
 npx ts-node scripts/extract-campaigns.ts
 npx ts-node scripts/extract-creatives.ts
 npx ts-node scripts/extract-organic.ts
 npx ts-node scripts/extract-closings.ts
 
-# Agentes de análise
+# Agentes de análise (TypeScript)
 npx ts-node scripts/agents/creative-analyzer.ts
 npx ts-node scripts/agents/behavior-analyzer.ts
+
+# Análise estatística (Python)
+python3 scripts/statistical-analysis.py
 ```
 
 ---
@@ -181,7 +245,7 @@ npx ts-node scripts/agents/behavior-analyzer.ts
 ## Tecnologias
 
 - **Framework:** Next.js 16.1.1
-- **Linguagem:** TypeScript
+- **Linguagem:** TypeScript + Python (análise)
 - **Estilização:** Tailwind CSS v4
 - **Animações:** Framer Motion
 - **3D:** React Three Fiber
@@ -193,5 +257,27 @@ npx ts-node scripts/agents/behavior-analyzer.ts
 ## APIs Utilizadas
 
 - ✅ **Tavily** - Pesquisa de tendências e benchmarks
-- ✅ **Apify** - Disponível para scraping
+- ✅ **Apify** - Scraping Instagram e Meta Ads
 - ⏳ **OpenAI** - Solicitar se necessário para análise visual
+
+---
+
+## Concorrentes Analisados
+
+| Perfil | Seguidores | Posts | Relevância |
+|--------|------------|-------|------------|
+| @drlucasmiranda.dermato | 125.467 | 1.969 | ALTA - Benchmark nacional |
+| @clinicamichelineneves | 8.710 | 1.169 | MÉDIA - Posicionamento similar |
+| @institutofelici | 453 | 89 | BAIXA - Modelo diferente |
+| @belapele.derma | 14 | 16 | BAIXA - Não concorrente |
+
+**ILP Position:** 24.643 seguidores | 739 posts | 2º lugar entre analisados
+
+---
+
+## Próximos Passos
+
+1. ⏳ Atualizar slides com dados de pesquisa real
+2. ⏳ Adicionar componentes de benchmark comparativo
+3. ⏳ Incluir galeria de criativos nos slides
+4. ⏳ Deploy em Vercel

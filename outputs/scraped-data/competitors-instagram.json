@@ -1,0 +1,97 @@
+{
+  "scrapedAt": "2026-01-08T00:00:00.000Z",
+  "source": "Apify Instagram Profile Scraper",
+  "competitors": [
+    {
+      "username": "drlucasmiranda.dermato",
+      "fullName": "Dr. Lucas Miranda - Dermatologista",
+      "biography": "Médico Dermatologista | CRM: 47533\nCriador do APhen Peel | BH | SP\nReferência em Rejuvenescimento Facial\n@clinicalucasmiranda | 31 3286 0810",
+      "postsCount": 1969,
+      "followersCount": 125467,
+      "followsCount": 4261,
+      "isVerified": true,
+      "isBusinessAccount": true,
+      "profilePicUrl": "https://scontent-hou1-1.cdninstagram.com/v/t51.2885-19/461801973_8372420916182116_8543606218943341486_n.jpg",
+      "analysis": {
+        "size": "Grande (125k+)",
+        "positioning": "Referência nacional em rejuvenescimento",
+        "differentiator": "Criador de técnica própria (APhen Peel)",
+        "contentFrequency": "Alta (1969 posts)",
+        "relevance": "ALTA - Benchmark de conteúdo"
+      }
+    },
+    {
+      "username": "clinicamichelineneves",
+      "fullName": "Clínica de Dermatologia",
+      "biography": "Médica Dermatologista SBD\nRQE: 9519\nRejuvenescimento natural e saudável\nBotox, Bioestimuladores, Laser\nAgende sua consulta",
+      "postsCount": 1169,
+      "followersCount": 8710,
+      "followsCount": 2930,
+      "isVerified": false,
+      "isBusinessAccount": true,
+      "profilePicUrl": "https://scontent-atl3-2.cdninstagram.com/v/t51.2885-19/462527237_584185304175124_6454432555530371991_n.jpg",
+      "analysis": {
+        "size": "Médio (8.7k)",
+        "positioning": "Rejuvenescimento natural",
+        "differentiator": "Foco em naturalidade",
+        "contentFrequency": "Alta (1169 posts)",
+        "relevance": "MÉDIA - Posicionamento similar ao ILP"
+      }
+    },
+    {
+      "username": "institutofelici",
+      "fullName": "Instituto Felici",
+      "biography": "Clínica particular coworking médico e saúde integrada.\nTelefone fixo: (19) 3254-0604",
+      "postsCount": 89,
+      "followersCount": 453,
+      "followsCount": 145,
+      "isVerified": false,
+      "isBusinessAccount": true,
+      "profilePicUrl": "https://scontent-atl3-1.cdninstagram.com/v/t51.2885-19/258440661_221374780105611_3246436095830083296_n.jpg",
+      "analysis": {
+        "size": "Pequeno (453)",
+        "positioning": "Coworking médico",
+        "differentiator": "Modelo de negócio diferente",
+        "contentFrequency": "Baixa (89 posts)",
+        "relevance": "BAIXA - Modelo diferente"
+      }
+    },
+    {
+      "username": "belapele.derma",
+      "fullName": "Bela Pele com Dermaplaning",
+      "biography": "É tendência, fica comigo e se apaixone.\nA página é para compartilhar amostras de trabalho com Dermaplaning.",
+      "postsCount": 16,
+      "followersCount": 14,
+      "followsCount": 9,
+      "isVerified": false,
+      "isBusinessAccount": false,
+      "profilePicUrl": "https://scontent-sjc3-1.cdninstagram.com/v/t51.2885-19/261126967_185869383746034_8597033864319689952_n.jpg",
+      "analysis": {
+        "size": "Micro (14)",
+        "positioning": "Nicho específico (Dermaplaning)",
+        "differentiator": "Foco em procedimento único",
+        "contentFrequency": "Muito baixa (16 posts)",
+        "relevance": "BAIXA - Não é concorrente direto"
+      }
+    }
+  ],
+  "comparativeAnalysis": {
+    "ilpPosition": {
+      "followers": 24643,
+      "posts": 739,
+      "ranking": "2º lugar entre os analisados"
+    },
+    "marketInsights": [
+      "Dr. Lucas Miranda é referência com 125k+ seguidores - modelo a estudar",
+      "ILP tem bom posicionamento regional (24k seguidores)",
+      "Frequência de posts do ILP (739) está abaixo da concorrência grande",
+      "Verificação do perfil seria diferencial (ILP não é verificado)"
+    ],
+    "opportunities": [
+      "Aumentar frequência de publicação",
+      "Desenvolver técnica/protocolo próprio como diferencial",
+      "Buscar verificação do perfil",
+      "Criar conteúdo mais educativo (benchmark Dr. Lucas Miranda)"
+    ]
+  }
+}

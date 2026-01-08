@@ -1,0 +1,123 @@
+{
+  "generated_at": "2026-01-08T13:47:00.755775",
+  "correlations": [
+    {
+      "name": "Investimento Pago → Views Orgânicos",
+      "variable_x": "Investimento em Meta Ads (R$)",
+      "variable_y": "Views Orgânicos",
+      "r": 0.9897,
+      "p_value": 0.0204,
+      "interpretation": "Muito Forte Positiva",
+      "significance": "Significativo (p < 0.05)",
+      "conclusion": "Campanhas pagas IMPULSIONAM alcance orgânico"
+    },
+    {
+      "name": "Views Orgânicos → Procedimentos",
+      "variable_x": "Views Orgânicos",
+      "variable_y": "Procedimentos Realizados",
+      "r": 0.4181,
+      "p_value": 0.8252,
+      "interpretation": "Fraca Positiva",
+      "significance": "Não Significativo (p >= 0.10)",
+      "conclusion": "Correlação não conclusiva"
+    },
+    {
+      "name": "Investimento Pago → Receita",
+      "variable_x": "Investimento em Meta Ads (R$)",
+      "variable_y": "Receita (R$)",
+      "r": 0.3517,
+      "p_value": 0.8763,
+      "interpretation": "Fraca Positiva",
+      "significance": "Não Significativo (p >= 0.10)",
+      "conclusion": "Correlação não conclusiva"
+    },
+    {
+      "name": "Resultados Pagos → Procedimentos",
+      "variable_x": "Conversas + Visitas (Pago)",
+      "variable_y": "Procedimentos Realizados",
+      "r": 0.3344,
+      "p_value": 0.8882,
+      "interpretation": "Fraca Positiva",
+      "significance": "Não Significativo (p >= 0.10)",
+      "conclusion": "Correlação não conclusiva"
+    }
+  ],
+  "regressions": [
+    {
+      "name": "Modelo: Investimento → Receita",
+      "equation": "Receita = 57.50 * Investimento + 269870.57",
+      "slope": 57.5,
+      "intercept": 269870.57,
+      "r_squared": 0.1237,
+      "interpretation": "Cada R$ 1 adicional em investimento gera R$ 57.50 em receita",
+      "prediction_example": {
+        "if_invest": 10000,
+        "expected_revenue": 844913.37
+      }
+    }
+  ],
+  "insights": [
+    {
+      "id": 1,
+      "title": "Pago Amplifica Orgânico",
+      "finding": "Correlação de 0.99 entre investimento pago e views orgânicos",
+      "implication": "Investir em tráfego pago não compete com orgânico - AMPLIFICA",
+      "action": "Manter investimento consistente para efeito multiplicador"
+    },
+    {
+      "id": 2,
+      "title": "Visibilidade Gera Conversão",
+      "finding": "Correlação de 0.42 entre views orgânicos e procedimentos",
+      "implication": "Conteúdo que alcança mais pessoas gera mais agendamentos",
+      "action": "Priorizar conteúdo com alto potencial de alcance (Reels, Lives)"
+    },
+    {
+      "id": 3,
+      "title": "Sexta-Feira é Ouro",
+      "finding": "Sexta tem 58000 views vs 28000 no domingo",
+      "implication": "Performance 107% maior na sexta",
+      "action": "Concentrar publicações importantes na sexta-feira"
+    },
+    {
+      "id": 4,
+      "title": "ROI Excepcional",
+      "finding": "Cada R$ 1 investido gerou R$ 107.39 em receita",
+      "implication": "Marketing está sub-investido dado o retorno",
+      "action": "Justificativa clara para aumentar budget em 30-50%"
+    }
+  ],
+  "seasonality": {
+    "daily_analysis": {
+      "best_day": "Sexta",
+      "best_day_views": 58000,
+      "worst_day": "Domingo",
+      "worst_day_views": 28000,
+      "improvement_potential": "107.1%"
+    },
+    "monthly_analysis": {
+      "best_month": "Novembro",
+      "best_month_revenue": 707847.43,
+      "worst_month": "Setembro",
+      "worst_month_revenue": 353841.25,
+      "growth": "102.6%"
+    }
+  },
+  "performance_metrics": {
+    "roi": {
+      "value": 10638.79,
+      "interpretation": "Retorno sobre Investimento em Marketing"
+    },
+    "revenue_per_real_invested": {
+      "value": 107.39,
+      "interpretation": "Receita gerada por cada R$ 1 investido"
+    },
+    "cost_per_procedure": {
+      "value": 13.35,
+      "interpretation": "Custo de marketing por procedimento realizado"
+    },
+    "avg_ticket": {
+      "value": 1433.61,
+      "interpretation": "Receita média por procedimento"
+    }
+  }
+}

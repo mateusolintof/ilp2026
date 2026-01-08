@@ -1,0 +1,126 @@
+{
+  "scrapedAt": "2026-01-08T00:00:00.000Z",
+  "source": "Apify Instagram Profile Scraper",
+  "profile": {
+    "username": "institutolucianeprado",
+    "fullName": "Instituto Luciane Prado",
+    "biography": "Dermatologia clínica, cirúrgica e estética\nUm lugar pensado para cuidar de você!  \nRT: Dra. Luciane Prado — CRM-TO 644 | RQE 67\nFale conosco",
+    "postsCount": 739,
+    "followersCount": 24643,
+    "followsCount": 4216,
+    "isBusinessAccount": true,
+    "isVerified": false,
+    "isPrivate": false,
+    "profilePicUrl": "https://instagram.fmkc1-1.fna.fbcdn.net/v/t51.2885-19/544286977_18498452590069129_6609115867290211640_n.jpg"
+  },
+  "metrics": {
+    "engagementRate": null,
+    "avgLikesPerPost": null,
+    "avgCommentsPerPost": null
+  },
+  "recentPosts": [
+    {
+      "url": "https://www.instagram.com/p/DTP05cngDEQ/",
+      "caption": "Aqui, o que buscamos não é mudar, mas revelar o melhor de você...",
+      "likesCount": 7,
+      "commentsCount": 0,
+      "timestamp": "2026-01-08T11:02:01.000Z",
+      "type": "preenchimento"
+    },
+    {
+      "url": "https://www.instagram.com/p/DTLxsHrEqms/",
+      "caption": "Hoje é dia de celebrar a vida de quem inspira, cuida e transforma. Feliz aniversário, Dr. Osterno!",
+      "likesCount": 36,
+      "commentsCount": 8,
+      "timestamp": "2026-01-06T21:19:09.000Z",
+      "type": "institucional"
+    },
+    {
+      "url": "https://www.instagram.com/p/DSztqkngLDq/",
+      "caption": "O que colocamos no prato não impacta apenas nossa saúde, mas também reflete na pele...",
+      "likesCount": 53,
+      "commentsCount": 12,
+      "timestamp": "2025-12-28T12:22:32.000Z",
+      "type": "educativo"
+    },
+    {
+      "url": "https://www.instagram.com/p/DR9qKHHAHEY/",
+      "caption": "Celebrar juntos é reconhecer tudo o que construímos ao longo do ano...",
+      "likesCount": 231,
+      "commentsCount": 32,
+      "timestamp": "2025-12-07T13:10:27.000Z",
+      "type": "institucional_confraternizacao"
+    },
+    {
+      "url": "https://www.instagram.com/p/DQywZIWgLq8/",
+      "caption": "Explorei cada cantinho e detalhe de Seul com a Yasmin… que lugar lindoo!",
+      "likesCount": 330,
+      "commentsCount": 45,
+      "timestamp": "2025-11-08T11:01:53.000Z",
+      "type": "viagem_congresso"
+    }
+  ],
+  "topPerformingPosts": [
+    {
+      "url": "https://www.instagram.com/p/DHGaW9GyLmL/",
+      "caption": "No Instituto Luciane Prado, cada detalhe é pensado para que você se sinta em casa...",
+      "likesCount": 410,
+      "commentsCount": 109,
+      "timestamp": "2025-03-12T13:00:00.000Z",
+      "engagement": 519
+    },
+    {
+      "url": "https://www.instagram.com/p/DQywZIWgLq8/",
+      "caption": "Explorei cada cantinho e detalhe de Seul com a Yasmin…",
+      "likesCount": 330,
+      "commentsCount": 45,
+      "timestamp": "2025-11-08T11:01:53.000Z",
+      "engagement": 375
+    },
+    {
+      "url": "https://www.instagram.com/p/DQT-xhJAHT3/",
+      "caption": "Estou voltando para a Coreia, e desta vez com a minha mãe!",
+      "likesCount": 327,
+      "commentsCount": 65,
+      "timestamp": "2025-10-27T12:12:35.000Z",
+      "engagement": 392
+    },
+    {
+      "url": "https://www.instagram.com/p/DRMgXeygJBg/",
+      "caption": "Legado é o que o tempo não apaga...",
+      "likesCount": 240,
+      "commentsCount": 45,
+      "timestamp": "2025-11-18T11:02:06.000Z",
+      "engagement": 285
+    }
+  ],
+  "contentThemes": [
+    "Dermatologia clínica",
+    "Estética facial",
+    "Toxina botulínica",
+    "Bioestimuladores",
+    "Dezembro Laranja (câncer de pele)",
+    "Congressos e atualizações",
+    "Institucional e equipe",
+    "Educativo sobre pele"
+  ],
+  "doctors": [
+    {
+      "name": "Dra. Luciane Prado",
+      "crm": "CRM-TO 644",
+      "rqe": "RQE 67",
+      "role": "Responsável Técnica"
+    },
+    {
+      "name": "Dr. Osterno",
+      "role": "Dermatologista"
+    },
+    {
+      "name": "Dra. Yasmin Pugliesi",
+      "crm": "CRM-TO 4223",
+      "rqe": "RQE 3518",
+      "instagram": "@yasminpugliesi",
+      "role": "Dermatologista"
+    }
+  ]
+}

@@ -173,7 +173,7 @@
 - [x] 11.3 Otimizar performance (lazy loading, memoization)
 - [ ] 11.4 Testar em diferentes navegadores
 - [ ] 11.5 Documentar código e decisões
-- [ ] 11.6 Commit final e push para repositório
+- [x] 11.6 Commit final e push para repositório
 - [ ] 11.7 Deploy (Vercel)
 
 ---

@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight, Home as HomeIcon, Menu, X } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Home as HomeIcon } from 'lucide-react';
 import { ParticleBackground } from '@/components/3d/ParticleBackground';
 import {
   SlideCover,
@@ -28,14 +28,12 @@ const slides = [
 
 export default function HomePage() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Navigate to specific slide
   const goToSlide = useCallback((index: number) => {
     if (index >= 0 && index < slides.length) {
       setCurrentSlide(index);
-      setIsMenuOpen(false);
     }
   }, []);
 
@@ -73,53 +71,12 @@ export default function HomePage() {
           e.preventDefault();
           goToSlide(slides.length - 1);
           break;
-        case 'Escape':
-          setIsMenuOpen(false);
-          break;
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [nextSlide, prevSlide, goToSlide]);
-
-  // Mouse wheel navigation (horizontal scroll effect)
-  useEffect(() => {
-    const handleWheel = (e: WheelEvent) => {
-      // Check if the target element is scrollable and has more content
-      const target = e.target as HTMLElement;
-      const slideContent = target.closest('.slide-content');
-
-      if (slideContent) {
-        const { scrollTop, scrollHeight, clientHeight } = slideContent;
-        const isScrollable = scrollHeight > clientHeight;
-        const isAtTop = scrollTop === 0;
-        const isAtBottom = scrollTop + clientHeight >= scrollHeight - 5;
-
-        // If scrollable and not at boundaries, let it scroll naturally
-        if (isScrollable && !isAtTop && !isAtBottom) {
-          return;
-        }
-
-        // At boundaries, navigate slides
-        if (e.deltaY > 0 && isAtBottom) {
-          nextSlide();
-        } else if (e.deltaY < 0 && isAtTop) {
-          prevSlide();
-        }
-      } else {
-        // Not in slide content, navigate slides
-        if (e.deltaY > 0) {
-          nextSlide();
-        } else if (e.deltaY < 0) {
-          prevSlide();
-        }
-      }
-    };
-
-    window.addEventListener('wheel', handleWheel, { passive: true });
-    return () => window.removeEventListener('wheel', handleWheel);
-  }, [nextSlide, prevSlide]);
 
   const progress = ((currentSlide + 1) / slides.length) * 100;
 
@@ -152,49 +109,9 @@ export default function HomePage() {
           </span>
         </div>
 
-        <button
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="p-2 rounded-lg bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-colors"
-          aria-label="Open menu"
-        >
-          {isMenuOpen ? (
-            <X className="w-5 h-5 text-foreground" />
-          ) : (
-            <Menu className="w-5 h-5 text-foreground" />
-          )}
-        </button>
+        {/* Spacer to balance layout */}
+        <div className="w-9" />
       </header>
-
-      {/* Slide Navigation Menu */}
-      <AnimatePresence>
-        {isMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, x: '100%' }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: '100%' }}
-            transition={{ duration: 0.2 }}
-            className="fixed top-0 right-0 h-full w-80 bg-surface-elevated/95 backdrop-blur-lg z-50 border-l border-white/10 pt-20 px-6"
-          >
-            <h3 className="text-lg font-semibold mb-4 text-foreground">Navegação</h3>
-            <nav className="space-y-2">
-              {slides.map((slide, index) => (
-                <button
-                  key={slide.id}
-                  onClick={() => goToSlide(index)}
-                  className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${
-                    index === currentSlide
-                      ? 'bg-accent/20 text-accent border border-accent/30'
-                      : 'hover:bg-white/5 text-foreground'
-                  }`}
-                >
-                  <span className="text-sm text-muted mr-2">{slide.id}.</span>
-                  {slide.title}
-                </button>
-              ))}
-            </nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
 
       {/* Slides Container */}
       <div ref={containerRef} className="h-full w-full">

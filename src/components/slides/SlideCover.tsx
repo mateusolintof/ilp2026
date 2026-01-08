@@ -7,7 +7,7 @@ import { Badge } from '../ui/Badge';
 
 export function SlideCover() {
   return (
-    <div className="min-h-full flex flex-col justify-center items-center text-center relative">
+    <div className="min-h-[calc(100vh-11rem)] flex flex-col justify-center items-center text-center relative">
       {/* Background Glow */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-accent/10 rounded-full blur-[120px]" />
@@ -93,35 +93,36 @@ export function SlideCover() {
           />
         </motion.div>
 
-        {/* Scroll Indicator */}
+      </motion.div>
+
+      {/* Navigation Hint - positioned at bottom of slide area */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5, duration: 0.5 }}
+        className="mt-12"
+      >
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5, duration: 0.5 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2"
+          animate={{ x: [0, 10, 0] }}
+          transition={{ repeat: Infinity, duration: 1.5 }}
+          className="flex items-center justify-center gap-2"
         >
-          <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ repeat: Infinity, duration: 1.5 }}
-            className="flex flex-col items-center gap-2"
+          <Text size="sm" variant="muted">
+            Use as setas para navegar
+          </Text>
+          <svg
+            className="w-5 h-5 text-accent"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
           >
-            <Text size="sm" variant="muted">
-              Deslize para navegar
-            </Text>
-            <svg
-              className="w-6 h-6 text-accent"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
-          </motion.div>
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M9 5l7 7-7 7"
+            />
+          </svg>
         </motion.div>
       </motion.div>
     </div>

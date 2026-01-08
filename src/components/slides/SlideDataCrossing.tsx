@@ -1,11 +1,10 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { GitBranch, DollarSign, TrendingUp, Target, Activity, Zap, Calendar, Clock } from 'lucide-react';
+import { GitBranch, Zap, Calendar, Clock, TrendingUp } from 'lucide-react';
 import { Heading, Text, Label } from '../ui/Typography';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/Card';
 import { Badge } from '../ui/Badge';
-import { MetricCard } from '../charts/MetricCard';
 import { BarChart } from '../charts/BarChart';
 import { LineChart } from '../charts/LineChart';
 import { formatCurrency, formatNumber } from '@/lib/utils';
@@ -66,50 +65,6 @@ export function SlideDataCrossing() {
         <Text variant="muted" size="lg">
           Correlações entre Marketing, Orgânico e Resultados de Negócio
         </Text>
-      </motion.div>
-
-      {/* ROI Metrics */}
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8"
-      >
-        <motion.div variants={itemVariants}>
-          <MetricCard
-            title="ROI Marketing"
-            value={`${formatNumber(Math.round(crossData.roi))}%`}
-            subtitle="Retorno sobre investimento"
-            icon={<TrendingUp className="w-5 h-5" />}
-            variant="success"
-          />
-        </motion.div>
-        <motion.div variants={itemVariants}>
-          <MetricCard
-            title="Retorno por R$ 1"
-            value={formatCurrency(crossData.revenuePerInvestment)}
-            subtitle="Receita / Investimento"
-            icon={<DollarSign className="w-5 h-5" />}
-            variant="gold"
-          />
-        </motion.div>
-        <motion.div variants={itemVariants}>
-          <MetricCard
-            title="Custo por Procedimento"
-            value={formatCurrency(crossData.costPerProcedure)}
-            subtitle="Investimento / Total proc."
-            icon={<Target className="w-5 h-5" />}
-            variant="accent"
-          />
-        </motion.div>
-        <motion.div variants={itemVariants}>
-          <MetricCard
-            title="Total Resultados Pagos"
-            value={formatNumber(crossData.totalPaidResults)}
-            subtitle="Conversas + Visitas"
-            icon={<Activity className="w-5 h-5" />}
-          />
-        </motion.div>
       </motion.div>
 
       {/* Marketing vs Revenue Flow */}

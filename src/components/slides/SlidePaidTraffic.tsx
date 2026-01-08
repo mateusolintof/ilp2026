@@ -31,13 +31,52 @@ export function SlidePaidTraffic() {
     visible: { opacity: 1, y: 0 },
   };
 
+  // Helper function to create short readable campaign names
+  const formatCampaignName = (name: string): string => {
+    // Extract key identifiers from campaign name
+    const parts = name.split(/[\[\]_\-\s]+/).filter(Boolean);
+
+    // Look for meaningful parts
+    const hasBlackFriday = name.toLowerCase().includes('bf') || name.toLowerCase().includes('black');
+    const hasEngaja = name.toLowerCase().includes('engaja');
+    const hasVendas = name.toLowerCase().includes('vendas');
+    const hasConversas = name.toLowerCase().includes('conversas');
+    const hasView = name.toLowerCase().includes('view');
+    const hasTrafego = name.toLowerCase().includes('trafego') || name.toLowerCase().includes('tráfego');
+
+    // Build a cleaner name
+    let cleanName = '';
+
+    if (hasBlackFriday) cleanName = 'Black Friday';
+    else if (hasEngaja) cleanName = 'Engajamento';
+    else if (hasVendas) cleanName = 'Vendas';
+    else if (hasConversas) cleanName = 'Conversas';
+    else if (hasView) cleanName = 'View Instagram';
+    else if (hasTrafego) cleanName = 'Tráfego';
+    else cleanName = parts.slice(0, 2).join(' ');
+
+    // Add date if present (look for patterns like 09/09, 07.11, etc)
+    const dateMatch = name.match(/(\d{2}[\/\.]\d{2})/);
+    if (dateMatch) {
+      cleanName += ` (${dateMatch[1]})`;
+    }
+
+    // Add number indicator if present
+    const numMatch = name.match(/\[(\d+)\]/);
+    if (numMatch) {
+      cleanName += ` #${numMatch[1]}`;
+    }
+
+    return cleanName.length > 20 ? cleanName.substring(0, 18) + '...' : cleanName;
+  };
+
   // Prepare chart data for campaigns
   const mensagemChartData = mensagemCampaigns
     .filter(c => (c.metrics.conversationsStarted || 0) > 0)
     .sort((a, b) => (b.metrics.conversationsStarted || 0) - (a.metrics.conversationsStarted || 0))
     .slice(0, 5)
     .map(c => ({
-      name: c.name.length > 25 ? c.name.substring(0, 25) + '...' : c.name,
+      name: formatCampaignName(c.name),
       value: c.metrics.conversationsStarted || 0,
     }));
 
@@ -46,7 +85,7 @@ export function SlidePaidTraffic() {
     .sort((a, b) => (b.metrics.profileVisits || 0) - (a.metrics.profileVisits || 0))
     .slice(0, 5)
     .map(c => ({
-      name: c.name.length > 25 ? c.name.substring(0, 25) + '...' : c.name,
+      name: formatCampaignName(c.name),
       value: c.metrics.profileVisits || 0,
     }));
 

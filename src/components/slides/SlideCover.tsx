@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Calendar, TrendingUp, Users, Target } from 'lucide-react';
+import { Calendar } from 'lucide-react';
 import { Heading, Text } from '../ui/Typography';
 import { Badge } from '../ui/Badge';
 
@@ -60,39 +60,6 @@ export function SlideCover() {
           </Text>
         </motion.div>
 
-        {/* Key Highlights */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8, duration: 0.6 }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-8"
-        >
-          <HighlightCard
-            icon={<Target className="w-6 h-6" />}
-            value="R$ 21.6K"
-            label="Investido"
-            delay={0.9}
-          />
-          <HighlightCard
-            icon={<Users className="w-6 h-6" />}
-            value="1.621"
-            label="Procedimentos"
-            delay={1.0}
-          />
-          <HighlightCard
-            icon={<TrendingUp className="w-6 h-6" />}
-            value="R$ 2.3M"
-            label="Faturamento"
-            delay={1.1}
-          />
-          <HighlightCard
-            icon={<TrendingUp className="w-6 h-6" />}
-            value="10.639%"
-            label="ROI"
-            delay={1.2}
-          />
-        </motion.div>
-
       </motion.div>
 
       {/* Navigation Hint - positioned at bottom of slide area */}
@@ -126,31 +93,5 @@ export function SlideCover() {
         </motion.div>
       </motion.div>
     </div>
-  );
-}
-
-interface HighlightCardProps {
-  icon: React.ReactNode;
-  value: string;
-  label: string;
-  delay: number;
-}
-
-function HighlightCard({ icon, value, label, delay }: HighlightCardProps) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.9 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ delay, duration: 0.4 }}
-      className="flex flex-col items-center gap-2 p-4 rounded-xl bg-surface/50 border border-white/10 backdrop-blur"
-    >
-      <div className="text-accent">{icon}</div>
-      <Text as="span" size="xl" weight="bold" className="text-foreground">
-        {value}
-      </Text>
-      <Text as="span" size="sm" variant="muted">
-        {label}
-      </Text>
-    </motion.div>
   );
 }

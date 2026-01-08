@@ -15,6 +15,7 @@ import { successPatterns } from '@/lib/data/research';
 
 // Image mapping for creatives with thumbnails
 const creativeImages: Record<string, string> = {
+  'bioestimulador': '/creatives/bioestimulador.png',
   'redtouch': '/creatives/redtouch.png',
   'co2': '/creatives/co2-virtue.png',
   'virtue': '/creatives/co2-virtue.png',
@@ -44,15 +45,15 @@ const melhoresCreativos = [
     hasThumb: true,
   },
   {
-    id: 'redtouch-pro-2',
-    name: 'Vídeo RedTouch PRO',
+    id: 'bioestimulador',
+    name: 'Vídeo Bioestimulador (Colágeno)',
     campaignName: '[ILP] [St/Reels] [palmas +] [M] - interesses',
     campaignType: 'MENSAGEM' as const,
     format: 'VIDEO' as const,
     metrics: {
-      results: 13,
+      results: 18,
       resultType: 'Conversas por mensagem iniciadas',
-      costPerResult: 23.45,
+      costPerResult: 26.39,
     },
     hasThumb: true,
   },
@@ -100,7 +101,10 @@ const melhoresCreativos = [
 
 // Helper to find image for a creative
 const getCreativeImage = (creativeId: string, creativeName: string): string | null => {
-  // Check by ID first (for redtouch and co2-virtue)
+  // Check by ID first
+  if (creativeId.includes('bioestimulador')) {
+    return creativeImages['bioestimulador'];
+  }
   if (creativeId.includes('redtouch')) {
     return creativeImages['redtouch'];
   }

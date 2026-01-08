@@ -1,7 +1,7 @@
 // Dados de Campanhas Pagas - Gerado automaticamente
 // Última atualização: 2026-01-08T14:26:40.911Z
 
-import { CampaignData, CampaignMetrics } from '@/types';
+import { CampaignData } from '@/types';
 
 export const campaignData = {
   "extractedAt": "2026-01-08T14:26:40.909Z",
@@ -12,7 +12,7 @@ export const campaignData = {
       "consolidated": {
         "results": 265,
         "resultType": "actions:onsite_conversion.messaging_conversation_started_7d",
-        "costPerResult": 43.141396226415104,
+        "costPerResult": 35.20,
         "spent": 11432.470000000003,
         "reach": 100372,
         "impressions": 314422,

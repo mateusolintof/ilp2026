@@ -650,17 +650,26 @@ export const strategicRecommendations = {
 
 export const successPatterns = {
   top10Patterns: [
-    { pattern: 'REELS', frequency: 4, percentage: 40, insight: 'Formato de vídeo curto domina performance' },
-    { pattern: 'MEDICO_PRESENTE', frequency: 4, percentage: 40, insight: 'Autoridade médica gera confiança' },
-    { pattern: 'BLACK_FRIDAY', frequency: 4, percentage: 40, insight: 'Datas promocionais amplificam resultados' },
-    { pattern: 'VIDEO', frequency: 2, percentage: 20, insight: 'Vídeo supera imagem estática' },
-    { pattern: 'BIOESTIMULADOR', frequency: 1, percentage: 10, insight: 'Tema alinhado com tendência 2026' },
+    { pattern: 'PROCEDIMENTO_TECH', frequency: 5, percentage: 100, insight: 'Vídeos sobre procedimentos tecnológicos (Laser, Redtouch, CO2, Virtue) dominam os melhores resultados' },
+    { pattern: 'TEXTO_EXPLICATIVO', frequency: 5, percentage: 100, insight: 'Todos os top criativos têm texto na tela explicando o que faz e para quem é' },
+    { pattern: 'VIDEO_REELS', frequency: 5, percentage: 100, insight: 'Formato vídeo/reels é obrigatório para campanhas de mensagem' },
+    { pattern: 'MEDICO_PRESENTE', frequency: 3, percentage: 60, insight: 'Presença médica aumenta autoridade e confiança' },
   ],
   formatPerformance: {
-    video: { avgResults: 764, avgCost: 15.30, verdict: 'MELHOR CUSTO-BENEFÍCIO' },
-    image: { avgResults: 716, avgCost: 20.49, verdict: 'Bom para remarketing' },
-    carousel: { avgResults: 19, avgCost: 40.75, verdict: 'Usar apenas para conteúdo educativo' },
+    video: { avgResults: 23, avgCost: 26.50, verdict: 'MELHOR CUSTO-BENEFÍCIO para MSG' },
+    image: { avgResults: 2391, avgCost: 0.41, verdict: 'Melhor para Audiência' },
+    carousel: { avgResults: 37, avgCost: 55.46, verdict: 'EVITAR - Custo muito alto' },
   },
-  keyInsight: 'Reels com presença médica em datas promocionais têm melhor custo-benefício. Priorizar este formato para campanhas de conversão.',
-  recommendation: 'Proporção ideal: 70% vídeo/reels, 20% imagem, 10% carrossel',
+  keyInsight: 'Vídeos sobre procedimentos tecnológicos (Laser, Redtouch, CO2, Virtue) com texto explicativo na tela têm o melhor custo por conversa (R$23-31). Este é o padrão que deve ser replicado.',
+  recommendation: 'Para campanhas de MENSAGEM: 100% vídeo com foco em tecnologias/procedimentos e texto explicativo. Para AUDIÊNCIA: imagens funcionam bem.',
+  realInsight: {
+    title: 'Padrão de Sucesso Identificado',
+    description: 'Os melhores criativos para conversão (WhatsApp) são vídeos que mostram procedimentos tecnológicos específicos (Redtouch, CO2, Virtue, Laser) com texto sobreposto explicando: O QUE É o procedimento, PARA QUEM é indicado, e QUAL RESULTADO esperar.',
+    actionable: [
+      'Criar vídeos focados em UMA tecnologia/procedimento por vez',
+      'Adicionar texto na tela explicando o procedimento (não depender de áudio)',
+      'Mostrar equipamento e/ou resultado visual',
+      'Duração: 15-30 segundos (formato Reels)',
+    ],
+  },
 } as const;

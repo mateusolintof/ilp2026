@@ -15,7 +15,9 @@ import { successPatterns } from '@/lib/data/research';
 
 // Image mapping for creatives with thumbnails
 const creativeImages: Record<string, string> = {
-  '05/11': '/creatives/post-05-11.png',
+  'redtouch': '/creatives/redtouch.png',
+  'co2': '/creatives/co2-virtue.png',
+  'virtue': '/creatives/co2-virtue.png',
   '07.11': '/creatives/post-07-11.png',
   '07/11': '/creatives/post-07-11.png',
   '12.11': '/creatives/post-12-11.png',
@@ -24,20 +26,50 @@ const creativeImages: Record<string, string> = {
 };
 
 // Melhores Criativos - Lista unificada com dados verificados
+// PADRÃO IDENTIFICADO: Vídeos de procedimentos tecnológicos (Laser, Redtouch, CO2, Virtue)
+// com texto na tela explicando o procedimento performam MUITO melhor
 const melhoresCreativos = [
+  // TOP MENSAGEM - Vídeos de tecnologia/laser com texto explicativo
   {
-    id: 'bioestimulador',
-    name: 'Video Bioestimulador',
-    campaignName: '[ILP] [Audiencia] [Trafego -> View Ig] [Pub. Frio]',
+    id: 'co2-virtue',
+    name: 'Vídeo CO2 e Virtue',
+    campaignName: '[ILP] [St/Reels] [palmas +] [M] - interesses',
     campaignType: 'MENSAGEM' as const,
     format: 'VIDEO' as const,
     metrics: {
-      results: 1510,
-      resultType: 'Visitas ao perfil do Instagram',
-      costPerResult: 0.43,
+      results: 31,
+      resultType: 'Conversas por mensagem iniciadas',
+      costPerResult: 24.68,
     },
-    hasThumb: false,
+    hasThumb: true,
   },
+  {
+    id: 'redtouch-pro-2',
+    name: 'Vídeo RedTouch PRO',
+    campaignName: '[ILP] [St/Reels] [palmas +] [M] - interesses',
+    campaignType: 'MENSAGEM' as const,
+    format: 'VIDEO' as const,
+    metrics: {
+      results: 13,
+      resultType: 'Conversas por mensagem iniciadas',
+      costPerResult: 23.45,
+    },
+    hasThumb: true,
+  },
+  {
+    id: 'redtouch-pro-1',
+    name: 'Vídeo RedtouchPro (26 conv)',
+    campaignName: '[ILP] [St/Reels] [palmas +] [M] - interesses',
+    campaignType: 'MENSAGEM' as const,
+    format: 'VIDEO' as const,
+    metrics: {
+      results: 26,
+      resultType: 'Conversas por mensagem iniciadas',
+      costPerResult: 31.38,
+    },
+    hasThumb: true,
+  },
+  // TOP AUDIÊNCIA - Mantidos os melhores
   {
     id: 'post-07-11',
     name: 'Post IG (07.11)',
@@ -64,36 +96,18 @@ const melhoresCreativos = [
     },
     hasThumb: true,
   },
-  {
-    id: 'post-28-09',
-    name: 'Post Reels 28/09 (Dra. Yasmin)',
-    campaignName: '[ILP] [Audiencia] [Trafego -> Visitou Perfil IG]',
-    campaignType: 'AUDIENCIA' as const,
-    format: 'IMAGE' as const,
-    metrics: {
-      results: 1502,
-      resultType: 'Visitas ao perfil do Instagram',
-      costPerResult: 0.37,
-    },
-    hasThumb: true,
-  },
-  {
-    id: 'post-05-11',
-    name: 'Post Carrossel 05/11',
-    campaignName: '[ILP] [BF] [Msg] [Vendas -> Wpp] [Rmkt]',
-    campaignType: 'MENSAGEM' as const,
-    format: 'CAROUSEL' as const,
-    metrics: {
-      results: 37,
-      resultType: 'Conversas por mensagem iniciadas',
-      costPerResult: 55.46,
-    },
-    hasThumb: true,
-  },
 ];
 
 // Helper to find image for a creative
-const getCreativeImage = (creativeName: string): string | null => {
+const getCreativeImage = (creativeId: string, creativeName: string): string | null => {
+  // Check by ID first (for redtouch and co2-virtue)
+  if (creativeId.includes('redtouch')) {
+    return creativeImages['redtouch'];
+  }
+  if (creativeId.includes('co2') || creativeId.includes('virtue')) {
+    return creativeImages['co2'];
+  }
+  // Then check by name for date-based posts
   for (const [dateKey, imagePath] of Object.entries(creativeImages)) {
     if (creativeName.includes(dateKey)) {
       return imagePath;
@@ -118,19 +132,17 @@ export function SlideCreatives() {
 
   // Pattern analysis from research data
   const patternColors: Record<string, string> = {
-    'REELS': 'var(--color-accent)',
-    'MEDICO_PRESENTE': 'var(--color-gold)',
-    'BLACK_FRIDAY': 'var(--color-success)',
-    'VIDEO': 'var(--color-info)',
-    'BIOESTIMULADOR': 'var(--color-chart-5)',
+    'PROCEDIMENTO_TECH': 'var(--color-success)',
+    'TEXTO_EXPLICATIVO': 'var(--color-gold)',
+    'VIDEO_REELS': 'var(--color-accent)',
+    'MEDICO_PRESENTE': 'var(--color-info)',
   };
 
   const patternLabels: Record<string, string> = {
-    'REELS': 'REELS',
+    'PROCEDIMENTO_TECH': 'PROCEDIMENTO TECNOLÓGICO',
+    'TEXTO_EXPLICATIVO': 'TEXTO NA TELA',
+    'VIDEO_REELS': 'FORMATO VÍDEO/REELS',
     'MEDICO_PRESENTE': 'MÉDICO PRESENTE',
-    'BLACK_FRIDAY': 'BLACK FRIDAY',
-    'VIDEO': 'VÍDEO',
-    'BIOESTIMULADOR': 'BIOESTIMULADOR',
   };
 
   const patterns = successPatterns.top10Patterns.slice(0, 5).map(p => ({
@@ -216,7 +228,7 @@ export function SlideCreatives() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {melhoresCreativos.map((creative, index) => {
-            const imagePath = getCreativeImage(creative.name);
+            const imagePath = getCreativeImage(creative.id, creative.name);
             const isAudiencia = creative.campaignType === 'AUDIENCIA';
             return (
               <motion.div key={creative.id} variants={itemVariants}>
@@ -345,10 +357,9 @@ export function SlideCreatives() {
                   <div className="flex justify-between items-center">
                     <div className="flex items-center gap-2">
                       <Text weight="medium">{pattern.name}</Text>
-                      <Text size="xs" variant="muted">({pattern.frequency} de 10)</Text>
                     </div>
-                    <Badge variant={pattern.percentage >= 40 ? 'success' : 'outline'}>
-                      {pattern.percentage}% dos top performers
+                    <Badge variant={pattern.percentage >= 60 ? 'success' : 'gold'}>
+                      {pattern.percentage}% dos top criativos
                     </Badge>
                   </div>
                   <ProgressBar
@@ -361,16 +372,20 @@ export function SlideCreatives() {
             </div>
             <div className="mt-6 pt-4 border-t border-white/10">
               <Text size="sm" variant="muted" className="mb-2">Insight Principal:</Text>
-              <Text weight="semibold" className="text-accent mb-3">
+              <Text weight="semibold" className="text-success mb-3">
                 {successPatterns.keyInsight}
               </Text>
-              <Text size="sm" variant="muted" className="mb-2">Recomendações:</Text>
+              <Text size="sm" variant="muted" className="mb-2">Como Replicar o Padrão de Sucesso:</Text>
               <ul className="list-disc list-inside space-y-1">
-                <li><Text size="sm" as="span">Priorizar formato REELS - 40x mais resultados que carrossel</Text></li>
-                <li><Text size="sm" as="span">Presença médica aumenta confiança e engajamento</Text></li>
-                <li><Text size="sm" as="span">Vídeos têm 25% melhor custo/resultado que imagens</Text></li>
-                <li><Text size="sm" as="span">Datas promocionais (Black Friday) são oportunidades-chave</Text></li>
+                {successPatterns.realInsight.actionable.map((action, i) => (
+                  <li key={i}><Text size="sm" as="span">{action}</Text></li>
+                ))}
               </ul>
+              <div className="mt-3 p-2 rounded bg-gold/10 border-l-2 border-gold">
+                <Text size="xs" variant="muted">
+                  <span className="text-gold font-semibold">Nota:</span> Para campanhas de MENSAGEM, evitar carrosséis (custo muito alto). Para AUDIÊNCIA, imagens funcionam bem com custo ~R$0,40/visita.
+                </Text>
+              </div>
             </div>
           </CardContent>
         </Card>

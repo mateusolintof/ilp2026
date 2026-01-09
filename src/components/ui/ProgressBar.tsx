@@ -18,8 +18,8 @@ const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
     const percentage = Math.min(Math.max((value / max) * 100, 0), 100);
 
     const variants = {
-      default: 'bg-accent',
-      accent: 'bg-gradient-to-r from-accent to-gold',
+      default: 'bg-white/20',
+      accent: 'bg-accent',
       success: 'bg-success',
       warning: 'bg-warning',
       gold: 'bg-gold',

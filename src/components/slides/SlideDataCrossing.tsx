@@ -1,7 +1,8 @@
 'use client';
 
+import type { ReactNode } from 'react';
 import { motion } from 'framer-motion';
-import { GitBranch, Zap, Calendar, Clock, TrendingUp, BarChart3, Activity, AlertCircle, CheckCircle2 } from 'lucide-react';
+import { GitBranch, Zap, Calendar, Clock, TrendingUp, BarChart3, Activity, AlertCircle, CheckCircle2, Rocket, DollarSign } from 'lucide-react';
 import { Heading, Text, Label } from '../ui/Typography';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/Card';
 import { Badge } from '../ui/Badge';
@@ -64,6 +65,13 @@ export function SlideDataCrossing() {
     correlations.resultadosVsProcedimentos,
   ];
 
+  const correlationIcons: Record<string, ReactNode> = {
+    rocket: <Rocket className="w-4 h-4 text-accent" />,
+    chart: <BarChart3 className="w-4 h-4 text-muted" />,
+    dollar: <DollarSign className="w-4 h-4 text-gold" />,
+    trending: <TrendingUp className="w-4 h-4 text-muted" />,
+  };
+
   return (
     <div className="min-h-full pb-8">
       {/* Header */}
@@ -101,28 +109,28 @@ export function SlideDataCrossing() {
               <div className="flex items-center justify-between gap-4 flex-wrap">
                 <div className="text-center px-4 py-2 flex-1 min-w-[120px]">
                   <Text size="sm" variant="muted" className="mb-1">Investimento</Text>
-                  <Text size="xl" weight="bold" className="text-accent">
+                  <Text size="xl" weight="bold" className="text-foreground">
                     {formatCurrency(crossData.totalPaidInvestment)}
                   </Text>
                 </div>
-                <Zap className="w-6 h-6 text-gold" />
+                <Zap className="w-6 h-6 text-white/25" />
                 <div className="text-center px-4 py-2 flex-1 min-w-[120px]">
                   <Text size="sm" variant="muted" className="mb-1">Views Orgânicos</Text>
-                  <Text size="xl" weight="bold" className="text-info">
+                  <Text size="xl" weight="bold" className="text-foreground">
                     {formatNumber(crossData.totalOrganicViews)}
                   </Text>
                 </div>
-                <Zap className="w-6 h-6 text-gold" />
+                <Zap className="w-6 h-6 text-white/25" />
                 <div className="text-center px-4 py-2 flex-1 min-w-[120px]">
                   <Text size="sm" variant="muted" className="mb-1">Procedimentos</Text>
-                  <Text size="xl" weight="bold" className="text-gold">
+                  <Text size="xl" weight="bold" className="text-foreground">
                     {formatNumber(crossData.totalProcedures)}
                   </Text>
                 </div>
-                <Zap className="w-6 h-6 text-gold" />
+                <Zap className="w-6 h-6 text-white/25" />
                 <div className="text-center px-4 py-2 flex-1 min-w-[120px]">
                   <Text size="sm" variant="muted" className="mb-1">Faturamento</Text>
-                  <Text size="xl" weight="bold" className="text-success">
+                  <Text size="xl" weight="bold" className="text-gold">
                     {formatCurrency(crossData.totalClosingRevenue)}
                   </Text>
                 </div>
@@ -150,11 +158,13 @@ export function SlideDataCrossing() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {correlationData.map((corr) => (
             <motion.div key={corr.name} variants={itemVariants}>
-              <Card className={`h-full ${corr.isSignificant ? 'border-success/50' : 'border-white/10'}`}>
+              <Card className={`h-full border-l-2 ${corr.isSignificant ? 'border-l-success/40' : 'border-l-white/10'}`}>
                 <CardContent className="p-4">
                   <div className="flex items-start justify-between mb-3">
                     <div className="flex items-center gap-2">
-                      <span className="text-xl">{corr.icon}</span>
+                      <div className="p-2 rounded-lg bg-white/5">
+                        {correlationIcons[corr.icon] || <Activity className="w-4 h-4 text-muted" />}
+                      </div>
                       <Text weight="semibold" size="sm">{corr.name}</Text>
                     </div>
                     {corr.isSignificant ? (
@@ -173,13 +183,13 @@ export function SlideDataCrossing() {
                   <div className="grid grid-cols-2 gap-3 mb-3">
                     <div className="text-center p-2 rounded-lg bg-white/5">
                       <Text size="xs" variant="muted">Coef. Pearson (r)</Text>
-                      <Text size="lg" weight="bold" className={corr.r > 0.7 ? 'text-success' : corr.r > 0.4 ? 'text-gold' : 'text-white/70'}>
+                      <Text size="lg" weight="bold" className="text-foreground">
                         {corr.r.toFixed(2)}
                       </Text>
                     </div>
                     <div className="text-center p-2 rounded-lg bg-white/5">
                       <Text size="xs" variant="muted">p-value</Text>
-                      <Text size="lg" weight="bold" className={corr.pValue < 0.05 ? 'text-success' : 'text-white/70'}>
+                      <Text size="lg" weight="bold" className={corr.pValue < 0.05 ? 'text-success' : 'text-foreground'}>
                         {corr.pValue.toFixed(2)}
                       </Text>
                     </div>
@@ -188,15 +198,15 @@ export function SlideDataCrossing() {
                   {/* Expanded explanations */}
                   <div className="space-y-2 border-t border-white/10 pt-3">
                     <div>
-                      <Text size="xs" weight="semibold" className="text-white/80 mb-0.5">O que significa:</Text>
+                      <Text size="xs" weight="semibold" variant="muted" className="mb-0.5">O que significa:</Text>
                       <Text size="xs" variant="muted">{corr.whatItMeans}</Text>
                     </div>
                     <div>
-                      <Text size="xs" weight="semibold" className="text-white/80 mb-0.5">Por que importa:</Text>
+                      <Text size="xs" weight="semibold" variant="muted" className="mb-0.5">Por que importa:</Text>
                       <Text size="xs" variant="muted">{corr.whyItMatters}</Text>
                     </div>
-                    <div className={`p-2 rounded ${corr.isSignificant ? 'bg-success/10 border-l-2 border-success' : 'bg-white/5 border-l-2 border-white/20'}`}>
-                      <Text size="xs" className={corr.isSignificant ? 'text-success' : 'text-white/60'}>
+                    <div className={`p-2 rounded bg-white/5 border-l-2 ${corr.isSignificant ? 'border-success/40' : 'border-white/15'}`}>
+                      <Text size="xs" variant="muted" className={corr.isSignificant ? 'text-foreground' : ''}>
                         {corr.conclusion}
                       </Text>
                     </div>
@@ -216,7 +226,7 @@ export function SlideDataCrossing() {
         className="mb-6"
       >
         <motion.div variants={itemVariants}>
-          <Card className="border-gold/30">
+          <Card className="border-l-2 border-l-gold/40">
             <CardContent className="p-4">
               <div className="flex items-center gap-3 mb-4">
                 <BarChart3 className="w-5 h-5 text-gold" />
@@ -225,21 +235,21 @@ export function SlideDataCrossing() {
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-                <div className="p-3 rounded-lg bg-accent/10 text-center">
+                <div className="p-3 rounded-lg bg-white/5 text-center">
                   <Text size="xs" variant="muted" className="mb-1">Equação</Text>
-                  <Text size="sm" weight="bold" className="text-accent font-mono">
+                  <Text size="sm" weight="bold" className="text-foreground font-mono">
                     {regression.equation}
                   </Text>
                 </div>
-                <div className="p-3 rounded-lg bg-gold/10 text-center">
+                <div className="p-3 rounded-lg bg-white/5 text-center">
                   <Text size="xs" variant="muted" className="mb-1">R² (Coef. Determinação)</Text>
-                  <Text size="lg" weight="bold" className="text-gold">
+                  <Text size="lg" weight="bold" className="text-foreground">
                     {(regression.rSquared * 100).toFixed(2)}%
                   </Text>
                 </div>
                 <div className="p-3 rounded-lg bg-white/5 text-center">
                   <Text size="xs" variant="muted" className="mb-1">Interpretação</Text>
-                  <Text size="sm" weight="semibold" className="text-white">
+                  <Text size="sm" weight="semibold" className="text-foreground">
                     R$ 1 investido → ~R$ {regression.slope.toFixed(0)} receita
                   </Text>
                 </div>

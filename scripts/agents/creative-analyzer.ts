@@ -191,16 +191,6 @@ function analyzeCreative(creative: Creative): CreativeAnalysis {
 // 2. CRUZAMENTO DE DADOS
 // ============================================
 
-interface MonthlyTimeline {
-  month: string;
-  paidInvestment: number;
-  paidResults: number;
-  organicViews: number;
-  organicReach: number;
-  closingRevenue: number;
-  closingProcedures: number;
-}
-
 interface PatternInsight {
   pattern: string;
   description: string;
@@ -368,46 +358,6 @@ async function runAnalysis(): Promise<void> {
 
   console.log('\n\n📈 CRUZAMENTO: MARKETING ↔ FECHAMENTO');
   console.log('=' .repeat(60));
-
-  // Dados mensais
-  const monthlyData: MonthlyTimeline[] = [
-    {
-      month: 'Setembro',
-      paidInvestment: 0,
-      paidResults: 0,
-      organicViews: 0,
-      organicReach: 0,
-      closingRevenue: closingData.summary.monthly.find(m => m.month === 'Setembro')?.totalRevenue || 0,
-      closingProcedures: closingData.summary.monthly.find(m => m.month === 'Setembro')?.totalProcedures || 0,
-    },
-    {
-      month: 'Outubro',
-      paidInvestment: 0,
-      paidResults: 0,
-      organicViews: 0,
-      organicReach: 0,
-      closingRevenue: closingData.summary.monthly.find(m => m.month === 'Outubro')?.totalRevenue || 0,
-      closingProcedures: closingData.summary.monthly.find(m => m.month === 'Outubro')?.totalProcedures || 0,
-    },
-    {
-      month: 'Novembro',
-      paidInvestment: 0,
-      paidResults: 0,
-      organicViews: 0,
-      organicReach: 0,
-      closingRevenue: closingData.summary.monthly.find(m => m.month === 'Novembro')?.totalRevenue || 0,
-      closingProcedures: closingData.summary.monthly.find(m => m.month === 'Novembro')?.totalProcedures || 0,
-    },
-    {
-      month: 'Dezembro',
-      paidInvestment: 0,
-      paidResults: 0,
-      organicViews: 0,
-      organicReach: 0,
-      closingRevenue: closingData.summary.monthly.find(m => m.month === 'Dezembro')?.totalRevenue || 0,
-      closingProcedures: closingData.summary.monthly.find(m => m.month === 'Dezembro')?.totalProcedures || 0,
-    },
-  ];
 
   // Consolidar investimento pago
   const totalPaidInvestment = campaignData.summary.mensagem.consolidated.spent +

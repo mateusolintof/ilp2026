@@ -28,7 +28,7 @@ const slides = [
 
 export default function HomePage() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   // Navigate to specific slide
   const goToSlide = useCallback((index: number) => {
@@ -78,6 +78,11 @@ export default function HomePage() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [nextSlide, prevSlide, goToSlide]);
 
+  // Reset vertical scroll when changing slides
+  useEffect(() => {
+    scrollRef.current?.scrollTo({ top: 0 });
+  }, [currentSlide]);
+
   const progress = ((currentSlide + 1) / slides.length) * 100;
 
   return (
@@ -87,105 +92,105 @@ export default function HomePage() {
 
       {/* Progress Bar */}
       <motion.div
-        className="fixed top-0 left-0 h-1 bg-gradient-to-r from-accent to-gold z-50"
+        className="fixed top-0 left-0 h-1 bg-accent z-50"
         initial={{ width: 0 }}
         animate={{ width: `${progress}%` }}
         transition={{ duration: 0.3, ease: 'easeOut' }}
       />
 
-      {/* Navigation Header */}
-      <header className="fixed top-0 left-0 right-0 z-40 px-6 py-4 flex items-center justify-between">
-        <button
-          onClick={() => goToSlide(0)}
-          className="p-2 rounded-lg bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-colors"
-          aria-label="Go to start"
-        >
-          <HomeIcon className="w-5 h-5 text-foreground" />
-        </button>
-
-        <div className="flex items-center gap-2">
-          <span className="text-sm text-muted font-medium">
-            {currentSlide + 1} / {slides.length}
-          </span>
-        </div>
-
-        {/* Spacer to balance layout */}
-        <div className="w-9" />
-      </header>
-
-      {/* Slides Container */}
-      <div ref={containerRef} className="h-full w-full">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentSlide}
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -50 }}
-            transition={{ duration: 0.3 }}
-            className="h-full w-full"
+      <div className="relative z-10 flex h-screen flex-col">
+        {/* Navigation Header */}
+        <header className="z-40 px-6 py-4 flex items-center justify-between border-b border-white/5 bg-background/30 backdrop-blur-md">
+          <button
+            onClick={() => goToSlide(0)}
+            className="p-2 rounded-lg bg-white/5 hover:bg-white/10 transition-colors"
+            aria-label="Go to start"
           >
-            <div className="slide-content h-full w-full overflow-y-auto pt-20 pb-24 px-6 md:px-12 lg:px-16">
-              <div className="max-w-7xl mx-auto">
+            <HomeIcon className="w-5 h-5 text-foreground" />
+          </button>
+
+          <div className="flex items-center gap-2">
+            <span className="text-sm text-muted font-medium">
+              {currentSlide + 1} / {slides.length}
+            </span>
+          </div>
+
+          {/* Spacer to balance layout */}
+          <div className="w-9" />
+        </header>
+
+        {/* Slides */}
+        <div ref={scrollRef} className="flex-1 w-full overflow-y-auto px-6 md:px-10 lg:px-12 py-8">
+          <div className="max-w-6xl mx-auto">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentSlide}
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -50 }}
+                transition={{ duration: 0.3 }}
+                className="min-h-full"
+              >
                 {(() => {
                   const CurrentSlideComponent = slides[currentSlide].component;
                   return <CurrentSlideComponent />;
                 })()}
-              </div>
-            </div>
-          </motion.div>
-        </AnimatePresence>
-      </div>
-
-      {/* Navigation Arrows */}
-      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-4 z-40">
-        <button
-          onClick={prevSlide}
-          disabled={currentSlide === 0}
-          className={`p-3 rounded-full bg-white/10 backdrop-blur-sm transition-all ${
-            currentSlide === 0
-              ? 'opacity-30 cursor-not-allowed'
-              : 'hover:bg-white/20 hover:scale-110'
-          }`}
-          aria-label="Previous slide"
-        >
-          <ChevronLeft className="w-6 h-6 text-foreground" />
-        </button>
-
-        {/* Slide Indicators */}
-        <div className="flex gap-2">
-          {slides.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => goToSlide(index)}
-              className={`w-2 h-2 rounded-full transition-all ${
-                index === currentSlide
-                  ? 'w-8 bg-accent'
-                  : 'bg-white/30 hover:bg-white/50'
-              }`}
-              aria-label={`Go to slide ${index + 1}`}
-            />
-          ))}
+              </motion.div>
+            </AnimatePresence>
+          </div>
         </div>
 
-        <button
-          onClick={nextSlide}
-          disabled={currentSlide === slides.length - 1}
-          className={`p-3 rounded-full bg-white/10 backdrop-blur-sm transition-all ${
-            currentSlide === slides.length - 1
-              ? 'opacity-30 cursor-not-allowed'
-              : 'hover:bg-white/20 hover:scale-110'
-          }`}
-          aria-label="Next slide"
-        >
-          <ChevronRight className="w-6 h-6 text-foreground" />
-        </button>
-      </div>
+        {/* Footer Navigation */}
+        <footer className="z-40 px-6 py-4 flex items-center justify-between border-t border-white/5 bg-background/30 backdrop-blur-md">
+          {/* Spacer */}
+          <div className="w-9" />
 
-      {/* Keyboard Shortcuts Hint */}
-      <div className="fixed bottom-6 right-6 text-xs text-muted hidden md:block">
-        <span className="opacity-50">
-          Use <kbd className="px-1 py-0.5 bg-white/10 rounded">←</kbd> <kbd className="px-1 py-0.5 bg-white/10 rounded">→</kbd> para navegar
-        </span>
+          <div className="flex items-center gap-4">
+            <button
+              onClick={prevSlide}
+              disabled={currentSlide === 0}
+              className={`p-2.5 rounded-full bg-white/10 transition-colors ${
+                currentSlide === 0 ? 'opacity-30 cursor-not-allowed' : 'hover:bg-white/15'
+              }`}
+              aria-label="Previous slide"
+            >
+              <ChevronLeft className="w-5 h-5 text-foreground" />
+            </button>
+
+            {/* Slide Indicators */}
+            <div className="flex gap-2">
+              {slides.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => goToSlide(index)}
+                  className={`h-2 rounded-full transition-all ${
+                    index === currentSlide ? 'w-8 bg-accent' : 'w-2 bg-white/25 hover:bg-white/40'
+                  }`}
+                  aria-label={`Go to slide ${index + 1}`}
+                />
+              ))}
+            </div>
+
+            <button
+              onClick={nextSlide}
+              disabled={currentSlide === slides.length - 1}
+              className={`p-2.5 rounded-full bg-white/10 transition-colors ${
+                currentSlide === slides.length - 1 ? 'opacity-30 cursor-not-allowed' : 'hover:bg-white/15'
+              }`}
+              aria-label="Next slide"
+            >
+              <ChevronRight className="w-5 h-5 text-foreground" />
+            </button>
+          </div>
+
+          {/* Keyboard Shortcuts Hint */}
+          <div className="text-xs text-muted hidden md:block">
+            <span className="opacity-60">
+              Use <kbd className="px-1 py-0.5 bg-white/10 rounded">←</kbd>{' '}
+              <kbd className="px-1 py-0.5 bg-white/10 rounded">→</kbd> para navegar
+            </span>
+          </div>
+        </footer>
       </div>
     </div>
   );

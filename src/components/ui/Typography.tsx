@@ -13,23 +13,23 @@ export interface HeadingProps extends HTMLAttributes<HTMLHeadingElement> {
 const Heading = forwardRef<HTMLHeadingElement, HeadingProps>(
   ({ className, as: Component = 'h2', size = 'lg', gradient = false, children, ...props }, ref) => {
     const sizes = {
-      xs: 'text-lg font-semibold',
-      sm: 'text-xl font-semibold',
-      md: 'text-2xl font-bold',
-      lg: 'text-3xl font-bold',
-      xl: 'text-4xl font-bold tracking-tight',
-      '2xl': 'text-5xl font-bold tracking-tight',
-      '3xl': 'text-6xl font-bold tracking-tight',
+      xs: 'text-base md:text-lg font-semibold tracking-tight',
+      sm: 'text-lg md:text-xl font-semibold tracking-tight',
+      md: 'text-xl md:text-2xl font-semibold tracking-tight',
+      lg: 'text-2xl md:text-3xl font-bold tracking-tight',
+      xl: 'text-3xl md:text-4xl font-bold tracking-tight',
+      '2xl': 'text-4xl md:text-5xl font-bold tracking-tight',
+      '3xl': 'text-5xl md:text-6xl font-bold tracking-tight',
     };
 
     const gradientClass = gradient
-      ? 'bg-gradient-to-r from-accent via-gold to-accent bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient'
+      ? 'bg-gradient-to-r from-foreground to-accent bg-clip-text text-transparent'
       : 'text-foreground';
 
     return (
       <Component
         ref={ref}
-        className={cn(sizes[size], gradientClass, className)}
+        className={cn(sizes[size], 'leading-tight', gradientClass, className)}
         {...props}
       >
         {children}
@@ -80,7 +80,7 @@ const Text = forwardRef<HTMLParagraphElement, TextProps>(
     return (
       <Component
         ref={ref as React.Ref<HTMLParagraphElement>}
-        className={cn(sizes[size], variants[variant], weights[weight], 'leading-relaxed', className)}
+        className={cn(sizes[size], variants[variant], weights[weight], 'leading-normal', className)}
         {...props}
       >
         {children}
@@ -99,7 +99,7 @@ export interface LabelProps extends HTMLAttributes<HTMLSpanElement> {
 const Label = forwardRef<HTMLSpanElement, LabelProps>(
   ({ className, size = 'sm', children, ...props }, ref) => {
     const sizes = {
-      sm: 'text-xs',
+      sm: 'text-[0.72rem]',
       md: 'text-sm',
       lg: 'text-base',
     };
@@ -107,7 +107,7 @@ const Label = forwardRef<HTMLSpanElement, LabelProps>(
     return (
       <span
         ref={ref}
-        className={cn(sizes[size], 'font-medium text-muted uppercase tracking-wider', className)}
+        className={cn(sizes[size], 'font-medium text-muted uppercase tracking-widest', className)}
         {...props}
       >
         {children}

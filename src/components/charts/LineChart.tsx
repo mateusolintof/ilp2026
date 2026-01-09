@@ -79,7 +79,13 @@ export function LineChart({
 }: LineChartProps) {
   return (
     <div className={cn('w-full', className)} style={{ height }}>
-      <ResponsiveContainer width="100%" height="100%">
+      <ResponsiveContainer
+        width="100%"
+        height="100%"
+        minWidth={0}
+        minHeight={0}
+        initialDimension={{ width: 320, height }}
+      >
         <RechartsLineChart
           data={data}
           margin={{ top: 10, right: 30, left: 10, bottom: 10 }}

@@ -28,7 +28,6 @@ function extractDataFromTS(filePath: string, varName: string): unknown {
 
 // Nomes dos dias da semana
 const DAYS_PT = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
-const DAYS_EN = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 // Parse date from "MM/DD/YYYY HH:MM" format
 function parseDate(dateStr: string): Date | null {

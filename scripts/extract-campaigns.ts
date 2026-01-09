@@ -7,7 +7,7 @@
 
 import * as fs from 'fs';
 import * as path from 'path';
-import { CampaignData, CampaignMetrics, CampaignType, MonthlyComparison } from '../src/types';
+import { CampaignData, CampaignMetrics, CampaignType } from '../src/types';
 
 const DATA_PATH = path.join(__dirname, '../data/relatorios-pago/performance-campanha');
 const OUTPUT_PATH = path.join(__dirname, '../src/lib/data');

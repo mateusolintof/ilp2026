@@ -11,26 +11,26 @@ export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
 const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
   ({ className, variant = 'default', size = 'md', children, ...props }, ref) => {
     const variants = {
-      default: 'bg-accent/20 text-accent border-accent/30',
-      success: 'bg-success/15 text-success border-success/30',
-      warning: 'bg-warning/15 text-warning border-warning/30',
-      error: 'bg-error/15 text-error border-error/30',
-      info: 'bg-info/15 text-info border-info/30',
-      gold: 'bg-gold/15 text-gold border-gold/30',
-      outline: 'bg-transparent text-foreground border-white/30',
+      default: 'bg-white/5 text-foreground border-white/10',
+      success: 'bg-success/10 text-success border-success/20',
+      warning: 'bg-warning/10 text-warning border-warning/20',
+      error: 'bg-error/10 text-error border-error/20',
+      info: 'bg-info/10 text-info border-info/20',
+      gold: 'bg-gold/10 text-gold border-gold/20',
+      outline: 'bg-transparent text-foreground border-white/15',
     };
 
     const sizes = {
       sm: 'px-2 py-0.5 text-xs',
-      md: 'px-2.5 py-1 text-sm',
-      lg: 'px-3 py-1.5 text-base',
+      md: 'px-2.5 py-1 text-xs',
+      lg: 'px-3 py-1.5 text-sm',
     };
 
     return (
       <span
         ref={ref}
         className={cn(
-          'inline-flex items-center font-medium rounded-full border transition-colors',
+          'inline-flex items-center font-medium rounded-full border backdrop-blur-sm transition-colors',
           variants[variant],
           sizes[size],
           className

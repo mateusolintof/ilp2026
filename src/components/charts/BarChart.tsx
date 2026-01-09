@@ -80,7 +80,13 @@ export function BarChart({
 
   return (
     <div className={cn('w-full', className)} style={{ height }}>
-      <ResponsiveContainer width="100%" height="100%">
+      <ResponsiveContainer
+        width="100%"
+        height="100%"
+        minWidth={0}
+        minHeight={0}
+        initialDimension={{ width: 320, height }}
+      >
         <RechartsBarChart
           data={chartData}
           layout={isHorizontal ? 'horizontal' : 'vertical'}

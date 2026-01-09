@@ -8,7 +8,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import * as XLSX from 'xlsx';
-import { ClosingRecord, ClosingSummary, CategorySummary, ServiceSummary, PaymentStatus } from '../src/types';
+import { ClosingRecord, ClosingSummary, CategorySummary, ServiceSummary } from '../src/types';
 
 const DATA_PATH = path.join(__dirname, '../data/fechamento-clinica');
 const OUTPUT_PATH = path.join(__dirname, '../src/lib/data');

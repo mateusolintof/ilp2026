@@ -25,19 +25,19 @@ export function SlideInsightsTrends() {
 
   // Icon mapping for trends
   const trendIcons: Record<string, React.ReactNode> = {
-    '💎': <Gem className="w-6 h-6 text-accent" />,
-    '💧': <Droplets className="w-6 h-6 text-info" />,
-    '🔄': <RefreshCw className="w-6 h-6 text-gold" />,
-    '✨': <Sparkles className="w-6 h-6 text-success" />,
+    gem: <Gem className="w-6 h-6 text-gold" />,
+    droplets: <Droplets className="w-6 h-6 text-gold" />,
+    refresh: <RefreshCw className="w-6 h-6 text-gold" />,
+    sparkles: <Sparkles className="w-6 h-6 text-gold" />,
   };
 
   // Icon mapping for insights
   const insightIcons: Record<string, React.ReactNode> = {
-    'rocket': <Rocket className="w-5 h-5 text-success" />,
-    'calendar': <Calendar className="w-5 h-5 text-gold" />,
-    'video': <Video className="w-5 h-5 text-accent" />,
-    'clock': <Clock className="w-5 h-5 text-info" />,
-    'layers': <Layers className="w-5 h-5 text-gold" />,
+    rocket: <Rocket className="w-5 h-5 text-accent" />,
+    calendar: <Calendar className="w-5 h-5 text-accent" />,
+    video: <Video className="w-5 h-5 text-accent" />,
+    clock: <Clock className="w-5 h-5 text-accent" />,
+    layers: <Layers className="w-5 h-5 text-accent" />,
   };
 
   return (
@@ -75,7 +75,7 @@ export function SlideInsightsTrends() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           {actionableInsights.slice(0, 4).map((insight) => (
             <motion.div key={insight.id} variants={itemVariants}>
-              <Card className={`h-full hover:border-accent/50 transition-colors ${insight.priority === 'ALTA' ? 'border-success/30' : ''}`}>
+              <Card className={`h-full border-l-2 ${insight.priority === 'ALTA' ? 'border-l-success/40' : 'border-l-white/10'}`}>
                 <CardContent className="p-4">
                   <div className="flex items-start gap-3 mb-3">
                     <div className="p-2 rounded-lg bg-white/5">
@@ -99,7 +99,7 @@ export function SlideInsightsTrends() {
 
                   <div className="space-y-2 mb-3">
                     <div>
-                      <Text size="xs" weight="semibold" className="text-white/80 mb-0.5">Por que importa:</Text>
+                      <Text size="xs" weight="semibold" variant="muted" className="mb-0.5">Por que importa:</Text>
                       <Text size="xs" variant="muted">{insight.whyItMatters}</Text>
                     </div>
                   </div>
@@ -117,7 +117,7 @@ export function SlideInsightsTrends() {
                   </div>
 
                   <div className="flex justify-between items-center mt-2 pt-2 border-t border-white/5">
-                    <Text size="xs" variant="muted">Resultado esperado: <span className="text-white">{insight.expectedResult}</span></Text>
+                    <Text size="xs" variant="muted">Resultado esperado: <span className="text-foreground">{insight.expectedResult}</span></Text>
                   </div>
                 </CardContent>
               </Card>
@@ -143,7 +143,7 @@ export function SlideInsightsTrends() {
 
         {/* Macro Trend */}
         <motion.div variants={itemVariants} className="mb-4">
-          <Card className="border-gold/50 bg-gold/5">
+          <Card className="border-l-2 border-l-gold/40">
             <CardContent className="p-4">
               <div className="flex items-center gap-3 mb-2">
                 <Zap className="w-5 h-5 text-gold" />
@@ -162,7 +162,7 @@ export function SlideInsightsTrends() {
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-4">
           {trends2026.procedures.map((proc) => (
             <motion.div key={proc.name} variants={itemVariants}>
-              <Card className="h-full text-center p-3 hover:border-gold/50 transition-colors">
+              <Card className="h-full text-center p-3 border-l-2 border-l-gold/30">
                 {trendIcons[proc.icon] || <Star className="w-6 h-6 mx-auto mb-2 text-gold" />}
                 <Text weight="bold" size="sm" className="mb-1">{proc.name}</Text>
                 <Text size="xs" variant="muted" className="mb-2">{proc.description}</Text>
@@ -176,12 +176,12 @@ export function SlideInsightsTrends() {
 
         {/* K-Beauty Influence */}
         <motion.div variants={itemVariants}>
-          <Card className="border-info/30">
+          <Card className="border-l-2 border-l-accent/40">
             <CardContent className="p-4">
               <div className="flex items-center gap-3 mb-2">
-                <Star className="w-5 h-5 text-info" />
+                <Star className="w-5 h-5 text-accent" />
                 <Text weight="bold">Influência K-Beauty no Brasil</Text>
-                <Badge variant="info">{trends2026.kBeauty.growth} busca por &quot;{trends2026.kBeauty.term}&quot;</Badge>
+                <Badge variant="default">{trends2026.kBeauty.growth} busca por &quot;{trends2026.kBeauty.term}&quot;</Badge>
               </div>
               <Text size="sm" variant="muted" className="mb-2">
                 Conceito &quot;{trends2026.kBeauty.concept}&quot; está em alta

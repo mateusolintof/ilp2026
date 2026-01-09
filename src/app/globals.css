@@ -4,49 +4,49 @@
   /* Design System - ILP Dashboard */
 
   /* Core Colors */
-  --color-primary: #1A1A2E;
-  --color-secondary: #16213E;
-  --color-accent: #E94560;
-  --color-gold: #D4AF37;
-  --color-background: #0F0F1A;
-  --color-surface: #1A1A2E;
-  --color-surface-elevated: #242444;
-  --color-text: #FAFAFA;
-  --color-text-muted: #8B8B8B;
-  --color-text-subtle: #6B6B6B;
+  --color-primary: #0b1220;
+  --color-secondary: #0f172a;
+  --color-accent: #d06c78; /* muted rose */
+  --color-gold: #c3a463; /* muted gold */
+  --color-background: #070b12;
+  --color-surface: #0c1322;
+  --color-surface-elevated: #111a2b;
+  --color-text: #f8fafc;
+  --color-text-muted: #94a3b8;
+  --color-text-subtle: #64748b;
 
   /* Semantic Colors */
-  --color-success: #10B981;
-  --color-success-muted: rgba(16, 185, 129, 0.15);
-  --color-warning: #F59E0B;
-  --color-warning-muted: rgba(245, 158, 11, 0.15);
-  --color-error: #EF4444;
-  --color-error-muted: rgba(239, 68, 68, 0.15);
-  --color-info: #3B82F6;
-  --color-info-muted: rgba(59, 130, 246, 0.15);
+  --color-success: #22c55e;
+  --color-success-muted: rgba(34, 197, 94, 0.12);
+  --color-warning: #f59e0b;
+  --color-warning-muted: rgba(245, 158, 11, 0.12);
+  --color-error: #ef4444;
+  --color-error-muted: rgba(239, 68, 68, 0.12);
+  --color-info: #60a5fa;
+  --color-info-muted: rgba(96, 165, 250, 0.12);
 
   /* Chart Colors */
-  --color-chart-1: #E94560;
-  --color-chart-2: #D4AF37;
-  --color-chart-3: #3B82F6;
-  --color-chart-4: #10B981;
-  --color-chart-5: #8B5CF6;
-  --color-chart-6: #EC4899;
+  --color-chart-1: #d06c78;
+  --color-chart-2: #c85e6f;
+  --color-chart-3: #e28a95;
+  --color-chart-4: #b65767;
+  --color-chart-5: #c3a463;
+  --color-chart-6: #8aa0c8;
 
   /* Gradients */
-  --gradient-primary: linear-gradient(135deg, #E94560 0%, #D4AF37 100%);
-  --gradient-surface: linear-gradient(180deg, #1A1A2E 0%, #0F0F1A 100%);
-  --gradient-glow: radial-gradient(ellipse at center, rgba(233, 69, 96, 0.15) 0%, transparent 70%);
+  --gradient-primary: linear-gradient(135deg, rgba(208, 108, 120, 0.95) 0%, rgba(195, 164, 99, 0.9) 100%);
+  --gradient-surface: linear-gradient(180deg, rgba(17, 26, 43, 0.9) 0%, rgba(7, 11, 18, 1) 100%);
+  --gradient-glow: radial-gradient(ellipse at center, rgba(208, 108, 120, 0.12) 0%, transparent 70%);
 
   /* Borders */
-  --border-color: rgba(255, 255, 255, 0.1);
-  --border-color-strong: rgba(255, 255, 255, 0.2);
+  --border-color: rgba(255, 255, 255, 0.10);
+  --border-color-strong: rgba(255, 255, 255, 0.18);
 
   /* Shadows */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
-  --shadow-glow: 0 0 20px rgba(233, 69, 96, 0.3);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.25);
+  --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.45);
+  --shadow-glow: 0 0 22px rgba(208, 108, 120, 0.18);
 
   /* Typography Scale */
   --text-xs: 0.75rem;
@@ -132,7 +132,7 @@
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: var(--color-accent) var(--color-surface);
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
 }
 
 *::-webkit-scrollbar {
@@ -141,12 +141,16 @@
 }
 
 *::-webkit-scrollbar-track {
-  background: var(--color-surface);
+  background: transparent;
 }
 
 *::-webkit-scrollbar-thumb {
-  background: var(--color-accent);
+  background: rgba(255, 255, 255, 0.18);
   border-radius: 4px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.28);
 }
 
 html {

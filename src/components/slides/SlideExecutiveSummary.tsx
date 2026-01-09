@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { MessageCircle, Eye, FileText, DollarSign, Briefcase, Users, Target, Award, CheckCircle2, ExternalLink } from 'lucide-react';
+import { MessageCircle, Eye, FileText, DollarSign, CircleDollarSign, Users, Target, Award, CheckCircle2, ExternalLink } from 'lucide-react';
 import { Heading, Text, Label } from '../ui/Typography';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/Card';
 import { Badge } from '../ui/Badge';
@@ -78,6 +78,7 @@ export function SlideExecutiveSummary() {
             subtitle="Meta Ads (Set-Dez)"
             icon={<DollarSign className="w-5 h-5" />}
             variant="default"
+            size="sm"
           />
         </motion.div>
         <motion.div variants={itemVariants}>
@@ -85,8 +86,9 @@ export function SlideExecutiveSummary() {
             title="Faturamento Total"
             value={formatCurrency(totalRevenue)}
             subtitle="Receita clínica"
-            icon={<Briefcase className="w-5 h-5" />}
+            icon={<CircleDollarSign className="w-5 h-5" />}
             variant="gold"
+            size="sm"
           />
         </motion.div>
         <motion.div variants={itemVariants}>
@@ -95,7 +97,8 @@ export function SlideExecutiveSummary() {
             value={formatNumber(totalProcedures)}
             subtitle="Total realizados"
             icon={<Users className="w-5 h-5" />}
-            variant="accent"
+            variant="default"
+            size="sm"
           />
         </motion.div>
         <motion.div variants={itemVariants}>
@@ -104,7 +107,8 @@ export function SlideExecutiveSummary() {
             value={formatNumber(mensagemSummary.consolidated.conversationsStarted)}
             subtitle="Leads gerados"
             icon={<MessageCircle className="w-5 h-5" />}
-            variant="success"
+            variant="accent"
+            size="sm"
           />
         </motion.div>
       </motion.div>
@@ -126,7 +130,7 @@ export function SlideExecutiveSummary() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <motion.div variants={itemVariants}>
-            <Card className={`h-full ${ilpVsBenchmarks.custoConversa.status === 'DENTRO' ? 'border-success/50' : ''}`}>
+            <Card className={`h-full border-l-2 ${ilpVsBenchmarks.custoConversa.status === 'DENTRO' ? 'border-l-success/40' : 'border-l-white/10'}`}>
               <CardContent className="p-4">
                 <div className="flex items-center justify-between mb-2">
                   <Text size="sm" weight="semibold">Custo/Conversa WhatsApp</Text>
@@ -155,7 +159,7 @@ export function SlideExecutiveSummary() {
           </motion.div>
 
           <motion.div variants={itemVariants}>
-            <Card className={`h-full ${ilpVsBenchmarks.custoVisita.status === 'EXCELENTE' ? 'border-gold/50' : ''}`}>
+            <Card className={`h-full border-l-2 ${ilpVsBenchmarks.custoVisita.status === 'EXCELENTE' ? 'border-l-gold/40' : 'border-l-white/10'}`}>
               <CardContent className="p-4">
                 <div className="flex items-center justify-between mb-2">
                   <Text size="sm" weight="semibold">Custo/Visita ao Perfil</Text>

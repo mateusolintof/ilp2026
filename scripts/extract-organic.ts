@@ -7,7 +7,7 @@
 
 import * as fs from 'fs';
 import * as path from 'path';
-import { OrganicPost, OrganicMetrics, OrganicPostType, OrganicSummary } from '../src/types';
+import { OrganicPost, OrganicMetrics, OrganicPostType } from '../src/types';
 
 const DATA_PATH = path.join(__dirname, '../data/relatorios-organico');
 const OUTPUT_PATH = path.join(__dirname, '../src/lib/data');

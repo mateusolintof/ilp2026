@@ -20,92 +20,109 @@ export interface MetricCardProps {
 }
 
 function MetricCard({ className, title, value, subtitle, change, changeLabel, icon, variant = 'default', size = 'md' }: MetricCardProps) {
-    const getTrendIcon = () => {
-      if (change === undefined || change === 0) return <Minus className="w-4 h-4" />;
-      return change > 0 ? <TrendingUp className="w-4 h-4" /> : <TrendingDown className="w-4 h-4" />;
-    };
+  const getTrendIcon = () => {
+    if (change === undefined || change === 0) return <Minus className="w-4 h-4" />;
+    return change > 0 ? <TrendingUp className="w-4 h-4" /> : <TrendingDown className="w-4 h-4" />;
+  };
 
-    const getTrendColor = () => {
-      if (change === undefined || change === 0) return 'text-muted';
-      return change > 0 ? 'text-success' : 'text-error';
-    };
+  const getTrendColor = () => {
+    if (change === undefined || change === 0) return 'text-muted';
+    return change > 0 ? 'text-success' : 'text-error';
+  };
 
-    const variants = {
-      default: 'border-white/10',
-      accent: 'border-accent/30 shadow-[0_0_15px_rgba(233,69,96,0.1)]',
-      success: 'border-success/30 shadow-[0_0_15px_rgba(16,185,129,0.1)]',
-      warning: 'border-warning/30 shadow-[0_0_15px_rgba(245,158,11,0.1)]',
-      gold: 'border-gold/30 shadow-[0_0_15px_rgba(212,175,55,0.1)]',
-    };
+  const variants = {
+    default: {
+      card: 'border-white/10 border-l-white/10',
+      icon: 'bg-white/5 text-muted',
+    },
+    accent: {
+      card: 'border-white/10 border-l-accent/40',
+      icon: 'bg-accent/10 text-accent',
+    },
+    success: {
+      card: 'border-white/10 border-l-success/40',
+      icon: 'bg-success/10 text-success',
+    },
+    warning: {
+      card: 'border-white/10 border-l-warning/40',
+      icon: 'bg-warning/10 text-warning',
+    },
+    gold: {
+      card: 'border-white/10 border-l-gold/40',
+      icon: 'bg-gold/10 text-gold',
+    },
+  };
 
-    const sizes = {
-      sm: { padding: 'p-4', value: 'text-2xl', icon: 'w-8 h-8' },
-      md: { padding: 'p-6', value: 'text-3xl', icon: 'w-10 h-10' },
-      lg: { padding: 'p-8', value: 'text-4xl', icon: 'w-12 h-12' },
-    };
+  const sizes = {
+    sm: { padding: 'p-4', value: 'text-xl', icon: 'w-9 h-9', gap: 'gap-3' },
+    md: { padding: 'p-5', value: 'text-2xl md:text-3xl', icon: 'w-10 h-10', gap: 'gap-4' },
+    lg: { padding: 'p-6', value: 'text-3xl md:text-4xl', icon: 'w-11 h-11', gap: 'gap-4' },
+  };
 
-    const sizeConfig = sizes[size];
+  const sizeConfig = sizes[size];
 
-    return (
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4 }}
+    >
+      <Card
+        className={cn(
+          sizeConfig.padding,
+          'border border-l-2',
+          variants[variant].card,
+          'hover:border-white/20 transition-colors',
+          className
+        )}
       >
-        <Card
-          className={cn(
-            sizeConfig.padding,
-            variants[variant],
-            'hover:border-accent/40 transition-all duration-300',
-            className
-          )}
-        >
-          <div className="flex items-start justify-between gap-4">
-            <div className="flex-1 min-w-0">
-              <Label className="mb-2 block">{title}</Label>
-              <motion.div
-                initial={{ scale: 0.8 }}
-                animate={{ scale: 1 }}
-                transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
-              >
-                <Text
-                  as="span"
-                  className={cn(sizeConfig.value, 'font-bold text-foreground block')}
-                >
-                  {value}
+        <div className={cn('flex items-start justify-between', sizeConfig.gap)}>
+          <div className="flex-1 min-w-0">
+            <Label className="mb-2 block">{title}</Label>
+            <motion.div
+              initial={{ scale: 0.98 }}
+              animate={{ scale: 1 }}
+              transition={{ delay: 0.08, type: 'spring', stiffness: 180 }}
+            >
+              <Text as="span" className={cn(sizeConfig.value, 'font-bold text-foreground block tracking-tight leading-none tabular-nums')}>
+                {value}
+              </Text>
+            </motion.div>
+            {subtitle && (
+              <Text size="sm" variant="muted" className="mt-1">
+                {subtitle}
+              </Text>
+            )}
+            {change !== undefined && (
+              <div className={cn('flex items-center gap-1 mt-2', getTrendColor())}>
+                {getTrendIcon()}
+                <Text size="sm" as="span" className="font-medium">
+                  {change > 0 ? '+' : ''}
+                  {change.toFixed(1)}%
                 </Text>
-              </motion.div>
-              {subtitle && (
-                <Text size="sm" variant="muted" className="mt-1">
-                  {subtitle}
-                </Text>
-              )}
-              {change !== undefined && (
-                <div className={cn('flex items-center gap-1 mt-2', getTrendColor())}>
-                  {getTrendIcon()}
-                  <Text size="sm" as="span" className="font-medium">
-                    {change > 0 ? '+' : ''}{change.toFixed(1)}%
+                {changeLabel && (
+                  <Text size="xs" variant="muted" as="span" className="ml-1">
+                    {changeLabel}
                   </Text>
-                  {changeLabel && (
-                    <Text size="xs" variant="muted" as="span" className="ml-1">
-                      {changeLabel}
-                    </Text>
-                  )}
-                </div>
-              )}
-            </div>
-            {icon && (
-              <div className={cn(
-                sizeConfig.icon,
-                'flex items-center justify-center rounded-lg bg-accent/10 text-accent flex-shrink-0'
-              )}>
-                {icon}
+                )}
               </div>
             )}
           </div>
-        </Card>
-      </motion.div>
-    );
+          {icon && (
+            <div
+              className={cn(
+                sizeConfig.icon,
+                'flex items-center justify-center rounded-xl flex-shrink-0',
+                variants[variant].icon
+              )}
+            >
+              {icon}
+            </div>
+          )}
+        </div>
+      </Card>
+    </motion.div>
+  );
 }
 
 export { MetricCard };

@@ -30,7 +30,7 @@ interface ParticleProps {
   speed?: number;
 }
 
-function Particles({ count = 500, color = '#E94560', size = 0.02, speed = 0.1 }: ParticleProps) {
+function Particles({ count = 500, color = '#d06c78', size = 0.02, speed = 0.1 }: ParticleProps) {
   const meshRef = useRef<THREE.Points>(null);
   const geometryRef = useRef<THREE.BufferGeometry>(null);
 
@@ -101,15 +101,15 @@ function FloatingOrbs() {
     <group ref={orbsRef}>
       <mesh position={[3, 2, -5]}>
         <sphereGeometry args={[0.5, 32, 32]} />
-        <meshBasicMaterial color="#E94560" transparent opacity={0.1} />
+        <meshBasicMaterial color="#d06c78" transparent opacity={0.08} />
       </mesh>
       <mesh position={[-4, -1, -3]}>
         <sphereGeometry args={[0.8, 32, 32]} />
-        <meshBasicMaterial color="#D4AF37" transparent opacity={0.08} />
+        <meshBasicMaterial color="#c3a463" transparent opacity={0.06} />
       </mesh>
       <mesh position={[2, -3, -4]}>
         <sphereGeometry args={[0.3, 32, 32]} />
-        <meshBasicMaterial color="#3B82F6" transparent opacity={0.12} />
+        <meshBasicMaterial color="#8aa0c8" transparent opacity={0.08} />
       </mesh>
     </group>
   );
@@ -124,7 +124,7 @@ export interface ParticleBackgroundProps {
 
 export function ParticleBackground({
   particleCount = 300,
-  particleColor = '#E94560',
+  particleColor = '#d06c78',
   showOrbs = true,
   className = '',
 }: ParticleBackgroundProps) {

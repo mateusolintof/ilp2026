@@ -117,7 +117,7 @@ export function SlideOrganic() {
               <CardTitle>Distribuição por Tipo de Conteúdo</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="grid grid-cols-3 gap-4 text-center">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
                 <div className="p-4 rounded-lg bg-accent/10">
                   <Play className="w-6 h-6 mx-auto mb-2 text-accent" />
                   <Text size="xl" weight="bold">{organicSummary.byType.reels}</Text>
@@ -298,22 +298,22 @@ export function SlideOrganic() {
                 </div>
               </div>
 
-              <div className="space-y-3 border-t border-white/10 pt-4">
+                <div className="space-y-3 border-t border-white/10 pt-4">
                 <div>
-                  <Text size="sm" weight="semibold" className="text-white mb-1">O que isso significa:</Text>
+                  <Text size="sm" weight="semibold" className="text-foreground mb-1">O que isso significa:</Text>
                   <Text size="sm" variant="muted">
                     {correlations.investimentoVsViewsOrganicos.whatItMeans}
                   </Text>
                 </div>
                 <div>
-                  <Text size="sm" weight="semibold" className="text-white mb-1">Por que importa:</Text>
+                  <Text size="sm" weight="semibold" className="text-foreground mb-1">Por que importa:</Text>
                   <Text size="sm" variant="muted">
                     {correlations.investimentoVsViewsOrganicos.whyItMatters}
                   </Text>
                 </div>
                 <div className="p-3 rounded bg-success/10 border-l-2 border-success">
                   <Text size="sm" weight="semibold" className="text-success mb-1">Conclusão:</Text>
-                  <Text size="sm" className="text-white">
+                  <Text size="sm" className="text-foreground">
                     {correlations.investimentoVsViewsOrganicos.conclusion}
                   </Text>
                 </div>

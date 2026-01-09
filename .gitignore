@@ -43,3 +43,6 @@ next-env.d.ts
 
 # Playwright MCP artifacts
 /.playwright-mcp/
+
+# Local screenshots (avoid committing random captures)
+Captura de Tela*.png

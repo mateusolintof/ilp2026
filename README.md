@@ -1,85 +1,40 @@
 # ILP Performance Report 2026
 
-Dashboard interativo de Performance de Marketing Digital para o Instituto Luciane Prado (Dermatologia & Estética).
+Este projeto é uma apresentação web (formato de **slides**) que consolida e explica a performance de marketing do **Instituto Luciane Prado** no período **Setembro → Dezembro/2025**, com foco em decisões práticas.
 
-## Sobre o Projeto
+## O que é (visão não técnica)
 
-Apresentação horizontal com 8 slides interativos que consolidam dados de:
-- Tráfego Pago (Meta Ads) - Set/Dez 2025
-- Análise de Criativos com thumbnails visuais
-- Performance Orgânica (Instagram)
-- Fechamento da Clínica (Procedimentos e Receita)
-- Correlações Estatísticas (Pearson)
-- Insights e Tendências 2026
+Você vai encontrar uma narrativa em 8 slides com:
+- **Tráfego Pago (Meta Ads)**: campanhas por objetivo (Mensagem vs Audiência), eficiência e comparação com benchmarks.
+- **Criativos**: o que funcionou melhor e quais padrões aparecem nos top performers (com thumbnails).
+- **Orgânico (Instagram)**: volume, alcance e leitura do que tende a amplificar resultados.
+- **Fechamento da Clínica**: faturamento, mix de serviços, oportunidades 2026.
+- **Cruzamentos e Insights**: correlações estatísticas (quando fizer sentido) e recomendações acionáveis.
 
-## Métricas Principais
+> Importante: métricas “bonitas” porém **não verificáveis** (ex.: ROI derivado sem atribuição/CRM) foram removidas para manter o relatório confiável.
 
-| Métrica | Valor |
-|---------|-------|
-| Investimento Total | R$ 21.640,08 |
-| Faturamento Total | R$ 2.323.874,90 |
-| ROI Marketing | 10.639% |
-| Procedimentos | 1.621 |
-| Correlação Pago→Orgânico | r = 0.99 |
+## Como navegar
 
-## Stack Tecnológico
+- **Setas na tela**: avançar/voltar
+- **Teclado**: ← →, Space (próximo), Home/End (início/fim)
+- **Scroll vertical**: cada slide pode ter conteúdo mais longo (não trava a leitura)
 
-- **Framework:** Next.js 16.1.1
-- **Linguagem:** TypeScript
-- **Estilização:** Tailwind CSS v4
-- **Animações:** Framer Motion
-- **3D:** React Three Fiber
-- **Gráficos:** Recharts
-- **Ícones:** Lucide React
+## O que contém em cada slide
 
-## Executando o Projeto
-
-```bash
-# Instalar dependências
-npm install
-
-# Desenvolvimento
-npm run dev
-
-# Build de produção
-npm run build
-
-# Verificar ESLint
-npm run lint
-```
-
-Abra [http://localhost:3000](http://localhost:3000) no browser.
-
-## Navegação
-
-- **Setas na tela** - Clique para navegar
-- **Teclado:** ← → (navegação), Space (próximo), Home/End (início/fim)
-- **Indicadores** - Clique nos pontos para ir ao slide
-
-## Estrutura de Slides
-
-1. **Capa** - Contexto e KPIs principais
-2. **Resumo Executivo** - ROI, benchmarks, status
-3. **Tráfego Pago** - Campanhas MSG/AUD vs mercado
-4. **Criativos** - Top 5 com imagens, padrões de sucesso
-5. **Orgânico** - Análise competitiva, correlação pago-orgânico
-6. **Fechamento** - Tendências 2026, oportunidades
-7. **Cruzamento** - Correlações Pearson, regressão
-8. **Insights** - Recomendações estratégicas
+1. **Capa**: contexto + período analisado.
+2. **Resumo Executivo**: KPIs principais + comparação ILP vs benchmarks verificáveis.
+3. **Tráfego Pago**: leitura separada por objetivo (MSG vs AUD) e implicações práticas.
+4. **Criativos**: melhores criativos, padrões e comparação por formato.
+5. **Orgânico**: visão do Instagram e interpretação do efeito do pago sobre alcance.
+6. **Fechamento**: faturamento, categorias e oportunidades 2026 com ação sugerida.
+7. **Cruzamento**: correlações (r e p-value) + limitações, regressão e sazonalidade.
+8. **Insights**: insights priorizados + recomendações por horizonte (imediato/curto/longo).
 
 ## Documentação
 
-- `CLAUDE.md` - Documentação técnica completa
-- `MILESTONES.md` - Progresso do projeto
-- `spec.md` - Especificação original
-- `docs/` - Contexto e pesquisa de mercado
+- `TECHNICAL.md`: documentação técnica completa (arquitetura, dados, scripts, deploy).
+- `DESIGN_GUIDE.md`: guia de design (tokens, tipografia, grids, componentes, charts).
 
 ## Deploy
 
-- **Plataforma:** Vercel
-- **Repositório:** https://github.com/mateusolintof/ilp2026.git
-- **Auto-deploy:** Ativado
-
----
-
-**Instituto Luciane Prado** - Performance Marketing Report | Set-Dez 2025
+- Vercel com auto-deploy via GitHub (`main`).

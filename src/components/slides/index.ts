@@ -4,6 +4,5 @@ export { SlideExecutiveSummary } from './SlideExecutiveSummary';
 export { SlidePaidTraffic } from './SlidePaidTraffic';
 export { SlideCreatives } from './SlideCreatives';
 export { SlideOrganic } from './SlideOrganic';
-export { SlideClosings } from './SlideClosings';
 export { SlideDataCrossing } from './SlideDataCrossing';
 export { SlideInsightsTrends } from './SlideInsightsTrends';

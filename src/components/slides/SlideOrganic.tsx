@@ -1,12 +1,11 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Play, LayoutGrid, Image as ImageIcon, TrendingUp, Eye, Heart, Share2, MessageCircle, Bookmark, Target, Zap } from 'lucide-react';
+import { Play, LayoutGrid, Image as ImageIcon, TrendingUp, Eye, Heart, MessageCircle, Bookmark, Target, Zap, ExternalLink } from 'lucide-react';
 import { Heading, Text, Label } from '../ui/Typography';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/Card';
 import { Badge } from '../ui/Badge';
 import { MetricCard } from '../charts/MetricCard';
-import { BarChart } from '../charts/BarChart';
 import { formatNumber, formatPercent } from '@/lib/utils';
 
 // Import data
@@ -31,12 +30,6 @@ export function SlideOrganic() {
     visible: { opacity: 1, y: 0 },
   };
 
-  // Top 5 feed/reels posts for chart
-  const topPostsChartData = topFeedReelsPosts.slice(0, 5).map((post, index) => ({
-    name: `Post ${index + 1}`,
-    value: post.metrics.views,
-  }));
-
   return (
     <div className="min-h-full pb-8">
       {/* Header */}
@@ -45,7 +38,7 @@ export function SlideOrganic() {
         animate={{ opacity: 1, y: 0 }}
         className="mb-6"
       >
-        <Label className="mb-2 block">Slide 5 de 8</Label>
+        <Label className="mb-2 block">Slide 4 de 7</Label>
         <Heading as="h1" size="2xl" className="mb-2">
           Tráfego Orgânico
         </Heading>
@@ -110,95 +103,121 @@ export function SlideOrganic() {
           </motion.div>
         </div>
 
-        {/* Content Type Distribution */}
-        <motion.div variants={itemVariants} className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-          <Card>
-            <CardHeader>
-              <CardTitle>Distribuição por Tipo de Conteúdo</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
-                <div className="p-4 rounded-lg bg-accent/10">
-                  <Play className="w-6 h-6 mx-auto mb-2 text-accent" />
-                  <Text size="xl" weight="bold">{organicSummary.byType.reels}</Text>
-                  <Text size="sm" variant="muted">Reels</Text>
-                </div>
-                <div className="p-4 rounded-lg bg-gold/10">
-                  <LayoutGrid className="w-6 h-6 mx-auto mb-2 text-gold" />
-                  <Text size="xl" weight="bold">{organicSummary.byType.carousel}</Text>
-                  <Text size="sm" variant="muted">Carrosséis</Text>
-                </div>
-                <div className="p-4 rounded-lg bg-info/10">
-                  <ImageIcon className="w-6 h-6 mx-auto mb-2 text-info" />
-                  <Text size="xl" weight="bold">{organicSummary.byType.image}</Text>
-                  <Text size="sm" variant="muted">Imagens</Text>
-                </div>
+        {/* Content Type Summary (inline) */}
+        <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+          <Card variant="bordered" className="p-4">
+            <div className="flex items-center gap-3">
+              <div className="p-2 rounded-lg bg-white/5 border border-white/10">
+                <Play className="w-5 h-5 text-accent" />
               </div>
-            </CardContent>
+              <div className="min-w-0">
+                <Text size="sm" variant="muted">Reels</Text>
+                <Text weight="bold" className="tabular-nums">{formatNumber(organicSummary.byType.reels)}</Text>
+              </div>
+            </div>
           </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle>Top 5 Posts - Views</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <BarChart
-                data={topPostsChartData}
-                height={180}
-                layout="vertical"
-                colors={['var(--color-accent)']}
-              />
-            </CardContent>
+          <Card variant="bordered" className="p-4">
+            <div className="flex items-center gap-3">
+              <div className="p-2 rounded-lg bg-white/5 border border-white/10">
+                <LayoutGrid className="w-5 h-5 text-gold" />
+              </div>
+              <div className="min-w-0">
+                <Text size="sm" variant="muted">Carrosséis</Text>
+                <Text weight="bold" className="tabular-nums">{formatNumber(organicSummary.byType.carousel)}</Text>
+              </div>
+            </div>
+          </Card>
+          <Card variant="bordered" className="p-4">
+            <div className="flex items-center gap-3">
+              <div className="p-2 rounded-lg bg-white/5 border border-white/10">
+                <ImageIcon className="w-5 h-5 text-info" />
+              </div>
+              <div className="min-w-0">
+                <Text size="sm" variant="muted">Imagens</Text>
+                <Text weight="bold" className="tabular-nums">{formatNumber(organicSummary.byType.image)}</Text>
+              </div>
+            </div>
           </Card>
         </motion.div>
 
-        {/* Top Feed/Reels Posts */}
+        {/* Best Feed/Reels Posts (table) */}
         <motion.div variants={itemVariants}>
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <TrendingUp className="w-5 h-5 text-accent" />
-                Top 5 Posts Feed/Reels
+                Melhores Posts Orgânicos (Feed/Reels)
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="space-y-3">
-                {topFeedReelsPosts.slice(0, 5).map((post, index) => (
-                  <div key={post.id} className="flex items-center gap-4 p-3 rounded-lg bg-white/5">
-                    <div className="flex items-center justify-center w-8 h-8 rounded-full bg-accent/20 text-accent font-bold">
-                      {index + 1}
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2">
-                        {post.type === 'REEL' ? (
-                          <Play className="w-4 h-4 text-accent" />
-                        ) : post.type === 'CAROUSEL_ALBUM' ? (
-                          <LayoutGrid className="w-4 h-4 text-gold" />
-                        ) : (
-                          <ImageIcon className="w-4 h-4 text-info" />
-                        )}
-                        <Text weight="semibold" className="truncate">
-                          {post.description?.substring(0, 50) || 'Post sem descrição'}...
-                        </Text>
-                      </div>
-                      <Text size="sm" variant="muted">{post.publishedAt}</Text>
-                    </div>
-                    <div className="flex items-center gap-4 text-sm">
-                      <div className="flex items-center gap-1">
-                        <Eye className="w-4 h-4 text-accent" />
-                        <Text weight="semibold">{formatNumber(post.metrics.views)}</Text>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <Heart className="w-4 h-4 text-pink-400" />
-                        <Text>{formatNumber(post.metrics.likes)}</Text>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <Share2 className="w-4 h-4 text-blue-400" />
-                        <Text>{formatNumber(post.metrics.shares)}</Text>
-                      </div>
-                    </div>
-                  </div>
-                ))}
+              <div className="overflow-x-auto">
+                <table className="min-w-[820px] w-full border-separate border-spacing-0">
+                  <thead>
+                    <tr className="text-left">
+                      <th className="px-3 py-2 text-xs font-medium text-muted uppercase tracking-widest">#</th>
+                      <th className="px-3 py-2 text-xs font-medium text-muted uppercase tracking-widest">Tipo</th>
+                      <th className="px-3 py-2 text-xs font-medium text-muted uppercase tracking-widest">Post</th>
+                      <th className="px-3 py-2 text-xs font-medium text-muted uppercase tracking-widest text-right">Views</th>
+                      <th className="px-3 py-2 text-xs font-medium text-muted uppercase tracking-widest text-right">Reach</th>
+                      <th className="px-3 py-2 text-xs font-medium text-muted uppercase tracking-widest text-right">Likes</th>
+                      <th className="px-3 py-2 text-xs font-medium text-muted uppercase tracking-widest text-right">Comentários</th>
+                      <th className="px-3 py-2 text-xs font-medium text-muted uppercase tracking-widest text-right">Saves</th>
+                      <th className="px-3 py-2 text-xs font-medium text-muted uppercase tracking-widest text-right">Link</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {topFeedReelsPosts.slice(0, 10).map((post, index) => {
+                      const typeIcon =
+                        post.type === 'REEL'
+                          ? <Play className="w-4 h-4 text-accent" />
+                          : post.type === 'CAROUSEL_ALBUM'
+                            ? <LayoutGrid className="w-4 h-4 text-gold" />
+                            : <ImageIcon className="w-4 h-4 text-info" />;
+
+                      const title = (post.description || 'Post sem descrição')
+                        .replace(/\n+/g, ' ')
+                        .trim()
+                        .slice(0, 96);
+
+                      return (
+                        <tr key={post.id} className="bg-white/3 border-b border-white/8">
+                          <td className="px-3 py-3 text-sm text-muted tabular-nums">{index + 1}</td>
+                          <td className="px-3 py-3">{typeIcon}</td>
+                          <td className="px-3 py-3 min-w-0">
+                            <Text as="div" weight="semibold" className="truncate max-w-[420px]">{title}{title.length >= 96 ? '…' : ''}</Text>
+                            <Text size="xs" variant="muted">{post.publishedAt}</Text>
+                          </td>
+                          <td className="px-3 py-3 text-right tabular-nums">
+                            <Text as="span" weight="semibold">{formatNumber(post.metrics.views)}</Text>
+                          </td>
+                          <td className="px-3 py-3 text-right tabular-nums">
+                            <Text as="span">{formatNumber(post.metrics.reach)}</Text>
+                          </td>
+                          <td className="px-3 py-3 text-right tabular-nums">
+                            <Text as="span">{formatNumber(post.metrics.likes)}</Text>
+                          </td>
+                          <td className="px-3 py-3 text-right tabular-nums">
+                            <Text as="span">{formatNumber(post.metrics.comments)}</Text>
+                          </td>
+                          <td className="px-3 py-3 text-right tabular-nums">
+                            <Text as="span">{formatNumber(post.metrics.saves)}</Text>
+                          </td>
+                          <td className="px-3 py-3 text-right">
+                            <a
+                              href={post.permanentLink}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 transition-colors"
+                              aria-label="Abrir post"
+                            >
+                              <ExternalLink className="w-4 h-4 text-foreground" />
+                            </a>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
               </div>
             </CardContent>
           </Card>

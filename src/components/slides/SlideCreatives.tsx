@@ -1,16 +1,14 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Video, Image as ImageIcon, LayoutGrid, TrendingUp, Eye, MessageCircle, Star } from 'lucide-react';
+import { Video, Image as ImageIcon, LayoutGrid, TrendingUp, Eye, MessageCircle, Star, Sparkles, SplitSquareVertical, ShieldCheck, Stethoscope, Layers } from 'lucide-react';
 import Image from 'next/image';
 import { Heading, Text, Label } from '../ui/Typography';
-import { Card, CardContent, CardHeader, CardTitle } from '../ui/Card';
+import { Card, CardContent } from '../ui/Card';
 import { Badge } from '../ui/Badge';
-import { ProgressBar } from '../ui/ProgressBar';
 import { formatCurrency, formatNumber } from '@/lib/utils';
 
 // Import data
-import { creativeSummary } from '@/lib/data/creatives';
 import { successPatterns } from '@/lib/data/research';
 
 // Image mapping for creatives with thumbnails
@@ -134,28 +132,6 @@ export function SlideCreatives() {
     visible: { opacity: 1, y: 0 },
   };
 
-  // Pattern analysis from research data
-  const patternColors: Record<string, string> = {
-    'PROCEDIMENTO_TECH': 'var(--color-success)',
-    'TEXTO_EXPLICATIVO': 'var(--color-gold)',
-    'VIDEO_REELS': 'var(--color-accent)',
-    'MEDICO_PRESENTE': 'var(--color-info)',
-  };
-
-  const patternLabels: Record<string, string> = {
-    'PROCEDIMENTO_TECH': 'PROCEDIMENTO TECNOLÓGICO',
-    'TEXTO_EXPLICATIVO': 'TEXTO NA TELA',
-    'VIDEO_REELS': 'FORMATO VÍDEO/REELS',
-    'MEDICO_PRESENTE': 'MÉDICO PRESENTE',
-  };
-
-  const patterns = successPatterns.top10Patterns.slice(0, 5).map(p => ({
-    name: patternLabels[p.pattern] || p.pattern,
-    percentage: p.percentage,
-    frequency: p.frequency,
-    color: patternColors[p.pattern] || 'var(--color-accent)',
-  }));
-
   // Format performance from research
   const formatPerformance = successPatterns.formatPerformance;
 
@@ -178,43 +154,13 @@ export function SlideCreatives() {
         animate={{ opacity: 1, y: 0 }}
         className="mb-6"
       >
-        <Label className="mb-2 block">Slide 4 de 8</Label>
+        <Label className="mb-2 block">Slide 5 de 7</Label>
         <Heading as="h1" size="2xl" className="mb-2">
           Análise de Criativos
         </Heading>
         <Text variant="muted" size="lg">
           Performance e padrões dos criativos mais eficientes
         </Text>
-      </motion.div>
-
-      {/* Format Summary */}
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-        className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8"
-      >
-        <motion.div variants={itemVariants}>
-          <Card className="text-center p-4">
-            <Video className="w-8 h-8 mx-auto mb-2 text-accent" />
-            <Text size="xl" weight="bold">{creativeSummary.byFormat.video}</Text>
-            <Text size="sm" variant="muted">Vídeos</Text>
-          </Card>
-        </motion.div>
-        <motion.div variants={itemVariants}>
-          <Card className="text-center p-4">
-            <ImageIcon className="w-8 h-8 mx-auto mb-2 text-gold" />
-            <Text size="xl" weight="bold">{creativeSummary.byFormat.image}</Text>
-            <Text size="sm" variant="muted">Imagens</Text>
-          </Card>
-        </motion.div>
-        <motion.div variants={itemVariants}>
-          <Card className="text-center p-4">
-            <LayoutGrid className="w-8 h-8 mx-auto mb-2 text-info" />
-            <Text size="xl" weight="bold">{creativeSummary.byFormat.carousel}</Text>
-            <Text size="sm" variant="muted">Carrosséis</Text>
-          </Card>
-        </motion.div>
       </motion.div>
 
       {/* Melhores Criativos - Seção Unificada */}
@@ -341,59 +287,174 @@ export function SlideCreatives() {
         </div>
       </motion.section>
 
-      {/* Pattern Analysis */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.6 }}
+      {/* Padrões + Pesquisa */}
+      <motion.section
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="mb-8"
       >
-        <Card variant="glow">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <TrendingUp className="w-5 h-5 text-accent" />
-              Padrões de Sucesso Identificados
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              {patterns.map((pattern) => (
-                <div key={pattern.name} className="space-y-2">
-                  <div className="flex justify-between items-center">
-                    <div className="flex items-center gap-2">
-                      <Text weight="medium">{pattern.name}</Text>
-                    </div>
-                    <Badge variant={pattern.percentage >= 60 ? 'success' : 'gold'}>
-                      {pattern.percentage}% dos top criativos
-                    </Badge>
+        <motion.div variants={itemVariants} className="flex items-center gap-3 mb-4">
+          <TrendingUp className="w-6 h-6 text-accent" />
+          <Heading as="h2" size="lg">Padrões de Sucesso Identificados</Heading>
+        </motion.div>
+
+        <motion.div variants={itemVariants}>
+          <Card variant="glow">
+            <CardContent className="p-5">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                <div className="rounded-2xl border border-white/10 bg-white/4 p-4">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Video className="w-5 h-5 text-accent" />
+                    <Text weight="semibold">Melhor Formato</Text>
                   </div>
-                  <ProgressBar
-                    value={pattern.percentage}
-                    variant={pattern.percentage >= 40 ? 'accent' : 'default'}
-                    size="sm"
-                  />
+                  <Text weight="bold" className="text-foreground">Vídeo / Reels</Text>
+                  <Text size="sm" variant="muted" className="mt-1">
+                    Consistente nos top performers (captura rápida + prova visual).
+                  </Text>
                 </div>
-              ))}
-            </div>
-            <div className="mt-6 pt-4 border-t border-white/10">
-              <Text size="sm" variant="muted" className="mb-2">Insight Principal:</Text>
-              <Text weight="semibold" className="text-success mb-3">
-                {successPatterns.keyInsight}
-              </Text>
-              <Text size="sm" variant="muted" className="mb-2">Como Replicar o Padrão de Sucesso:</Text>
-              <ul className="list-disc list-inside space-y-1">
-                {successPatterns.realInsight.actionable.map((action, i) => (
-                  <li key={i}><Text size="sm" as="span">{action}</Text></li>
-                ))}
-              </ul>
-              <div className="mt-3 p-2 rounded bg-gold/10 border-l-2 border-gold">
-                <Text size="xs" variant="muted">
-                  <span className="text-gold font-semibold">Nota:</span> Para campanhas de MENSAGEM, evitar carrosséis (custo muito alto). Para AUDIÊNCIA, imagens funcionam bem com custo ~R$0,40/visita.
-                </Text>
+                <div className="rounded-2xl border border-white/10 bg-white/4 p-4">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Layers className="w-5 h-5 text-gold" />
+                    <Text weight="semibold">Serviço com Melhores Resultados</Text>
+                  </div>
+                  <Text weight="bold" className="text-foreground">Procedimentos Tecnológicos</Text>
+                  <Text size="sm" variant="muted" className="mt-1">
+                    Demonstração do processo + autoridade médica elevam intenção.
+                  </Text>
+                </div>
+                <div className="rounded-2xl border border-white/10 bg-white/4 p-4">
+                  <div className="flex items-center gap-2 mb-2">
+                    <SplitSquareVertical className="w-5 h-5 text-info" />
+                    <Text weight="semibold">Técnica do Criativo</Text>
+                  </div>
+                  <Text weight="bold" className="text-foreground">Explicação (para quem é + o que faz)</Text>
+                  <Text size="sm" variant="muted" className="mt-1">
+                    Texto na tela + depoimento / fala médica, sem sensacionalismo.
+                  </Text>
+                </div>
               </div>
-            </div>
-          </CardContent>
-        </Card>
-      </motion.div>
+            </CardContent>
+          </Card>
+        </motion.div>
+      </motion.section>
+
+      <motion.section
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        <motion.div variants={itemVariants} className="flex items-center gap-3 mb-4">
+          <Sparkles className="w-6 h-6 text-gold" />
+          <Heading as="h2" size="lg">Pesquisa de Tendências e Estratégias de Conteúdo</Heading>
+          <Badge variant="gold">Ideias de criativos</Badge>
+        </motion.div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <motion.div variants={itemVariants}>
+            <Card className="h-full">
+              <CardContent className="p-4 space-y-2">
+                <div className="flex items-center gap-2">
+                  <Video className="w-5 h-5 text-accent" />
+                  <Text weight="bold">1) “O que acontece na sessão”</Text>
+                </div>
+                <Text size="sm" variant="muted">Bastidor + processo: o que é feito, em qual etapa e o que esperar.</Text>
+                <div className="rounded-xl border border-white/10 bg-white/4 p-3">
+                  <Text size="xs" variant="muted">Objetivo</Text>
+                  <Text size="sm" weight="semibold" className="mt-1">Aumentar confiança e reduzir dúvidas</Text>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+
+          <motion.div variants={itemVariants}>
+            <Card className="h-full">
+              <CardContent className="p-4 space-y-2">
+                <div className="flex items-center gap-2">
+                  <ShieldCheck className="w-5 h-5 text-gold" />
+                  <Text weight="bold">2) “Expectativa realista” (anti-promessa)</Text>
+                </div>
+                <Text size="sm" variant="muted">
+                  Formato 20–30s com 2 colunas: “o que melhora” / “o que não é mágico”.
+                </Text>
+                <Text size="sm" variant="muted">
+                  Exemplos: melasma, cicatriz de acne. Vantagem: aumenta confiança e diminui lead ruim.
+                </Text>
+              </CardContent>
+            </Card>
+          </motion.div>
+
+          <motion.div variants={itemVariants}>
+            <Card className="h-full">
+              <CardContent className="p-4 space-y-2">
+                <div className="flex items-center gap-2">
+                  <SplitSquareVertical className="w-5 h-5 text-info" />
+                  <Text weight="bold">3) “Comparativo médico” (qual serve para quê)</Text>
+                </div>
+                <Text size="sm" variant="muted">
+                  Split-screen ou quadro branco (25–40s). Ex.: Botox vs Preenchimento vs Bioestimulador; Laser vs peelings; CO2 vs estímulo de colágeno.
+                </Text>
+                <div className="p-3 rounded-xl bg-white/4 border border-white/10">
+                  <Text size="sm" variant="muted">
+                    Observação: este formato segue a lógica dos melhores criativos do período — explicação do procedimento que converge, não só “educação genérica”.
+                  </Text>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+
+          <motion.div variants={itemVariants}>
+            <Card className="h-full">
+              <CardContent className="p-4 space-y-2">
+                <div className="flex items-center gap-2">
+                  <Layers className="w-5 h-5 text-accent" />
+                  <Text weight="bold">4) “Protocolos” (combos que aumentam ticket)</Text>
+                </div>
+                <Text size="sm" variant="muted">
+                  Carrossel (Meta) ou vídeo 30s: problema → plano (2–3 etapas) → tempo estimado → CTA.
+                </Text>
+                <Text size="sm" variant="muted">
+                  Naming (sem promessa): “Protocolo textura + viço”, “Protocolo manchas controladas”, “Protocolo firmeza + colágeno”.
+                </Text>
+              </CardContent>
+            </Card>
+          </motion.div>
+
+          <motion.div variants={itemVariants}>
+            <Card className="h-full">
+              <CardContent className="p-4 space-y-2">
+                <div className="flex items-center gap-2">
+                  <Stethoscope className="w-5 h-5 text-gold" />
+                  <Text weight="bold">5) Dermato clínica/cirúrgica (intenção + autoridade)</Text>
+                </div>
+                <Text size="sm" variant="muted">
+                  Vídeo educativo + CTA para consulta/triagem. Temas: câncer de pele, nevo, verruga, cisto, lesões suspeitas.
+                </Text>
+                <Text size="sm" variant="muted">
+                  Canais: Google/YouTube + remarketing em Meta. Por que é forte: demanda perene e intenção alta.
+                </Text>
+              </CardContent>
+            </Card>
+          </motion.div>
+
+          <motion.div variants={itemVariants}>
+            <Card className="h-full">
+              <CardContent className="p-4 space-y-2">
+                <div className="flex items-center gap-2">
+                  <ImageIcon className="w-5 h-5 text-info" />
+                  <Text weight="bold">6) “Antes/depois educativo” (quando fizer sentido)</Text>
+                </div>
+                <Text size="sm" variant="muted">
+                  Sequência com contexto: indicação, fases, limitações e riscos/complicações possíveis.
+                </Text>
+                <Text size="sm" variant="muted">
+                  Requisito: caráter educativo e 100% dentro das regras do CFM; evite “milagre”.
+                </Text>
+              </CardContent>
+            </Card>
+          </motion.div>
+        </div>
+      </motion.section>
     </div>
   );
 }

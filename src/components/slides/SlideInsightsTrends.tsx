@@ -1,20 +1,36 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Lightbulb, Target, TrendingUp, Sparkles, ArrowRight, CheckCircle, Star, Rocket, ExternalLink, Gem, Droplets, RefreshCw, Zap, Calendar, Video, Clock, Layers } from 'lucide-react';
+import type { ReactNode } from 'react';
+import {
+  Sparkles,
+  TrendingUp,
+  ShoppingCart,
+  Search,
+  Megaphone,
+  Video,
+  Layers,
+  Target,
+  ExternalLink,
+  Star,
+  Gem,
+  Droplets,
+  RefreshCw,
+  Zap,
+} from 'lucide-react';
 import { Heading, Text, Label } from '../ui/Typography';
-import { Card, CardContent, CardHeader, CardTitle } from '../ui/Card';
+import { Card, CardContent } from '../ui/Card';
 import { Badge } from '../ui/Badge';
 
-// Import data
-import { actionableInsights, trends2026, strategicRecommendations } from '@/lib/data/research';
+// Import data (keep the screenshot section intact)
+import { trends2026 } from '@/lib/data/research';
 
 export function SlideInsightsTrends() {
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.15 },
+      transition: { staggerChildren: 0.12 },
     },
   };
 
@@ -23,21 +39,12 @@ export function SlideInsightsTrends() {
     visible: { opacity: 1, y: 0 },
   };
 
-  // Icon mapping for trends
-  const trendIcons: Record<string, React.ReactNode> = {
+  // Icon mapping for the “print” section
+  const trendIcons: Record<string, ReactNode> = {
     gem: <Gem className="w-6 h-6 text-gold" />,
     droplets: <Droplets className="w-6 h-6 text-gold" />,
     refresh: <RefreshCw className="w-6 h-6 text-gold" />,
     sparkles: <Sparkles className="w-6 h-6 text-gold" />,
-  };
-
-  // Icon mapping for insights
-  const insightIcons: Record<string, React.ReactNode> = {
-    rocket: <Rocket className="w-5 h-5 text-accent" />,
-    calendar: <Calendar className="w-5 h-5 text-accent" />,
-    video: <Video className="w-5 h-5 text-accent" />,
-    clock: <Clock className="w-5 h-5 text-accent" />,
-    layers: <Layers className="w-5 h-5 text-accent" />,
   };
 
   return (
@@ -48,121 +55,102 @@ export function SlideInsightsTrends() {
         animate={{ opacity: 1, y: 0 }}
         className="mb-6"
       >
-        <Label className="mb-2 block">Slide 8 de 8</Label>
+        <Label className="mb-2 block">Slide 7 de 7</Label>
         <Heading as="h1" size="2xl" className="mb-2">
-          Insights & Tendências 2026
+          Estratégias & Tendências 2026
         </Heading>
         <Text variant="muted" size="lg">
-          Conclusões baseadas em dados e recomendações estratégicas
+          Tendências do mercado + plano estratégico de aquisição e conteúdo
         </Text>
       </motion.div>
 
-      {/* Key Insights from Statistical Analysis */}
+      {/* Section 1 — Trends */}
       <motion.section
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="mb-6"
-      >
-        <motion.div variants={itemVariants} className="flex items-center gap-3 mb-4">
-          <div className="p-2 rounded-lg bg-accent/10">
-            <Lightbulb className="w-6 h-6 text-accent" />
-          </div>
-          <Heading as="h2" size="lg">Insights Acionáveis</Heading>
-          <Badge variant="default">Baseados em Dados</Badge>
-        </motion.div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-          {actionableInsights.slice(0, 4).map((insight) => (
-            <motion.div key={insight.id} variants={itemVariants}>
-              <Card className={`h-full border-l-2 ${insight.priority === 'ALTA' ? 'border-l-success/40' : 'border-l-white/10'}`}>
-                <CardContent className="p-4">
-                  <div className="flex items-start gap-3 mb-3">
-                    <div className="p-2 rounded-lg bg-white/5">
-                      {insightIcons[insight.icon] || <Lightbulb className="w-5 h-5 text-accent" />}
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-1">
-                        <Text weight="bold" size="sm">{insight.title}</Text>
-                        <Badge variant={insight.priority === 'ALTA' ? 'success' : 'gold'} className="text-xs">
-                          {insight.priority}
-                        </Badge>
-                      </div>
-                      <Text size="xs" variant="muted">
-                        {insight.finding.data}
-                      </Text>
-                      {'significance' in insight.finding && insight.finding.significance && (
-                        <Text size="xs" className="text-success">{insight.finding.significance}</Text>
-                      )}
-                    </div>
-                  </div>
-
-                  <div className="space-y-2 mb-3">
-                    <div>
-                      <Text size="xs" weight="semibold" variant="muted" className="mb-0.5">Por que importa:</Text>
-                      <Text size="xs" variant="muted">{insight.whyItMatters}</Text>
-                    </div>
-                  </div>
-
-                  <div className="p-2 rounded bg-accent/5 border-l-2 border-accent">
-                    <Text size="xs" weight="semibold" className="text-accent mb-1">Como aplicar:</Text>
-                    <ul className="space-y-1">
-                      {insight.howToApply.slice(0, 2).map((action, i) => (
-                        <li key={i} className="flex items-start gap-1">
-                          <ArrowRight className="w-3 h-3 text-accent shrink-0 mt-0.5" />
-                          <Text size="xs" variant="muted">{action}</Text>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <div className="flex justify-between items-center mt-2 pt-2 border-t border-white/5">
-                    <Text size="xs" variant="muted">Resultado esperado: <span className="text-foreground">{insight.expectedResult}</span></Text>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
-        </div>
-      </motion.section>
-
-      {/* 2026 Market Trends */}
-      <motion.section
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-        className="mb-6"
+        className="mb-8"
       >
         <motion.div variants={itemVariants} className="flex items-center gap-3 mb-4">
           <div className="p-2 rounded-lg bg-gold/10">
             <Sparkles className="w-6 h-6 text-gold" />
           </div>
-          <Heading as="h2" size="lg">Tendências Dermatologia 2026</Heading>
-          <Badge variant="gold">Pesquisa de Mercado</Badge>
+          <Heading as="h2" size="lg">Tendências 2026</Heading>
+          <Badge variant="gold">Visão de mercado</Badge>
         </motion.div>
 
-        {/* Macro Trend */}
         <motion.div variants={itemVariants} className="mb-4">
           <Card className="border-l-2 border-l-gold/40">
             <CardContent className="p-4">
               <div className="flex items-center gap-3 mb-2">
                 <Zap className="w-5 h-5 text-gold" />
-                <Text weight="bold" className="text-gold">{trends2026.macroTrend.title}</Text>
+                <Text weight="bold" className="text-gold">
+                  Ponto central para 2026
+                </Text>
               </div>
-              <Text size="sm" variant="muted" className="mb-2">{trends2026.macroTrend.description}</Text>
-              <Text size="xs" variant="muted" className="flex items-center gap-1">
-                <ExternalLink className="w-3 h-3" />
-                Fonte: {trends2026.macroTrend.source}
+              <Text size="sm" variant="muted">
+                Cresceu a demanda por <strong>resultados naturais</strong> + <strong>alta tecnologia</strong> +{' '}
+                <strong>rotinas mais simples</strong>, e o digital ganhou peso real na descoberta, decisão e compra.
               </Text>
             </CardContent>
           </Card>
         </motion.div>
 
-        {/* Procedures in High Demand */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-4">
-          {trends2026.procedures.map((proc) => (
-            <motion.div key={proc.name} variants={itemVariants}>
-              <Card className="h-full text-center p-3 border-l-2 border-l-gold/30">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-5">
+          <motion.div variants={itemVariants}>
+            <Card className="h-full">
+              <CardContent className="p-4">
+                <div className="flex items-center gap-3 mb-2">
+                  <TrendingUp className="w-5 h-5 text-info" />
+                  <Text weight="bold">Macro mercado e canais</Text>
+                </div>
+                <ul className="space-y-2 text-sm text-muted list-disc pl-4">
+                  <li>Descoberta por conteúdo, decisão por prova social e conversão por conveniência.</li>
+                  <li>E-commerce e comportamento “digital-first” aceleram (pesquisa → clique → agenda).</li>
+                  <li>Panoramas setoriais (ex.: ABIHPEC) reforçam amadurecimento e continuidade do crescimento.</li>
+                </ul>
+              </CardContent>
+            </Card>
+          </motion.div>
+
+          <motion.div variants={itemVariants}>
+            <Card className="h-full">
+              <CardContent className="p-4">
+                <div className="flex items-center gap-3 mb-2">
+                  <ShoppingCart className="w-5 h-5 text-info" />
+                  <Text weight="bold">O que o consumidor busca (25–26)</Text>
+                </div>
+                <ul className="space-y-2 text-sm text-muted list-disc pl-4">
+                  <li><strong>Skinimalism</strong>: menos passos, mais eficácia (praticidade + ciência).</li>
+                  <li><strong>Quiet beauty</strong>: resultado natural e credível (anti-promessa).</li>
+                  <li>Mais interesse por procedimentos tecnológicos e narrativa de segurança.</li>
+                </ul>
+              </CardContent>
+            </Card>
+          </motion.div>
+
+          <motion.div variants={itemVariants}>
+            <Card className="h-full">
+              <CardContent className="p-4">
+                <div className="flex items-center gap-3 mb-2">
+                  <Video className="w-5 h-5 text-info" />
+                  <Text weight="bold">O que muda no conteúdo</Text>
+                </div>
+                <ul className="space-y-2 text-sm text-muted list-disc pl-4">
+                  <li>Educação curta (“1 problema → 1 explicação → 1 opção”) tende a performar melhor.</li>
+                  <li>Prova de credibilidade via processo (bastidores, planejamento, expectativas realistas).</li>
+                  <li>Ciência e rotina: microbioma, filtros solares, ativos — linguagem “médica” porém simples.</li>
+                </ul>
+              </CardContent>
+            </Card>
+          </motion.div>
+        </div>
+
+        {/* Keep (PRINT) — Procedures in High Demand + K-Beauty */}
+        <motion.div variants={itemVariants} className="mb-4">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+            {trends2026.procedures.map((proc) => (
+              <Card key={proc.name} className="h-full text-center p-3 border-l-2 border-l-gold/30">
                 {trendIcons[proc.icon] || <Star className="w-6 h-6 mx-auto mb-2 text-gold" />}
                 <Text weight="bold" size="sm" className="mb-1">{proc.name}</Text>
                 <Text size="xs" variant="muted" className="mb-2">{proc.description}</Text>
@@ -170,15 +158,14 @@ export function SlideInsightsTrends() {
                   Potencial {proc.potential}
                 </Badge>
               </Card>
-            </motion.div>
-          ))}
-        </div>
+            ))}
+          </div>
+        </motion.div>
 
-        {/* K-Beauty Influence */}
         <motion.div variants={itemVariants}>
           <Card className="border-l-2 border-l-accent/40">
             <CardContent className="p-4">
-              <div className="flex items-center gap-3 mb-2">
+              <div className="flex flex-wrap items-center gap-3 mb-2">
                 <Star className="w-5 h-5 text-accent" />
                 <Text weight="bold">Influência K-Beauty no Brasil</Text>
                 <Badge variant="default">{trends2026.kBeauty.growth} busca por &quot;{trends2026.kBeauty.term}&quot;</Badge>
@@ -196,7 +183,7 @@ export function SlideInsightsTrends() {
         </motion.div>
       </motion.section>
 
-      {/* Strategic Recommendations */}
+      {/* Section 2 — Strategic Plan */}
       <motion.section
         variants={containerVariants}
         initial="hidden"
@@ -207,122 +194,104 @@ export function SlideInsightsTrends() {
           <div className="p-2 rounded-lg bg-success/10">
             <Target className="w-6 h-6 text-success" />
           </div>
-          <Heading as="h2" size="lg">Recomendações Estratégicas</Heading>
+          <Heading as="h2" size="lg">Plano Estratégico</Heading>
+          <Badge variant="success">Campanhas + Criativo</Badge>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-          {/* Immediate */}
           <motion.div variants={itemVariants}>
-            <Card className="h-full">
-              <CardHeader className="pb-2">
-                <CardTitle className="flex items-center gap-2 text-sm">
-                  <Rocket className="w-4 h-4 text-success" />
-                  Imediato
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="pt-0">
-                {strategicRecommendations.immediate.items.map((rec, i) => (
-                  <div key={i} className="flex items-start gap-2 mb-2">
-                    <CheckCircle className="w-4 h-4 text-success shrink-0 mt-0.5" />
-                    <Text size="xs">{rec.action}</Text>
-                  </div>
-                ))}
+            <Card className="h-full border-l-2 border-l-info/40">
+              <CardContent className="p-4">
+                <div className="flex items-center gap-3 mb-2">
+                  <Search className="w-5 h-5 text-info" />
+                  <Text weight="bold">Google (alta intenção)</Text>
+                </div>
+                <Text size="sm" variant="muted" className="mb-2">
+                  Campanhas por clusters (intenção alta → agendamento):
+                </Text>
+                <ul className="space-y-1.5 text-sm text-muted list-disc pl-4">
+                  <li><strong>Estética recorrente:</strong> botox, preenchimento, bioestimulador.</li>
+                  <li><strong>Tecnologia:</strong> skin tightening, CO2, lasers (manchas/textura).</li>
+                  <li><strong>Dermato clínica/cirúrgica:</strong> câncer de pele, nevo, cisto, verruga.</li>
+                  <li><strong>Capilar:</strong> queda de cabelo, alopecia, transplante.</li>
+                </ul>
+                <div className="mt-3 rounded-xl border border-white/10 bg-white/4 p-3">
+                  <Text size="xs" variant="muted">Métrica de ouro</Text>
+                  <Text size="sm" weight="semibold" className="mt-1">
+                    Custo por consulta comparecida + % que vira procedimento em 30 dias
+                  </Text>
+                </div>
               </CardContent>
             </Card>
           </motion.div>
 
-          {/* Short Term */}
           <motion.div variants={itemVariants}>
-            <Card className="h-full">
-              <CardHeader className="pb-2">
-                <CardTitle className="flex items-center gap-2 text-sm">
-                  <TrendingUp className="w-4 h-4 text-gold" />
-                  Curto Prazo (Q1 2026)
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="pt-0">
-                {strategicRecommendations.shortTerm.items.map((rec, i) => (
-                  <div key={i} className="flex items-start gap-2 mb-2">
-                    <CheckCircle className="w-4 h-4 text-gold shrink-0 mt-0.5" />
-                    <Text size="xs">{rec.action}</Text>
-                  </div>
-                ))}
+            <Card className="h-full border-l-2 border-l-accent/40">
+              <CardContent className="p-4">
+                <div className="flex items-center gap-3 mb-2">
+                  <Megaphone className="w-5 h-5 text-accent" />
+                  <Text weight="bold">Meta (demanda latente + prova social)</Text>
+                </div>
+                <Text size="sm" variant="muted" className="mb-2">
+                  Criativos vencedores tendem a ser:
+                </Text>
+                <ul className="space-y-1.5 text-sm text-muted list-disc pl-4">
+                  <li>Educação curta: “1 problema → 1 explicação → 1 opção de tratamento”.</li>
+                  <li>Bastidores de tecnologia (equipamento + por que funciona), com cautela e sem sensacionalismo.</li>
+                  <li>Sequências: topo (descoberta) → meio (prova) → fundo (agenda limitada/triagem).</li>
+                </ul>
               </CardContent>
             </Card>
           </motion.div>
 
-          {/* Long Term */}
           <motion.div variants={itemVariants}>
-            <Card className="h-full">
-              <CardHeader className="pb-2">
-                <CardTitle className="flex items-center gap-2 text-sm">
-                  <Star className="w-4 h-4 text-accent" />
-                  Longo Prazo (2026)
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="pt-0">
-                {strategicRecommendations.longTerm.items.map((rec, i) => (
-                  <div key={i} className="flex items-start gap-2 mb-2">
-                    <CheckCircle className="w-4 h-4 text-accent shrink-0 mt-0.5" />
-                    <Text size="xs">{rec.action}</Text>
+            <Card className="h-full border-l-2 border-l-gold/40">
+              <CardContent className="p-4">
+                <div className="flex items-center gap-3 mb-2">
+                  <Layers className="w-5 h-5 text-gold" />
+                  <Text weight="bold">Criativo & Comunicação</Text>
+                </div>
+                <div className="space-y-3">
+                  <div className="rounded-xl border border-white/10 bg-white/4 p-3">
+                    <Text weight="semibold">Prova visual “de processo”</Text>
+                    <Text size="sm" variant="muted" className="mt-1">
+                      Mostrar bastidor, marcação/planejamento, pós-imediato realista e orientações (menos “resultado” e mais credibilidade).
+                    </Text>
                   </div>
-                ))}
+                  <div className="rounded-xl border border-white/10 bg-white/4 p-3">
+                    <Text weight="semibold">Multi-formato (curto + longo)</Text>
+                    <Text size="sm" variant="muted" className="mt-1">
+                      10s/30s para captura (Reels/Shorts) + 3–8min para conversão (YouTube) em temas complexos (melasma, acne, rosácea, capilar).
+                    </Text>
+                  </div>
+                </div>
               </CardContent>
             </Card>
           </motion.div>
         </div>
-      </motion.section>
 
-      {/* Summary Box */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1 }}
-      >
-        <Card variant="glow">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-center justify-center">
-              <Star className="w-5 h-5 text-gold" />
-              Resumo: Set-Dez 2025
-              <Star className="w-5 h-5 text-gold" />
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-center">
-              <div>
-                <Text size="2xl" weight="bold" className="text-gold">
-                  R$ 21.6K
-                </Text>
-                <Text size="xs" variant="muted">Investido em Marketing</Text>
+        <motion.div variants={itemVariants} className="mt-4">
+          <Card className="border-l-2 border-l-white/10">
+            <CardContent className="p-4">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <div className="flex items-center gap-3">
+                  <Target className="w-5 h-5 text-muted" />
+                  <div>
+                    <Text weight="semibold">Próximo passo recomendado</Text>
+                    <Text size="sm" variant="muted">
+                      Conectar campanha → atendimento → CRM para medir conversão real por canal.
+                    </Text>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2 text-sm text-muted">
+                  <ExternalLink className="w-4 h-4" />
+                  Referências e detalhes técnicos em `TECHNICAL.md`
+                </div>
               </div>
-              <div>
-                <Text size="2xl" weight="bold" className="text-success">
-                  R$ 2.3M
-                </Text>
-                <Text size="xs" variant="muted">Faturamento da Clínica</Text>
-              </div>
-              <div>
-                <Text size="2xl" weight="bold" className="text-info">
-                  r = 0.99
-                </Text>
-                <Text size="xs" variant="muted">Correlação Pago→Orgânico</Text>
-              </div>
-            </div>
-            <div className="mt-4 pt-3 border-t border-white/10 text-center">
-              <Text size="sm" className="text-success mb-2">
-                Principal descoberta: Campanhas pagas amplificam o alcance orgânico.
-              </Text>
-              <Text size="xs" variant="muted">
-                A correlação estatisticamente significativa (p = 0.02) comprova que investimento em marketing
-                e crescimento orgânico caminham juntos - não competem entre si.
-              </Text>
-              <Text size="xs" variant="muted" className="mt-2">
-                Instituto Luciane Prado - Performance Marketing Report | Período: Set-Dez 2025
-              </Text>
-            </div>
-          </CardContent>
-        </Card>
-      </motion.div>
+            </CardContent>
+          </Card>
+        </motion.div>
+      </motion.section>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 # Documentação Técnica — ILP Performance Report
 
-Aplicação web em Next.js (App Router) que renderiza um relatório em formato de slides com dados consolidados de marketing e fechamento (Set–Dez/2025), incluindo benchmarks verificáveis e análises estatísticas quando aplicável.
+Aplicação web em Next.js (App Router) que renderiza um relatório em formato de slides com dados consolidados de marketing e financeiro da clínica (Set–Dez/2025), incluindo benchmarks verificáveis e análises estatísticas quando aplicável.
 
 ## Stack
 
@@ -45,7 +45,8 @@ npm run build
 
 - `src/lib/data/campaigns.ts`: tráfego pago, separado por objetivo (**MSG** vs **AUD**).
 - `src/lib/data/organic.ts`: orgânico (Feed/Reels/Stories).
-- `src/lib/data/closings.ts`: fechamentos (procedimentos, receita, mix, mensal).
+- `src/lib/data/financial.ts`: financeiro da clínica (categorias + tecnologia) a partir de planilhas em `data/fechamento-clinica/`.
+- `src/lib/data/closings.ts`: base histórica de fechamento (gerada por script; pode não estar 100% alinhada com `financial.ts`).
 - `src/lib/data/creatives.ts` + `src/lib/data/analysis.ts`: criativos e consolidações/rankings.
 
 ### Pesquisa / benchmarks / estatística (central)
@@ -65,13 +66,12 @@ npm run build
 ## Mapeamento de slides → dados
 
 - `SlideCover`: contextualização (sem cálculos críticos).
-- `SlideExecutiveSummary`: KPIs + `ilpVsBenchmarks`.
+- `SlideExecutiveSummary`: KPIs + `ilpVsBenchmarks` + financeiro (`financial.ts`) e modal de análise.
 - `SlidePaidTraffic`: MSG vs AUD + `benchmarks` e `ilpVsBenchmarks`.
-- `SlideCreatives`: top performers e padrões (thumbnails em `public/creatives/*`).
-- `SlideOrganic`: orgânico + correlação pago→orgânico (`correlations`).
-- `SlideClosings`: fechamento + oportunidades 2026 (`trends2026`).
-- `SlideDataCrossing`: correlações, regressão e sazonalidade (`correlations`, `regression`, `seasonality`).
-- `SlideInsightsTrends`: insights acionáveis + tendências + recomendações (`actionableInsights`, `trends2026`, `strategicRecommendations`).
+- `SlideOrganic`: orgânico + melhores posts (tabela) + correlação pago→orgânico (`correlations`).
+- `SlideCreatives`: top performers, padrões e ideias de conteúdo (thumbnails em `public/creatives/*`).
+- `SlideDataCrossing`: correlações Pearson (2 cards) + explicação em modal + insights acionáveis.
+- `SlideInsightsTrends`: tendências 2026 + plano estratégico, mantendo o bloco visual de oportunidades + K‑Beauty (`trends2026`).
 
 ## Scripts (extração e análise)
 

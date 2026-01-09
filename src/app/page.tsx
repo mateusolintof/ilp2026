@@ -8,9 +8,8 @@ import {
   SlideCover,
   SlideExecutiveSummary,
   SlidePaidTraffic,
-  SlideCreatives,
   SlideOrganic,
-  SlideClosings,
+  SlideCreatives,
   SlideDataCrossing,
   SlideInsightsTrends,
 } from '@/components/slides';
@@ -19,11 +18,10 @@ const slides = [
   { id: 1, component: SlideCover, title: 'Capa' },
   { id: 2, component: SlideExecutiveSummary, title: 'Resumo Executivo' },
   { id: 3, component: SlidePaidTraffic, title: 'Tráfego Pago' },
-  { id: 4, component: SlideCreatives, title: 'Criativos' },
-  { id: 5, component: SlideOrganic, title: 'Orgânico' },
-  { id: 6, component: SlideClosings, title: 'Fechamento' },
-  { id: 7, component: SlideDataCrossing, title: 'Cruzamento' },
-  { id: 8, component: SlideInsightsTrends, title: 'Insights' },
+  { id: 4, component: SlideOrganic, title: 'Orgânico' },
+  { id: 5, component: SlideCreatives, title: 'Criativos' },
+  { id: 6, component: SlideDataCrossing, title: 'Cruzamento' },
+  { id: 7, component: SlideInsightsTrends, title: 'Insights' },
 ];
 
 export default function HomePage() {

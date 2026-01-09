@@ -41,6 +41,7 @@ Padrão sugerido:
 
 Números/KPIs:
 - Prefira `MetricCard` (ver abaixo) para garantir responsividade e evitar estouro no mobile.
+- Se um valor “estourar” no mobile, reduza `size` do `MetricCard` (ou quebre em duas linhas) antes de aumentar padding.
 
 ## Grid e espaçamento
 
@@ -92,6 +93,15 @@ Wrappers:
 - `src/components/charts/BarChart.tsx`
 - `src/components/charts/LineChart.tsx`
 - `src/components/charts/PieChart.tsx`
+- `src/components/charts/FinanceByCategoryChart.tsx` (barra = receita, linha = quantidade)
+
+## Modais
+
+`src/components/ui/Modal.tsx`
+
+- Use `variant="dialog"` para explicações curtas (ex.: “como ler Pearson”).
+- Use `variant="fullscreen"` para análises longas com múltiplos blocos (ex.: análise do mix financeiro).
+- Conteúdo deve ser escaneável: cards curtos, grids e bullets; evite texto corrido.
 
 ## Motion (Framer Motion)
 

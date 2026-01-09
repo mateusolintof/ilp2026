@@ -38,7 +38,7 @@ export function SlidePaidTraffic() {
         animate={{ opacity: 1, y: 0 }}
         className="mb-6"
       >
-        <Label className="mb-2 block">Slide 3 de 8</Label>
+        <Label className="mb-2 block">Slide 3 de 7</Label>
         <Heading as="h1" size="2xl" className="mb-2">
           Tráfego Pago
         </Heading>

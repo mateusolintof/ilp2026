@@ -54,9 +54,9 @@ function MetricCard({ className, title, value, subtitle, change, changeLabel, ic
   };
 
   const sizes = {
-    sm: { padding: 'p-4', value: 'text-xl', icon: 'w-9 h-9', gap: 'gap-3' },
-    md: { padding: 'p-5', value: 'text-2xl md:text-3xl', icon: 'w-10 h-10', gap: 'gap-4' },
-    lg: { padding: 'p-6', value: 'text-3xl md:text-4xl', icon: 'w-11 h-11', gap: 'gap-4' },
+    sm: { padding: 'p-4', value: 'text-lg md:text-xl', icon: 'w-9 h-9', gap: 'gap-3' },
+    md: { padding: 'p-5', value: 'text-xl md:text-2xl', icon: 'w-10 h-10', gap: 'gap-4' },
+    lg: { padding: 'p-6', value: 'text-2xl md:text-3xl', icon: 'w-11 h-11', gap: 'gap-4' },
   };
 
   const sizeConfig = sizes[size];
@@ -84,7 +84,13 @@ function MetricCard({ className, title, value, subtitle, change, changeLabel, ic
               animate={{ scale: 1 }}
               transition={{ delay: 0.08, type: 'spring', stiffness: 180 }}
             >
-              <Text as="span" className={cn(sizeConfig.value, 'font-bold text-foreground block tracking-tight leading-none tabular-nums')}>
+              <Text
+                as="span"
+                className={cn(
+                  sizeConfig.value,
+                  'font-bold text-foreground block tracking-tight leading-none tabular-nums break-words'
+                )}
+              >
                 {value}
               </Text>
             </motion.div>

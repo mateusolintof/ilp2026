@@ -11,7 +11,6 @@ import {
   Video,
   Layers,
   Target,
-  ExternalLink,
   Star,
   Gem,
   Droplets,
@@ -282,10 +281,6 @@ export function SlideInsightsTrends() {
                       Conectar campanha → atendimento → CRM para medir conversão real por canal.
                     </Text>
                   </div>
-                </div>
-                <div className="flex items-center gap-2 text-sm text-muted">
-                  <ExternalLink className="w-4 h-4" />
-                  Referências e detalhes técnicos em `TECHNICAL.md`
                 </div>
               </div>
             </CardContent>
